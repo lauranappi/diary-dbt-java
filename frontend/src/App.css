@@ -53,7 +53,29 @@ input, textarea, select {
   background: var(--dc-surface); color: var(--dc-ink); color-scheme: light;
 }
 
-.app-schermo { max-width: 480px; margin: 0 auto; min-height: 100vh; position: relative; }
+/* Colore esplicito su tutti i titoli, cosi' nessuno eredita per sbaglio
+   un colore chiaro pensato solo per l'intestazione petrolio. */
+h1, h2, h3, h4 { color: var(--dc-ink); }
+
+.app-schermo {
+  max-width: 480px; margin: 0 auto; min-height: 100vh; position: relative;
+  background: var(--dc-bg);
+}
+
+/* Su schermi larghi (desktop), invece di lasciare l'app stretta in mezzo
+   a due fasce vuote, le do una cornice leggera cosi' sembra una scelta
+   voluta e non un layout rimasto stretto per sbaglio. Non e' un vero
+   adattamento desktop (niente barra laterale come nell'app originale),
+   solo una cornice piu' dignitosa in attesa di farlo per bene. */
+@media (min-width: 700px) {
+  body { background: var(--dc-petrolio-scurissimo); }
+  .app-schermo {
+    max-width: 480px; margin: 2rem auto; min-height: calc(100vh - 4rem);
+    border-radius: 32px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .dc-bottom-nav, .pannello-paziente { max-width: 480px; }
+  .pagina-centrata { min-height: 100%; }
+}
 
 /* ── Intestazione petrolio con onda ── */
 .dc-hero {
