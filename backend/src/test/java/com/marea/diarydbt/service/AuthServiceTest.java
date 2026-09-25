@@ -78,7 +78,11 @@ class AuthServiceTest {
         // per la generazione del codice univoco casuale della paziente stessa
         when(utenteRepository.findByCodicePaziente(argThat(c -> c == null || !c.equals("ABC123"))))
                 .thenReturn(Optional.empty());
-        when(utenteRepository.save(any(Utente.class))).thenAnswer(inv -> inv.getArgument(0));
+        when(utenteRepository.save(any(Utente.class))).thenAnswer(inv -> {
+            Utente u = inv.getArgument(0);
+            u.setId("paziente-id-generato");
+            return u;
+        });
         when(jwtService.generaToken(anyString(), anyString())).thenReturn("token-finto");
 
         AuthResponse risposta = authService.registra(req);
@@ -98,7 +102,10 @@ class AuthServiceTest {
 
         when(utenteRepository.existsByUsername("mariarossi")).thenReturn(false);
         when(passwordEncoder.encode(anyString())).thenReturn("hash-finto");
-        when(utenteRepository.findByCodicePaziente("NONESISTE")).thenReturn(Optional.empty());
+        // il codice paziente casuale viene generato e controllato PRIMA del
+        // codice terapeuta: entrambe le chiamate a findByCodicePaziente
+        // devono restituire "non trovato" per arrivare al controllo vero
+        when(utenteRepository.findByCodicePaziente(anyString())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> authService.registra(req))
                 .isInstanceOf(IllegalArgumentException.class)
