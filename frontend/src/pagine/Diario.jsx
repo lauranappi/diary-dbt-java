@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api';
 import Intestazione from '../componenti/Intestazione';
 
@@ -61,6 +62,8 @@ export default function Diario() {
     <>
       <Intestazione sopraTitolo={dataOggiFormattata()} titolo="Oggi" />
       <div className="dc-corpo">
+        <Link to="/piano-crisi" className="link-crisi">🛟 Piano di crisi</Link>
+
         <div className="dc-passi-barra">
           {Array.from({ length: NUMERO_PASSI }).map((_, i) => (
             <div key={i} className={

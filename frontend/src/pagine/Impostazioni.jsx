@@ -1,4 +1,5 @@
 import { useAutenticazione } from '../AuthContext';
+import { Link } from 'react-router-dom';
 import Intestazione from '../componenti/Intestazione';
 
 export default function Impostazioni() {
@@ -18,6 +19,11 @@ export default function Impostazioni() {
             </>
           )}
         </div>
+
+        <Link to="/piano-crisi" className="dc-card" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+          <h2 style={{ margin: 0 }}>Piano di crisi →</h2>
+          <p className="nota-piccola" style={{ margin: '6px 0 0' }}>Segnali d'allarme, strategie, contatti</p>
+        </Link>
 
         <button className="dc-btn-secondario dc-btn-pericolo" onClick={esci}>
           Esci dall'account

@@ -221,3 +221,11 @@ button { font-family: inherit; }
 }
 .cella-media-valore { font-size: 20px; font-weight: 800; color: var(--dc-terracotta); }
 .cella-media-etichetta { font-size: 10.5px; color: var(--dc-muted); text-transform: uppercase; letter-spacing: .04em; }
+
+/* ── Piano di crisi ── */
+.avviso-crisi { background: var(--dc-terracotta-chiara) !important; }
+.avviso-crisi p { margin: 0; font-size: 13.5px; color: var(--dc-ink); }
+.link-crisi {
+  display: block; text-align: center; margin-bottom: 14px; color: var(--dc-terracotta);
+  font-size: 13px; font-weight: 600; text-decoration: none;
+}

@@ -7,6 +7,7 @@ import Diario from './pagine/Diario';
 import Storico from './pagine/Storico';
 import Guida from './pagine/Guida';
 import Impostazioni from './pagine/Impostazioni';
+import PianoCrisi from './pagine/PianoCrisi';
 import Terapeuta from './pagine/Terapeuta';
 import BarraInferiore from './componenti/BarraInferiore';
 import './App.css';
@@ -32,6 +33,9 @@ function ContenutoApp() {
           } />
           <Route path="/impostazioni" element={
             <RottaProtetta ruoloRichiesto="PAZIENTE"><Impostazioni /></RottaProtetta>
+          } />
+          <Route path="/piano-crisi" element={
+            <RottaProtetta ruoloRichiesto="PAZIENTE"><PianoCrisi /></RottaProtetta>
           } />
 
           <Route path="/terapeuta" element={
