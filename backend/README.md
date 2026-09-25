@@ -34,6 +34,24 @@ Servono queste variabili d'ambiente (fornite dal servizio di hosting):
 - `JWT_SECRET` — stringa lunga e casuale, diversa da quella di sviluppo
 - `APP_CORS_ORIGIN` — dominio del frontend (es. `https://lauranappi.github.io`)
 
+## Test
+
+Scritti ma **mai eseguiti** (stesso limite di rete di sopra) — coprono:
+- `JwtServiceTest`: generazione/validazione token, scadenza, manomissione
+- `AuthServiceTest`: registrazione (con/senza terapeuta collegata, username
+  duplicato, codice terapeuta non valido), accesso (credenziali giuste/sbagliate)
+- `DiarioServiceTest`: salvataggio (nuova voce vs aggiornamento), lettura
+  storico, **controllo di accesso terapeuta-paziente** (una terapeuta non
+  collegata non può leggere i dati di una paziente)
+- `AuthControllerTest` / `SicurezzaJwtIntegrationTest`: gli stessi percorsi
+  ma end-to-end, con richieste HTTP vere contro un database H2 vero,
+  compresa la sicurezza JWT (richieste senza token o con token invalido
+  vengono rifiutate)
+
+```bash
+mvn test
+```
+
 ## Cosa manca ancora
 
 - Test automatici (nessuno scritto finora)
