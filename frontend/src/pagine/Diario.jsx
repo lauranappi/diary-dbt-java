@@ -49,8 +49,16 @@ export default function Diario() {
   async function salva() {
     setSalvataggio('in-corso');
     try {
+      // Come in CatenaEventi.jsx: il salvataggio sostituisce l'intera voce
+      // del giorno, quindi leggo prima quella di oggi per non perdere
+      // altri campi di testo salvati separatamente (es. un'analisi della
+      // catena fatta in un altro momento della giornata).
+      const oggi = oggiISO();
+      const esistenti = await api.mioStorico(oggi, oggi);
+      const testiEsistenti = esistenti[0]?.testi || {};
+
       await api.salvaMioDiario({
-        data: oggiISO(), scale, toggle: {}, testi: { note }, abilitaUsate, planner: {},
+        data: oggi, scale, toggle: {}, testi: { ...testiEsistenti, note }, abilitaUsate, planner: {},
       });
       setSalvataggio('fatto');
     } catch {

@@ -25,6 +25,11 @@ export default function Impostazioni() {
           <p className="nota-piccola" style={{ margin: '6px 0 0' }}>Segnali d'allarme, strategie, contatti</p>
         </Link>
 
+        <Link to="/catena-eventi" className="dc-card" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+          <h2 style={{ margin: 0 }}>Analisi della catena →</h2>
+          <p className="nota-piccola" style={{ margin: '6px 0 0' }}>Capire cosa ha scatenato un comportamento</p>
+        </Link>
+
         <button className="dc-btn-secondario dc-btn-pericolo" onClick={esci}>
           Esci dall'account
         </button>
