@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../api';
 import { useAutenticazione } from '../AuthContext';
 import Intestazione from '../componenti/Intestazione';
+import GraficoLinea from '../componenti/GraficoLinea';
 
 function dataDiOggiMeno(giorni) {
   const d = new Date();
@@ -19,6 +20,16 @@ function calcolaMedie(voci) {
     }
   }
   return Object.keys(somme).map((chiave) => ({ chiave, media: somme[chiave] / conteggi[chiave] }));
+}
+
+// Ordina le voci dal giorno piu' vecchio al piu' recente (per il grafico,
+// che va letto da sinistra a destra) e prende solo i giorni che hanno
+// davvero un valore per quella scala.
+function serieTemporale(voci, chiave) {
+  return [...voci]
+    .filter((v) => v.scale && v.scale[chiave] !== undefined)
+    .sort((a, b) => a.data.localeCompare(b.data))
+    .map((v) => ({ data: v.data, valore: v.scale[chiave] }));
 }
 
 export default function Terapeuta() {
@@ -124,6 +135,17 @@ export default function Terapeuta() {
                 </div>
               </div>
             )}
+
+            {storicoPaziente?.length >= 2 && calcolaMedie(storicoPaziente).map(({ chiave }) => (
+              <div key={chiave} className="dc-card">
+                <h3 style={{ marginTop: 0, textTransform: 'uppercase', fontSize: 12, color: 'var(--dc-terracotta)' }}>
+                  Andamento — {chiave}
+                </h3>
+                <GraficoLinea
+                  punti={serieTemporale(storicoPaziente, chiave)}
+                />
+              </div>
+            ))}
 
             {storicoPaziente?.map((v) => (
               <div key={v.id} className="dc-card">

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ProvaAutenticazione, useAutenticazione } from './AuthContext';
 import RottaProtetta from './RottaProtetta';
 import Accedi from './pagine/Accedi';
@@ -15,11 +15,15 @@ import './App.css';
 
 function ContenutoApp() {
   const { utente } = useAutenticazione();
+  const posizione = useLocation();
 
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <div className="app-schermo">
-        <Routes>
+    <div className="app-schermo">
+      {/* La chiave legata al percorso forza React a rimontare questo div
+          a ogni cambio pagina, cosi' l'animazione CSS (che parte solo al
+          montaggio) riparte da capo invece di restare ferma. */}
+      <div key={posizione.pathname} className="contenitore-transizione">
+        <Routes location={posizione}>
           <Route path="/accedi" element={<Accedi />} />
           <Route path="/registrati" element={<Registrati />} />
 
@@ -48,17 +52,19 @@ function ContenutoApp() {
 
           <Route path="*" element={<Navigate to="/accedi" replace />} />
         </Routes>
-
-        {utente?.ruolo === 'PAZIENTE' && <BarraInferiore />}
       </div>
-    </BrowserRouter>
+
+      {utente?.ruolo === 'PAZIENTE' && <BarraInferiore />}
+    </div>
   );
 }
 
 export default function App() {
   return (
     <ProvaAutenticazione>
-      <ContenutoApp />
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <ContenutoApp />
+      </BrowserRouter>
     </ProvaAutenticazione>
   );
 }
