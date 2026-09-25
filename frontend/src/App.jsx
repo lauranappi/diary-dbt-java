@@ -9,6 +9,7 @@ import Guida from './pagine/Guida';
 import Impostazioni from './pagine/Impostazioni';
 import PianoCrisi from './pagine/PianoCrisi';
 import CatenaEventi from './pagine/CatenaEventi';
+import DearMan from './pagine/DearMan';
 import Terapeuta from './pagine/Terapeuta';
 import BarraInferiore from './componenti/BarraInferiore';
 import './App.css';
@@ -44,6 +45,9 @@ function ContenutoApp() {
           } />
           <Route path="/catena-eventi" element={
             <RottaProtetta ruoloRichiesto="PAZIENTE"><CatenaEventi /></RottaProtetta>
+          } />
+          <Route path="/dear-man" element={
+            <RottaProtetta ruoloRichiesto="PAZIENTE"><DearMan /></RottaProtetta>
           } />
 
           <Route path="/terapeuta" element={

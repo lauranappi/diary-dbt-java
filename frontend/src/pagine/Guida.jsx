@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api';
 import { DESCRIZIONI_ABILITA } from '../descrizioniAbilita';
 import Intestazione from '../componenti/Intestazione';
@@ -43,9 +44,16 @@ export default function Guida() {
                   <span className="freccia-guida">{aperta === a.id ? '−' : '+'}</span>
                 </button>
                 {aperta === a.id && (
-                  <p className="descrizione-guida-skill">
-                    {DESCRIZIONI_ABILITA[a.id] || 'Descrizione non ancora disponibile.'}
-                  </p>
+                  <>
+                    <p className="descrizione-guida-skill">
+                      {DESCRIZIONI_ABILITA[a.id] || 'Descrizione non ancora disponibile.'}
+                    </p>
+                    {a.id === 'ei-dearman' && (
+                      <Link to="/dear-man" className="link-strumento">
+                        Apri il generatore di copione →
+                      </Link>
+                    )}
+                  </>
                 )}
               </div>
             ))}
