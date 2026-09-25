@@ -6,7 +6,6 @@ import com.marea.diarydbt.dto.RegistrazioneRequest;
 import com.marea.diarydbt.model.Utente;
 import com.marea.diarydbt.repository.UtenteRepository;
 import com.marea.diarydbt.security.JwtService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,8 +32,8 @@ class AuthServiceTest {
     @InjectMocks private AuthService authService;
 
     @Test
-    void registrazionePazienteSenzaTerapeutaAssegnaCodiceUnivoco() {
-        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE", null);
+    void registrazionePazienteAssegnaCodiceUnivoco() {
+        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE");
 
         when(utenteRepository.existsByUsername("mariarossi")).thenReturn(false);
         when(passwordEncoder.encode("passwordlunga")).thenReturn("hash-finto");
@@ -55,8 +54,29 @@ class AuthServiceTest {
     }
 
     @Test
+    void registrazioneTerapeutaNonHaCodicePaziente() {
+        RegistrazioneRequest req = new RegistrazioneRequest("dott.rossi", "passwordlunga", "TERAPEUTA");
+
+        when(utenteRepository.existsByUsername("dott.rossi")).thenReturn(false);
+        when(passwordEncoder.encode(anyString())).thenReturn("hash-finto");
+        when(utenteRepository.save(any(Utente.class))).thenAnswer(inv -> {
+            Utente u = inv.getArgument(0);
+            u.setId("id-generato");
+            return u;
+        });
+        when(jwtService.generaToken(anyString(), anyString())).thenReturn("token-finto");
+
+        AuthResponse risposta = authService.registra(req);
+
+        assertThat(risposta.ruolo()).isEqualTo("TERAPEUTA");
+        assertThat(risposta.codicePaziente()).isNull();
+        // non deve mai generare/controllare un codice per una terapeuta
+        verify(utenteRepository, never()).findByCodicePaziente(anyString());
+    }
+
+    @Test
     void registrazioneConUsernameGiaEsistenteFallisce() {
-        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE", null);
+        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE");
         when(utenteRepository.existsByUsername("mariarossi")).thenReturn(true);
 
         assertThatThrownBy(() -> authService.registra(req))
@@ -64,52 +84,6 @@ class AuthServiceTest {
                 .hasMessageContaining("già in uso");
 
         verify(utenteRepository, never()).save(any());
-    }
-
-    @Test
-    void registrazionePazienteConCodiceTerapeutaValidoSiCollega() {
-        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE", "ABC123");
-
-        Utente terapeuta = Utente.builder().id("terapeuta-id").ruolo(Utente.Ruolo.TERAPEUTA).build();
-
-        when(utenteRepository.existsByUsername("mariarossi")).thenReturn(false);
-        when(passwordEncoder.encode(anyString())).thenReturn("hash-finto");
-        when(utenteRepository.findByCodicePaziente("ABC123")).thenReturn(Optional.of(terapeuta));
-        // per la generazione del codice univoco casuale della paziente stessa
-        when(utenteRepository.findByCodicePaziente(argThat(c -> c == null || !c.equals("ABC123"))))
-                .thenReturn(Optional.empty());
-        when(utenteRepository.save(any(Utente.class))).thenAnswer(inv -> {
-            Utente u = inv.getArgument(0);
-            u.setId("paziente-id-generato");
-            return u;
-        });
-        when(jwtService.generaToken(anyString(), anyString())).thenReturn("token-finto");
-
-        AuthResponse risposta = authService.registra(req);
-
-        assertThat(risposta.ruolo()).isEqualTo("PAZIENTE");
-        verificaTerapeutaCollegata(terapeuta);
-    }
-
-    private void verificaTerapeutaCollegata(Utente terapeutaAtteso) {
-        verify(utenteRepository).save(argThat(u -> u.getTerapeuta() != null
-                && u.getTerapeuta().getId().equals(terapeutaAtteso.getId())));
-    }
-
-    @Test
-    void registrazionePazienteConCodiceTerapeutaInesistenteFallisce() {
-        RegistrazioneRequest req = new RegistrazioneRequest("mariarossi", "passwordlunga", "PAZIENTE", "NONESISTE");
-
-        when(utenteRepository.existsByUsername("mariarossi")).thenReturn(false);
-        when(passwordEncoder.encode(anyString())).thenReturn("hash-finto");
-        // il codice paziente casuale viene generato e controllato PRIMA del
-        // codice terapeuta: entrambe le chiamate a findByCodicePaziente
-        // devono restituire "non trovato" per arrivare al controllo vero
-        when(utenteRepository.findByCodicePaziente(anyString())).thenReturn(Optional.empty());
-
-        assertThatThrownBy(() -> authService.registra(req))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Codice terapeuta non valido");
     }
 
     @Test

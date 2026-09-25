@@ -24,6 +24,12 @@ public class AuthService {
     private static final String ALFABETO_CODICE = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // senza caratteri ambigui
     private static final SecureRandom RANDOM = new SecureRandom();
 
+    // Il collegamento a una terapeuta NON avviene qui: la paziente riceve
+    // il proprio codice alla registrazione e lo comunica (di persona, a
+    // voce) alla terapeuta, che poi la collega dal proprio lato - vedi
+    // TerapeutaService.collegaPaziente(). Farlo qui, durante la
+    // registrazione, richiederebbe che la paziente conosca in anticipo
+    // un codice della terapeuta, che non e' come funziona nella pratica.
     public AuthResponse registra(RegistrazioneRequest req) {
         if (utenteRepository.existsByUsername(req.username())) {
             throw new IllegalArgumentException("Username già in uso");
@@ -39,12 +45,6 @@ public class AuthService {
 
         if (ruolo == Utente.Ruolo.PAZIENTE) {
             builder.codicePaziente(generaCodiceUnivoco());
-            if (req.codiceTerapeuta() != null && !req.codiceTerapeuta().isBlank()) {
-                Utente terapeuta = utenteRepository.findByCodicePaziente(req.codiceTerapeuta())
-                        .filter(u -> u.getRuolo() == Utente.Ruolo.TERAPEUTA)
-                        .orElseThrow(() -> new IllegalArgumentException("Codice terapeuta non valido"));
-                builder.terapeuta(terapeuta);
-            }
         }
 
         Utente utente = utenteRepository.save(builder.build());

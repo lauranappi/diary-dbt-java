@@ -37,11 +37,17 @@ public class Utente {
     @Column(unique = true)
     private String codicePaziente;
 
-    // Se questo utente e' una terapeuta, riferimento alla sua stessa entita';
-    // se e' una paziente collegata, riferimento alla terapeuta.
+    // Se questo utente e' una paziente collegata, riferimento alla terapeuta.
+    // Il collegamento avviene DOPO la registrazione, quando la terapeuta
+    // inserisce il codice che la paziente le ha comunicato a voce -
+    // vedi TerapeutaService.collegaPaziente().
     @ManyToOne
     @JoinColumn(name = "terapeuta_id")
     private Utente terapeuta;
+
+    // Quando e' avvenuto il collegamento con la terapeuta (null finche' non
+    // e' collegata)
+    private Instant collegataIl;
 
     private Instant creatoIl;
 
