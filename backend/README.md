@@ -2,17 +2,17 @@
 
 Spring Boot 3.4 / Java 21 / PostgreSQL / JWT.
 
-## ⚠️ Non ancora compilato
+## Stato
 
-Questo codice è stato scritto senza un ambiente Maven/Java disponibile per
-verificarlo — a differenza del resto del progetto, non è stato testato con
-una build vera prima di essere pubblicato. Prima di fidarsene, esegui:
+✅ Compila ed esegue tutti i 30 test (`mvn test`), verificato per davvero
+in locale con IntelliJ — non solo scritto a fiducia. Vedi la cronologia dei
+commit per i problemi reali incontrati e come sono stati risolti (Lombok e
+JDK troppo recente, tipo colonna JSON non riconosciuto da H2, entità JPA
+serializzata direttamente invece di passare per un DTO).
 
-```bash
-mvn clean compile
-```
-
-e correggi quello che emerge.
+**Importante**: usa Java 21 per compilare, non versioni più recenti (26 e
+successive hanno rotto Lombok durante lo sviluppo — problema noto, non
+ancora risolto lato Lombok all'uscita di nuove versioni principali di Java).
 
 ## Sviluppo locale
 
@@ -36,17 +36,16 @@ Servono queste variabili d'ambiente (fornite dal servizio di hosting):
 
 ## Test
 
-Scritti ma **mai eseguiti** (stesso limite di rete di sopra) — coprono:
+Tutti verificati e verdi:
 - `JwtServiceTest`: generazione/validazione token, scadenza, manomissione
 - `AuthServiceTest`: registrazione (con/senza terapeuta collegata, username
   duplicato, codice terapeuta non valido), accesso (credenziali giuste/sbagliate)
 - `DiarioServiceTest`: salvataggio (nuova voce vs aggiornamento), lettura
-  storico, **controllo di accesso terapeuta-paziente** (una terapeuta non
+  storico, controllo di accesso terapeuta-paziente (una terapeuta non
   collegata non può leggere i dati di una paziente)
 - `AuthControllerTest` / `SicurezzaJwtIntegrationTest`: gli stessi percorsi
   ma end-to-end, con richieste HTTP vere contro un database H2 vero,
-  compresa la sicurezza JWT (richieste senza token o con token invalido
-  vengono rifiutate)
+  compresa la sicurezza JWT
 
 ```bash
 mvn test
@@ -54,7 +53,6 @@ mvn test
 
 ## Cosa manca ancora
 
-- Test automatici (nessuno scritto finora)
 - Migrazioni database vere (oggi Hibernate genera lo schema da solo in
   sviluppo; in produzione andrebbe sostituito con Flyway o Liquibase)
 - Endpoint per la gestione abilità/schede DBT, pianificazione attività,
