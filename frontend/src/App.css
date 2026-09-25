@@ -191,3 +191,33 @@ button { font-family: inherit; }
   background: rgba(255,255,255,.15); color: var(--dc-hero-ink); border: none;
   border-radius: var(--dc-r-pill); padding: 8px 16px; cursor: pointer;
 }
+
+/* ── Guida DBT ── */
+.riga-guida-skill { border-bottom: 1px solid var(--dc-crema-scura); }
+.riga-guida-skill:last-child { border-bottom: none; }
+.titolo-guida-skill {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: none; border: none; padding: 12px 0; font-size: 14.5px; font-weight: 600;
+  color: var(--dc-ink); cursor: pointer; text-align: left;
+}
+.freccia-guida { color: var(--dc-terracotta); font-size: 18px; }
+.descrizione-guida-skill { margin: 0 0 12px; font-size: 13.5px; color: var(--dc-muted); line-height: 1.5; }
+
+/* ── Diary a passi ── */
+.dc-passi-barra { display: flex; gap: 6px; margin-bottom: 16px; }
+.dc-passo-pallino {
+  flex: 1; height: 4px; border-radius: 2px; background: var(--dc-line);
+}
+.dc-passo-pallino.fatto, .dc-passo-pallino.attivo { background: var(--dc-hero); }
+.dc-passi-nav { display: flex; gap: 10px; margin-top: 20px; }
+.dc-passi-nav .dc-btn-secondario { flex: 0 0 auto; }
+.dc-passi-nav .dc-btn-primario { flex: 1; }
+
+/* ── Griglia medie (vista terapeuta) ── */
+.griglia-medie { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 10px; margin-top: 12px; }
+.cella-media {
+  background: var(--dc-surface-2); border-radius: var(--dc-r-interno); padding: 10px 8px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cella-media-valore { font-size: 20px; font-weight: 800; color: var(--dc-terracotta); }
+.cella-media-etichetta { font-size: 10.5px; color: var(--dc-muted); text-transform: uppercase; letter-spacing: .04em; }

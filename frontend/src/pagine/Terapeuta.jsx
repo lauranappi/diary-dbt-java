@@ -9,6 +9,18 @@ function dataDiOggiMeno(giorni) {
   return d.toISOString().slice(0, 10);
 }
 
+function calcolaMedie(voci) {
+  const somme = {};
+  const conteggi = {};
+  for (const v of voci) {
+    for (const [chiave, valore] of Object.entries(v.scale || {})) {
+      somme[chiave] = (somme[chiave] || 0) + valore;
+      conteggi[chiave] = (conteggi[chiave] || 0) + 1;
+    }
+  }
+  return Object.keys(somme).map((chiave) => ({ chiave, media: somme[chiave] / conteggi[chiave] }));
+}
+
 export default function Terapeuta() {
   const { utente, esci } = useAutenticazione();
   const [pazienti, setPazienti] = useState([]);
@@ -97,6 +109,22 @@ export default function Terapeuta() {
           <div className="dc-corpo">
             {storicoPaziente === null && <p>Caricamento...</p>}
             {storicoPaziente?.length === 0 && <p>Nessuna voce negli ultimi 30 giorni.</p>}
+
+            {storicoPaziente?.length > 0 && (
+              <div className="dc-card">
+                <h2>Ultimi 30 giorni</h2>
+                <p className="nota-piccola">{storicoPaziente.length} giorni compilati</p>
+                <div className="griglia-medie">
+                  {calcolaMedie(storicoPaziente).map(({ chiave, media }) => (
+                    <div key={chiave} className="cella-media">
+                      <span className="cella-media-valore">{media.toFixed(1)}</span>
+                      <span className="cella-media-etichetta">{chiave}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {storicoPaziente?.map((v) => (
               <div key={v.id} className="dc-card">
                 <strong>{v.data}</strong>

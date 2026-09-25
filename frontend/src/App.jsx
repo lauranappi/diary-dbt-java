@@ -5,6 +5,8 @@ import Accedi from './pagine/Accedi';
 import Registrati from './pagine/Registrati';
 import Diario from './pagine/Diario';
 import Storico from './pagine/Storico';
+import Guida from './pagine/Guida';
+import Impostazioni from './pagine/Impostazioni';
 import Terapeuta from './pagine/Terapeuta';
 import BarraInferiore from './componenti/BarraInferiore';
 import './App.css';
@@ -24,6 +26,12 @@ function ContenutoApp() {
           } />
           <Route path="/storico" element={
             <RottaProtetta ruoloRichiesto="PAZIENTE"><Storico /></RottaProtetta>
+          } />
+          <Route path="/guida" element={
+            <RottaProtetta ruoloRichiesto="PAZIENTE"><Guida /></RottaProtetta>
+          } />
+          <Route path="/impostazioni" element={
+            <RottaProtetta ruoloRichiesto="PAZIENTE"><Impostazioni /></RottaProtetta>
           } />
 
           <Route path="/terapeuta" element={
