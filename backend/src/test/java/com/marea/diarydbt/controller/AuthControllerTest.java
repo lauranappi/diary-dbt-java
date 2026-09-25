@@ -28,7 +28,7 @@ class AuthControllerTest {
     @Test
     void registrazioneTerapeutaRestituisceTokenESenzaCodicePaziente() throws Exception {
         RegistrazioneRequest req = new RegistrazioneRequest(
-                "dott.ssa_test_" + System.nanoTime(), "passwordsicura123", "TERAPEUTA", null);
+                "dott.ssa_test_" + System.nanoTime(), "passwordsicura123", "TERAPEUTA");
 
         mockMvc.perform(post("/api/auth/registrati")
                         .contentType("application/json")
@@ -42,7 +42,7 @@ class AuthControllerTest {
     @Test
     void registrazionePazienteRicevePropiocodiceDiSeiCaratteri() throws Exception {
         RegistrazioneRequest req = new RegistrazioneRequest(
-                "paziente_test_" + System.nanoTime(), "passwordsicura123", "PAZIENTE", null);
+                "paziente_test_" + System.nanoTime(), "passwordsicura123", "PAZIENTE");
 
         mockMvc.perform(post("/api/auth/registrati")
                         .contentType("application/json")
@@ -54,7 +54,7 @@ class AuthControllerTest {
     @Test
     void registrazioneConPasswordTroppoCortaVieneRifiutata() throws Exception {
         RegistrazioneRequest req = new RegistrazioneRequest(
-                "utente_" + System.nanoTime(), "corta", "PAZIENTE", null);
+                "utente_" + System.nanoTime(), "corta", "PAZIENTE");
 
         mockMvc.perform(post("/api/auth/registrati")
                         .contentType("application/json")
@@ -66,7 +66,7 @@ class AuthControllerTest {
     @Test
     void registrazioneConUsernameDuplicatoVieneRifiutata() throws Exception {
         String username = "utente_duplicato_" + System.nanoTime();
-        RegistrazioneRequest req = new RegistrazioneRequest(username, "passwordsicura123", "PAZIENTE", null);
+        RegistrazioneRequest req = new RegistrazioneRequest(username, "passwordsicura123", "PAZIENTE");
 
         // prima registrazione: va bene
         mockMvc.perform(post("/api/auth/registrati")
@@ -85,7 +85,7 @@ class AuthControllerTest {
     void accessoConCredenzialiCorretteFunziona() throws Exception {
         String username = "login_test_" + System.nanoTime();
         RegistrazioneRequest registrazione = new RegistrazioneRequest(
-                username, "passwordsicura123", "PAZIENTE", null);
+                username, "passwordsicura123", "PAZIENTE");
         mockMvc.perform(post("/api/auth/registrati")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(registrazione)));
@@ -102,7 +102,7 @@ class AuthControllerTest {
     void accessoConPasswordSbagliataVieneRifiutato() throws Exception {
         String username = "login_fallito_" + System.nanoTime();
         RegistrazioneRequest registrazione = new RegistrazioneRequest(
-                username, "passwordsicura123", "PAZIENTE", null);
+                username, "passwordsicura123", "PAZIENTE");
         mockMvc.perform(post("/api/auth/registrati")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(registrazione)));

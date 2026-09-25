@@ -4,7 +4,7 @@ Spring Boot 3.4 / Java 21 / PostgreSQL / JWT.
 
 ## Stato
 
-✅ Compila ed esegue tutti i 30 test (`mvn test`), verificato per davvero
+✅ Compila ed esegue tutti i 40 test (`mvn test`), verificato per davvero
 in locale con IntelliJ — non solo scritto a fiducia. Vedi la cronologia dei
 commit per i problemi reali incontrati e come sono stati risolti (Lombok e
 JDK troppo recente, tipo colonna JSON non riconosciuto da H2, entità JPA
@@ -55,6 +55,6 @@ mvn test
 
 - Migrazioni database vere (oggi Hibernate genera lo schema da solo in
   sviluppo; in produzione andrebbe sostituito con Flyway o Liquibase)
-- Endpoint per la gestione abilità/schede DBT, pianificazione attività,
-  collegamento paziente-terapeuta lato terapeuta (solo login/registrazione
-  e diario sono stati scritti finora)
+- Tutti gli endpoint principali sono scritti: autenticazione, diario
+  (con la pianificazione attività inclusa nel campo `planner`), catalogo
+  abilità DBT, collegamento paziente-terapeuta

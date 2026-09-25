@@ -94,7 +94,7 @@ class SicurezzaJwtIntegrationTest {
 
     private String registraERitornaToken() throws Exception {
         RegistrazioneRequest req = new RegistrazioneRequest(
-                "utente_sicurezza_" + System.nanoTime(), "passwordsicura123", "PAZIENTE", null);
+                "utente_sicurezza_" + System.nanoTime(), "passwordsicura123", "PAZIENTE");
 
         String risposta = mockMvc.perform(post("/api/auth/registrati")
                         .contentType("application/json")
