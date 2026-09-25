@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api';
+import Intestazione from '../componenti/Intestazione';
 
 function dataDiOggiMeno(giorni) {
   const d = new Date();
@@ -19,27 +20,26 @@ export default function Storico() {
       .finally(() => setCaricamento(false));
   }, []);
 
-  if (caricamento) return <div className="pagina">Caricamento...</div>;
-  if (errore) return <div className="pagina"><p className="messaggio-errore">{errore}</p></div>;
-
   return (
-    <div className="pagina">
-      <h1>Storico</h1>
-      <p className="nota-piccola">Ultimi 30 giorni</p>
+    <>
+      <Intestazione titolo="Storico" sottotitolo="Ultimi 30 giorni" />
+      <div className="dc-corpo">
+        {caricamento && <p>Caricamento...</p>}
+        {errore && <p className="messaggio-errore">{errore}</p>}
+        {!caricamento && voci.length === 0 && <p>Nessuna voce ancora in questo periodo.</p>}
 
-      {voci.length === 0 && <p>Nessuna voce ancora in questo periodo.</p>}
-
-      {voci.map((v) => (
-        <div key={v.id} className="riga-storico">
-          <strong>{v.data}</strong>
-          {v.testi?.note && <p>{v.testi.note}</p>}
-          {v.scale && Object.keys(v.scale).length > 0 && (
-            <p className="nota-piccola">
-              {Object.entries(v.scale).map(([k, val]) => `${k}: ${val}`).join(' · ')}
-            </p>
-          )}
-        </div>
-      ))}
-    </div>
+        {voci.map((v) => (
+          <div key={v.id} className="dc-card">
+            <strong>{v.data}</strong>
+            {v.testi?.note && <p>{v.testi.note}</p>}
+            {v.scale && Object.keys(v.scale).length > 0 && (
+              <p className="nota-piccola">
+                {Object.entries(v.scale).map(([k, val]) => `${k}: ${val}`).join(' · ')}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

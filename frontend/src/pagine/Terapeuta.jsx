@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api';
 import { useAutenticazione } from '../AuthContext';
+import Intestazione from '../componenti/Intestazione';
 
 function dataDiOggiMeno(giorni) {
   const d = new Date();
@@ -9,7 +10,7 @@ function dataDiOggiMeno(giorni) {
 }
 
 export default function Terapeuta() {
-  const { utente } = useAutenticazione();
+  const { utente, esci } = useAutenticazione();
   const [pazienti, setPazienti] = useState([]);
   const [codiceDaCollegare, setCodiceDaCollegare] = useState('');
   const [erroreCollegamento, setErroreCollegamento] = useState(null);
@@ -38,8 +39,7 @@ export default function Terapeuta() {
     setPazienteAperta(paziente);
     setStoricoPaziente(null);
     try {
-      const storico = await api.storicoPaziente(paziente.id, dataDiOggiMeno(30), dataDiOggiMeno(0));
-      setStoricoPaziente(storico);
+      setStoricoPaziente(await api.storicoPaziente(paziente.id, dataDiOggiMeno(30), dataDiOggiMeno(0)));
     } catch {
       setStoricoPaziente([]);
     }
@@ -52,33 +52,41 @@ export default function Terapeuta() {
   }
 
   return (
-    <div className="pagina">
-      <h1>Le mie pazienti</h1>
-      <p className="nota-piccola">{utente.username}</p>
+    <>
+      <Intestazione
+        sopraTitolo={new Date().toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}
+        titolo="Le mie pazienti"
+        sottotitolo={utente.username}
+        azioni={
+          <button className="dc-btn-secondario" onClick={esci} style={{ background: 'rgba(255,255,255,.15)', color: '#fff' }}>
+            Esci
+          </button>
+        }
+      />
+      <div className="dc-corpo">
+        <div className="dc-card">
+          <form onSubmit={collega} className="riga-collega">
+            <input
+              type="text" placeholder="Codice della paziente (es. ABC123)"
+              value={codiceDaCollegare} onChange={(e) => setCodiceDaCollegare(e.target.value)} required
+            />
+            <button type="submit" className="dc-btn-secondario">Collega</button>
+          </form>
+          {erroreCollegamento && <p className="messaggio-errore">{erroreCollegamento}</p>}
+        </div>
 
-      <form onSubmit={collega} className="riga-collega">
-        <input
-          type="text"
-          placeholder="Codice della paziente (es. ABC123)"
-          value={codiceDaCollegare}
-          onChange={(e) => setCodiceDaCollegare(e.target.value)}
-          required
-        />
-        <button type="submit">Collega</button>
-      </form>
-      {erroreCollegamento && <p className="messaggio-errore">{erroreCollegamento}</p>}
+        {pazienti.length === 0 && <p>Nessuna paziente collegata ancora.</p>}
 
-      {pazienti.length === 0 && <p>Nessuna paziente collegata ancora.</p>}
-
-      <ul className="elenco-pazienti">
-        {pazienti.map((p) => (
-          <li key={p.id}>
-            <button className="riga-paziente" onClick={() => apriPaziente(p)}>
-              {p.username}
-            </button>
-          </li>
-        ))}
-      </ul>
+        <ul className="elenco-pazienti">
+          {pazienti.map((p) => (
+            <li key={p.id}>
+              <button className="riga-paziente" onClick={() => apriPaziente(p)}>
+                {p.username}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {pazienteAperta && (
         <div className="pannello-paziente">
@@ -86,21 +94,21 @@ export default function Terapeuta() {
             <h2>{pazienteAperta.username}</h2>
             <button onClick={() => setPazienteAperta(null)}>Chiudi</button>
           </div>
-
-          {storicoPaziente === null && <p>Caricamento...</p>}
-          {storicoPaziente?.length === 0 && <p>Nessuna voce negli ultimi 30 giorni.</p>}
-          {storicoPaziente?.map((v) => (
-            <div key={v.id} className="riga-storico">
-              <strong>{v.data}</strong>
-              {v.testi?.note && <p>{v.testi.note}</p>}
-            </div>
-          ))}
-
-          <button className="pulsante-pericolo" onClick={() => scollega(pazienteAperta.id)}>
-            Scollega paziente
-          </button>
+          <div className="dc-corpo">
+            {storicoPaziente === null && <p>Caricamento...</p>}
+            {storicoPaziente?.length === 0 && <p>Nessuna voce negli ultimi 30 giorni.</p>}
+            {storicoPaziente?.map((v) => (
+              <div key={v.id} className="dc-card">
+                <strong>{v.data}</strong>
+                {v.testi?.note && <p>{v.testi.note}</p>}
+              </div>
+            ))}
+            <button className="dc-btn-secondario dc-btn-pericolo" onClick={() => scollega(pazienteAperta.id)}>
+              Scollega paziente
+            </button>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
