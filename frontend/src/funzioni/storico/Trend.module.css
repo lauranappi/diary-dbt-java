@@ -1,0 +1,15 @@
+.scheda {
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.titolo {
+  margin-bottom: 16px;
+  font-size: var(--corpo-riga);
+  font-weight: var(--peso-grassetto);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--inchiostro);
+}
+.vuoto { padding: 1rem 0; font-size: 14px; color: var(--tenue); }

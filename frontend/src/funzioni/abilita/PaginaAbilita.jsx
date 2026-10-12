@@ -13,7 +13,7 @@ export default function PaginaAbilita() {
 
   return (
     <>
-      <Hero soloDesktop titolo="Abilità di oggi" sottotitolo={`${spuntate} su ${TOTALE_ABILITA} spuntate oggi`} />
+      <Hero soloDesktop semplice titolo="Abilità di oggi" sottotitolo={`${spuntate} su ${TOTALE_ABILITA} spuntate oggi`} />
       <div className={stili.contenuto}>
         {errore && <p className={stili.errore} role="alert">Non sono riuscita a salvare l'ultima spunta, riprova.</p>}
         {GRUPPI_ABILITA.map((gruppo) => (

@@ -1,0 +1,28 @@
+.giornata {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 16px 18px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--superficie);
+  color: var(--tenue);
+  text-align: left;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.testo { flex: 1; }
+.data { margin-bottom: 6px; font-size: 14px; font-weight: var(--peso-grassetto); letter-spacing: -0.02em; color: var(--inchiostro); }
+.etichette { display: flex; flex-wrap: wrap; gap: 5px; }
+.etichetta {
+  padding: 6px 11px;
+  border-radius: var(--raggio-pillola);
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: 11px;
+  font-weight: var(--peso-semi);
+}
+.vuoto { padding: 1rem 0; font-size: 14px; color: var(--tenue); }

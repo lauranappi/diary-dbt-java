@@ -75,6 +75,7 @@ Ogni pacchetto ha il suo controller, service, repository, entità e DTO (vedi `A
 | PUT/DELETE | `/api/paziente/terapeuta` | la paziente indica/toglie la propria terapeuta (codice = username) |
 | GET | `/api/notifiche/chiave-pubblica` | chiave VAPID per il browser |
 | PUT/DELETE | `/api/notifiche/iscrizione` | attiva/aggiorna/spegne il promemoria di un dispositivo |
+| PUT | `/api/profilo` | cambia nome e cognome di chi è collegato |
 
 Chiavi dei documenti condivise con la terapeuta: `attivita-provate`, `abilita-personali`, `note-paziente`, `note-terapeuta`, `fogli`.
 Tutte le altre (post-it, preferiti, impostazioni…) sono private.

@@ -36,6 +36,15 @@ export function ProviderAutenticazione({ children }) {
     [entra],
   );
 
+  // Aggiorna alcuni dati dell'utente collegato (es. nome dopo averlo modificato)
+  const aggiornaUtente = useCallback((parti) => {
+    setUtente((corrente) => {
+      const nuovo = { ...corrente, ...parti };
+      salvaSessione({ ...leggiSessione(), utente: nuovo });
+      return nuovo;
+    });
+  }, []);
+
   const esci = useCallback(() => {
     cancellaSessione();
     setUtente(null);
@@ -47,8 +56,8 @@ export function ProviderAutenticazione({ children }) {
   }, [esci]);
 
   const valore = useMemo(
-    () => ({ utente, accedi, registrati, esci }),
-    [utente, accedi, registrati, esci],
+    () => ({ utente, accedi, registrati, aggiornaUtente, esci }),
+    [utente, accedi, registrati, aggiornaUtente, esci],
   );
   return <ContestoAutenticazione.Provider value={valore}>{children}</ContestoAutenticazione.Provider>;
 }

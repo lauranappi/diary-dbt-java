@@ -1,0 +1,8 @@
+.contenuto { padding: 0 var(--margine-laterale); }
+
+.scheda {
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 20px;
+  margin-bottom: 14px;
+}

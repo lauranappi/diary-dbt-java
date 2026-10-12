@@ -1,0 +1,9 @@
+.riga {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 0;
+}
+.nome { display: block; font-size: var(--corpo-riga); font-weight: var(--peso-semi); color: var(--inchiostro); }
+.descrizione { margin-top: 3px; font-size: 12px; line-height: 1.4; color: var(--tenue); opacity: 0.85; }

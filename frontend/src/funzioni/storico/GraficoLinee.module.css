@@ -1,0 +1,15 @@
+.grafico { margin: 0; }
+.grafico svg { display: block; width: 100%; height: auto; }
+
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 12px;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: var(--peso-medio);
+  color: var(--inchiostro);
+}
+.voce { display: inline-flex; align-items: center; gap: 5px; }
+.voce i { width: 8px; height: 8px; border-radius: 8px; }
