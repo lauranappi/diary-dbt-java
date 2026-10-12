@@ -5,6 +5,7 @@ import com.marea.terapeuta.TerapeutaService;
 import com.marea.auth.AuthResponse;
 import com.marea.auth.LoginRequest;
 import com.marea.auth.RegistrazioneRequest;
+import com.marea.utente.CodiciPaziente;
 import com.marea.utente.Utente;
 import com.marea.utente.UtenteRepository;
 import com.marea.auth.JwtService;
@@ -13,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.security.SecureRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +22,6 @@ public class AuthService {
     private final UtenteRepository utenteRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-
-    private static final String ALFABETO_CODICE = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // senza caratteri ambigui
-    private static final SecureRandom RANDOM = new SecureRandom();
 
     // Il collegamento a una terapeuta NON avviene qui: la paziente riceve
     // il proprio codice alla registrazione e lo comunica (di persona, a
@@ -88,14 +85,6 @@ public class AuthService {
     }
 
     private String generaCodiceUnivoco() {
-        String codice;
-        do {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 6; i++) {
-                sb.append(ALFABETO_CODICE.charAt(RANDOM.nextInt(ALFABETO_CODICE.length())));
-            }
-            codice = sb.toString();
-        } while (utenteRepository.findByCodicePaziente(codice).isPresent());
-        return codice;
+        return CodiciPaziente.genera(c -> utenteRepository.findByCodicePaziente(c).isPresent());
     }
 }

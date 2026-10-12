@@ -31,3 +31,5 @@ jobs:
           DATABASE_USERNAME: marea
           DATABASE_PASSWORD: marea
         run: mvn -B -ntp verify
+      - name: Controlla che il test su PostgreSQL non sia stato saltato
+        run: grep -q 'skipped="0"' backend/target/surefire-reports/TEST-com.marea.comune.MigrazioniPostgresTest.xml
