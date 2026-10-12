@@ -1,0 +1,35 @@
+.azione { margin-top: var(--spazio-m); }
+
+.impostazioni {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.impostazioni:active { background: rgba(255, 255, 255, 0.3); }
+
+.pila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-m);
+  padding: 16px var(--margine-laterale) 14px;
+}
+
+.nota { font-size: var(--corpo-meta); color: var(--tenue); }
+
+.esci {
+  align-self: center;
+  margin-top: var(--spazio-s);
+  background: none;
+  border: 0;
+  color: var(--tenue);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  cursor: pointer;
+}

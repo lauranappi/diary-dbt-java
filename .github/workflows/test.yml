@@ -33,3 +33,25 @@ jobs:
         run: mvn -B -ntp verify
       - name: Controlla che il test su PostgreSQL non sia stato saltato
         run: grep -q 'skipped="0"' backend/target/surefire-reports/TEST-com.marea.comune.MigrazioniPostgresTest.xml
+
+  frontend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Installa
+        working-directory: frontend
+        run: npm ci
+      - name: Controlla il codice
+        working-directory: frontend
+        run: npm run lint
+      - name: Test
+        working-directory: frontend
+        run: npm test
+      - name: Compila
+        working-directory: frontend
+        run: npm run build

@@ -4,7 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/diary-dbt/',
+  base: '/diary-dbt-java/',
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/prova/setup.js'],
+  },
   plugins: [
     react(),
     VitePWA({
@@ -14,7 +18,7 @@ export default defineConfig({
         name: 'Marea',
         short_name: 'Marea',
         description: 'Marea — la tua diary card DBT quotidiana',
-        start_url: '/diary-dbt/',
+        start_url: '/diary-dbt-java/',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#1B4B4A',

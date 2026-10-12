@@ -1,0 +1,44 @@
+.schermata {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--testata);
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 28px calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+.ramo {
+  position: fixed;
+  right: -60px;
+  top: calc(env(safe-area-inset-top, 20px) + 60px);
+  width: 200px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.contenitore {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+}
+
+.titolo {
+  margin-bottom: 10px;
+  font-size: 34px;
+  font-weight: var(--peso-grassetto);
+  letter-spacing: -0.03em;
+  color: var(--testata-inchiostro);
+}
+
+.sottotitolo {
+  margin-bottom: 26px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--linea);
+}
+
+.scheda {
+  background: var(--superficie);
+  border-radius: 30px;
+  padding: 1.75rem;
+}

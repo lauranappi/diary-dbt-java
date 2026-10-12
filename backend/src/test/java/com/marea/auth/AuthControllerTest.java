@@ -113,4 +113,20 @@ class AuthControllerTest {
                         .content(objectMapper.writeValueAsString(login)))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void siPuoAccedereAncheConLEmail() throws Exception {
+        String username = "conemail_" + System.nanoTime();
+        String email = username + "@esempio.it";
+        RegistrazioneRequest reg = new RegistrazioneRequest(
+                username, "passwordsicura123", "PAZIENTE", "Maria", "Rossi", email, null);
+        mockMvc.perform(post("/api/auth/registrati").contentType("application/json")
+                .content(objectMapper.writeValueAsString(reg))).andExpect(status().isOk());
+
+        mockMvc.perform(post("/api/auth/accedi").contentType("application/json")
+                        .content(objectMapper.writeValueAsString(new LoginRequest(email.toUpperCase(), "passwordsicura123"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value(username))
+                .andExpect(jsonPath("$.nome").value("Maria"));
+    }
 }

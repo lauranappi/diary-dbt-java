@@ -11,5 +11,6 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
     Optional<Utente> findByCodicePaziente(String codicePaziente);
     List<Utente> findByTerapeutaId(String terapeutaId);
     boolean existsByUsername(String username);
+    Optional<Utente> findByEmailIgnoreCase(String email);
     boolean existsByEmail(String email);
 }

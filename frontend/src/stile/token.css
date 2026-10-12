@@ -1,0 +1,73 @@
+/* Token di Marea: colori, forme, testo, spazi. Tutto il resto dello stile
+   usa solo queste variabili: per cambiare l'aspetto dell'app si tocca qui. */
+
+:root {
+  /* Palette: quattro tinte */
+  --petrolio: #1B4B4A;
+  --petrolio-scuro: #123534;
+  --petrolio-scurissimo: #0E2A29;
+  --petrolio-chiaro: #DCE8E6;
+
+  --crema: #FBF3E7;
+
+  --senape: #F5CE47;
+  --senape-chiara: #FDF3D5;
+
+  --terracotta: #C1714A;
+  --terracotta-chiara: #F7E7DC;
+
+  --bianco: #FFFFFF;
+  --nero: #14201F;
+
+  /* Ruoli */
+  --sfondo: var(--crema);
+  --superficie: var(--bianco);
+  --inchiostro: var(--nero);
+  --tenue: var(--petrolio);
+  --linea: var(--petrolio-chiaro);
+  --accento: var(--senape);
+  --segnale: var(--terracotta);
+  --segnale-chiaro: var(--terracotta-chiara);
+  --testata: var(--petrolio);
+  --testata-inchiostro: var(--bianco);
+  --testata-secondario: var(--petrolio-chiaro);
+  --errore: #C85250;
+  --errore-chiaro: #FCEAEA;
+  --successo: #1D9E75;
+
+  /* Angoli */
+  --raggio-scheda: 26px;
+  --raggio-elemento: 20px;
+  --raggio-interno: 18px;
+  --raggio-cella: 15px;
+  --raggio-barra: 30px;
+  --raggio-pillola: 999px;
+
+  /* Testo */
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --peso-normale: 400;
+  --peso-medio: 500;
+  --peso-semi: 600;
+  --peso-grassetto: 800;
+
+  --corpo-titolo: 28px;
+  --corpo-sezione: 16px;
+  --corpo-riga: 14.5px;
+  --corpo-testo: 14px;
+  --corpo-piccolo: 13.5px;
+  --corpo-meta: 12.5px;
+  --corpo-soprattitolo: 11.5px;
+  --corpo-scheda-barra: 10.5px;
+
+  /* Spazi */
+  --spazio-xs: 4px;
+  --spazio-s: 8px;
+  --spazio-m: 12px;
+  --spazio-l: 14px;
+  --spazio-xl: 20px;
+  --margine-laterale: 20px;
+  --altezza-barra: 84px;
+
+  /* Ombre */
+  --ombra-barra: 0 -6px 26px rgba(27, 75, 74, 0.08);
+}
