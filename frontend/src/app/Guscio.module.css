@@ -1,0 +1,9 @@
+.guscio {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100dvh;
+}
+
+.contenuto {
+  padding-bottom: calc(var(--altezza-barra) + env(safe-area-inset-bottom, 0px) + 16px);
+}

@@ -1,0 +1,36 @@
+.pulsante {
+  border: 0;
+  cursor: pointer;
+  font-weight: var(--peso-grassetto);
+  transition: transform 0.12s, opacity 0.12s;
+}
+.pulsante:active { transform: scale(0.98); }
+.pulsante:disabled { opacity: 0.55; cursor: default; }
+
+.pieno { width: 100%; }
+
+.primario {
+  background: var(--testata);
+  color: var(--testata-inchiostro);
+  border-radius: var(--raggio-elemento);
+  font-size: 16px;
+  padding: 16px;
+}
+
+.accento {
+  background: var(--accento);
+  color: var(--nero);
+  border-radius: var(--raggio-interno);
+  font-size: var(--corpo-testo);
+  font-weight: var(--peso-semi);
+  padding: 12px 22px;
+}
+
+.testo {
+  background: none;
+  color: var(--segnale);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  padding: 0;
+  text-decoration: underline;
+}

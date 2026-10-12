@@ -66,7 +66,9 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest req) {
+        // Come in Marea si puo' entrare con l'email oltre che con lo username
         Utente utente = utenteRepository.findByUsername(req.username())
+                .or(() -> utenteRepository.findByEmailIgnoreCase(req.username()))
                 .orElseThrow(() -> new IllegalArgumentException("Credenziali non valide"));
 
         if (!passwordEncoder.matches(req.password(), utente.getPasswordHash())) {

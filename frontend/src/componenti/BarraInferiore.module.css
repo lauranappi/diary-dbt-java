@@ -1,0 +1,51 @@
+.barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: var(--superficie);
+  border-radius: var(--raggio-barra) var(--raggio-barra) 0 0;
+  box-shadow: var(--ombra-barra);
+  padding: 12px 8px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+
+.dentro {
+  display: flex;
+  justify-content: space-around;
+  gap: 2px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.voce {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 4px;
+  text-decoration: none;
+  color: var(--inchiostro);
+}
+
+.pallino {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--raggio-pillola);
+  background: var(--linea);
+  transition: width 0.18s ease, background 0.18s ease;
+}
+.attiva .pallino { width: 24px; background: var(--accento); }
+
+.etichetta {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--corpo-scheda-barra);
+  font-weight: var(--peso-medio);
+  opacity: 0.55;
+}
+.attiva .etichetta { font-weight: var(--peso-semi); opacity: 1; }

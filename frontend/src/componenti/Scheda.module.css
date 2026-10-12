@@ -1,0 +1,30 @@
+.scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-xs);
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 20px;
+  text-align: left;
+  color: var(--inchiostro);
+}
+
+.riga {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}
+
+.soprattitolo {
+  font-size: var(--corpo-soprattitolo);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+}
+
+.titolo {
+  font-size: var(--corpo-sezione);
+  font-weight: var(--peso-semi);
+  letter-spacing: -0.02em;
+}
