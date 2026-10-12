@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: marea
+          POSTGRES_USER: marea
+          POSTGRES_PASSWORD: marea
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U marea" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Test backend
+        working-directory: backend
+        env:
+          DATABASE_URL: jdbc:postgresql://localhost:5432/marea
+          DATABASE_USERNAME: marea
+          DATABASE_PASSWORD: marea
+        run: mvn -B -ntp verify
+      - name: Controlla che il test su PostgreSQL non sia stato saltato
+        run: grep -q 'skipped="0"' backend/target/surefire-reports/TEST-com.marea.comune.MigrazioniPostgresTest.xml
