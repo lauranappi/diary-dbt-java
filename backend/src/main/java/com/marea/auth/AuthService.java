@@ -39,8 +39,23 @@ public class AuthService {
 
         Utente.Ruolo ruolo = Utente.Ruolo.valueOf(req.ruolo().toUpperCase());
 
+        Utente terapeuta = null;
+        if (req.codiceTerapeuta() != null && !req.codiceTerapeuta().isBlank()) {
+            terapeuta = utenteRepository.findByUsername(req.codiceTerapeuta().trim().toLowerCase())
+                    .filter(u -> u.getRuolo() == Utente.Ruolo.TERAPEUTA)
+                    .orElseThrow(() -> new IllegalArgumentException("Codice terapeuta non valido"));
+        }
+        if (req.email() != null && !req.email().isBlank() && utenteRepository.existsByEmail(req.email())) {
+            throw new IllegalArgumentException("Email già in uso");
+        }
+
         Utente.UtenteBuilder builder = Utente.builder()
                 .username(req.username())
+                .nome(req.nome())
+                .cognome(req.cognome())
+                .email(req.email() == null || req.email().isBlank() ? null : req.email())
+                .terapeuta(terapeuta)
+                .collegataIl(terapeuta != null ? Instant.now() : null)
                 .passwordHash(passwordEncoder.encode(req.password()))
                 .ruolo(ruolo)
                 .creatoIl(Instant.now());
@@ -67,7 +82,9 @@ public class AuthService {
     private AuthResponse costruisciRisposta(Utente utente) {
         String token = jwtService.generaToken(utente.getId(), utente.getRuolo().name());
         return new AuthResponse(token, utente.getId(), utente.getUsername(),
-                utente.getRuolo().name(), utente.getCodicePaziente());
+                utente.getRuolo().name(), utente.getCodicePaziente(),
+                utente.getNome(), utente.getCognome(),
+                utente.getTerapeuta() != null ? utente.getTerapeuta().getUsername() : null);
     }
 
     private String generaCodiceUnivoco() {

@@ -58,4 +58,28 @@ public class TerapeutaService {
         paziente.setCollegataIl(null);
         utenteRepository.save(paziente);
     }
+
+    // Come in Marea: e' la paziente a indicare il codice (username) della
+    // propria terapeuta, dal profilo.
+    public Utente collegaATerapeuta(String pazienteId, String codiceTerapeuta) {
+        Utente paziente = utenteRepository.findById(pazienteId)
+                .orElseThrow(() -> new IllegalArgumentException("Paziente non trovata"));
+        if (paziente.getRuolo() != Utente.Ruolo.PAZIENTE) {
+            throw new IllegalArgumentException("Solo una paziente può indicare la propria terapeuta");
+        }
+        Utente terapeuta = utenteRepository.findByUsername(codiceTerapeuta.trim().toLowerCase())
+                .filter(u -> u.getRuolo() == Utente.Ruolo.TERAPEUTA)
+                .orElseThrow(() -> new IllegalArgumentException("Codice terapeuta non valido"));
+        paziente.setTerapeuta(terapeuta);
+        paziente.setCollegataIl(Instant.now());
+        return utenteRepository.save(paziente);
+    }
+
+    public void scollegaDaTerapeuta(String pazienteId) {
+        Utente paziente = utenteRepository.findById(pazienteId)
+                .orElseThrow(() -> new IllegalArgumentException("Paziente non trovata"));
+        paziente.setTerapeuta(null);
+        paziente.setCollegataIl(null);
+        utenteRepository.save(paziente);
+    }
 }
