@@ -36,6 +36,18 @@ public class DiarioService {
         return voceDiarioRepository.save(voce);
     }
 
+    // True se per quel giorno c'e' almeno qualcosa di compilato (serve ai promemoria)
+    public boolean haCompilato(String pazienteId, LocalDate giorno) {
+        return voceDiarioRepository.findByPazienteIdAndData(pazienteId, giorno)
+                .map(v -> piena(v.getScale()) || piena(v.getToggle()) || piena(v.getTesti())
+                        || piena(v.getAbilitaUsate()) || piena(v.getPlanner()))
+                .orElse(false);
+    }
+
+    private static boolean piena(java.util.Map<?, ?> m) {
+        return m != null && !m.isEmpty();
+    }
+
     public List<VoceDiario> storico(String pazienteId, LocalDate da, LocalDate a) {
         return voceDiarioRepository.findByPazienteIdAndDataBetweenOrderByDataDesc(pazienteId, da, a);
     }
