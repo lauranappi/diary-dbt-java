@@ -1,0 +1,33 @@
+/* Sul telefono si vede un passo alla volta; dal tablet in su si vedono tutti */
+.passo { display: none; }
+.attivo { display: block; }
+
+.soprattitolo {
+  margin-bottom: 10px;
+  font-size: var(--corpo-soprattitolo);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+}
+
+.scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-xl);
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 20px;
+}
+
+.gruppo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spazio-xl);
+}
+
+@media (min-width: 701px) {
+  .passo { display: block; margin-bottom: 1.25rem; }
+  .gruppo { grid-template-columns: 1fr 1fr; }
+  .tre { grid-template-columns: 1fr 1fr 1fr; }
+}

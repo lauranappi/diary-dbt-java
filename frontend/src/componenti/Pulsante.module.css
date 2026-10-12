@@ -17,6 +17,14 @@
   padding: 16px;
 }
 
+.secondario {
+  background: var(--linea);
+  color: var(--tenue);
+  border-radius: var(--raggio-elemento);
+  font-size: 16px;
+  padding: 16px 22px;
+}
+
 .accento {
   background: var(--accento);
   color: var(--nero);

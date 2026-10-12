@@ -66,6 +66,36 @@ class DiarioServiceTest {
     }
 
     @Test
+    void salvareSoloLeScaleNonCancellaAbilitaEPlanner() {
+        LocalDate oggi = LocalDate.now();
+        VoceDiario esistente = VoceDiario.builder().id("voce-1").data(oggi)
+                .scale(Map.of("ai", 1)).abilitaUsate(Map.of("dear", true))
+                .planner(Map.of("mattina", List.of("corsa"))).build();
+        VoceDiarioDto dto = new VoceDiarioDto(oggi, Map.of("ai", 4), Map.of(), Map.of(), null, null);
+
+        when(voceDiarioRepository.findByPazienteIdAndData("paziente-1", oggi)).thenReturn(Optional.of(esistente));
+        when(voceDiarioRepository.save(any(VoceDiario.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        VoceDiario risultato = diarioService.salva("paziente-1", dto);
+
+        assertThat(risultato.getScale()).containsEntry("ai", 4);
+        assertThat(risultato.getAbilitaUsate()).containsEntry("dear", true);
+        assertThat(risultato.getPlanner()).containsKey("mattina");
+    }
+
+    @Test
+    void unaParteInviataVuotaSvuotaQuellaParte() {
+        LocalDate oggi = LocalDate.now();
+        VoceDiario esistente = VoceDiario.builder().id("voce-1").data(oggi).scale(Map.of("ai", 3)).build();
+        VoceDiarioDto dto = new VoceDiarioDto(oggi, Map.of(), null, null, null, null);
+
+        when(voceDiarioRepository.findByPazienteIdAndData("paziente-1", oggi)).thenReturn(Optional.of(esistente));
+        when(voceDiarioRepository.save(any(VoceDiario.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        assertThat(diarioService.salva("paziente-1", dto).getScale()).isEmpty();
+    }
+
+    @Test
     void storicoRestituisceLeVociNellIntervallo() {
         LocalDate da = LocalDate.now().minusDays(7);
         LocalDate a = LocalDate.now();

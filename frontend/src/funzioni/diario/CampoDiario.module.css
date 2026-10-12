@@ -1,0 +1,7 @@
+.campo { display: flex; flex-direction: column; gap: 8px; }
+
+.etichetta {
+  font-size: var(--corpo-riga);
+  font-weight: var(--peso-semi);
+  line-height: 1.3;
+}
