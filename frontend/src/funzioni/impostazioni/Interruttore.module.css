@@ -1,0 +1,27 @@
+.interruttore { position: relative; width: 46px; height: 28px; flex-shrink: 0; }
+.interruttore input { opacity: 0; width: 0; height: 0; }
+
+.binario {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  background: var(--linea);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.binario::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 3px;
+  bottom: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+input:checked + .binario { background: var(--testata); }
+input:checked + .binario::before { transform: translateX(18px); }
+input:disabled + .binario { opacity: 0.55; cursor: default; }
+input:focus-visible + .binario { outline: 2px solid var(--segnale); outline-offset: 2px; }

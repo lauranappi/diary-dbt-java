@@ -1,0 +1,13 @@
+.fila { display: flex; gap: 8px; margin-bottom: 16px; }
+
+.pillola {
+  padding: 11px 18px;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  cursor: pointer;
+}
+.attiva { background: var(--testata); color: var(--testata-inchiostro); }

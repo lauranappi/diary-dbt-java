@@ -1,0 +1,12 @@
+.contenuto { padding: 0 var(--margine-laterale); }
+
+.etichetta {
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+}
+
+.errore { margin-bottom: 12px; font-size: var(--corpo-piccolo); font-weight: var(--peso-semi); color: var(--errore); }
