@@ -26,14 +26,13 @@ describe('Percorsi', () => {
     expect(screen.getByRole('heading', { name: 'Bentornata' })).toBeInTheDocument();
   });
 
-  it('la paziente vede la home con le sei voci della barra e il suo codice', () => {
+  it('la paziente vede la home con le sei voci della barra', () => {
     sessione('PAZIENTE');
     apri('/');
     expect(screen.getByRole('heading', { name: /Laura/ })).toBeInTheDocument();
     const barra = screen.getByRole('navigation', { name: 'Navigazione principale' });
     expect([...barra.querySelectorAll('a')].map((a) => a.textContent))
       .toEqual(['Home', 'Diary', 'Guida', 'Abilità', 'Storico', 'Attività']);
-    expect(screen.getByText('ABC234')).toBeInTheDocument();
   });
 
   it('la terapeuta vede Home, Pazienti e Guida', () => {

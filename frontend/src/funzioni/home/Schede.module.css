@@ -1,0 +1,47 @@
+.scheda {
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: clamp(14px, 2.4dvh, 18px);
+  margin: 0;
+}
+
+.titolo { font-size: var(--corpo-meta); font-weight: var(--peso-semi); color: var(--tenue); }
+
+/* serie + ieri */
+.serie { flex: 1; display: flex; flex-direction: column; gap: var(--spazio-xs); }
+.numeroSerie { font-size: 30px; font-weight: var(--peso-grassetto); letter-spacing: -0.03em; color: var(--tenue); }
+.etichettaSerie { font-size: var(--corpo-meta); font-weight: var(--peso-medio); line-height: 1.35; color: var(--tenue); }
+
+.ieri { flex: 1.6; display: flex; flex-direction: column; gap: 10px; }
+.nessuna { font-size: var(--corpo-meta); color: var(--tenue); }
+.barra { display: flex; align-items: center; gap: 9px; }
+.nomeBarra { flex: none; width: 66px; font-size: 13px; font-weight: var(--peso-medio); color: var(--inchiostro); }
+.binario { position: relative; flex: 1; height: 7px; overflow: hidden; border-radius: var(--raggio-pillola); background: var(--linea); }
+.binario i { position: absolute; inset: 0 auto 0 0; border-radius: var(--raggio-pillola); background: var(--testata); }
+.valore { font-size: 11px; font-weight: var(--peso-semi); color: var(--segnale); }
+
+/* abilita' di oggi */
+.abilita { background: var(--senape-chiara); position: relative; overflow: hidden; cursor: pointer; }
+.rigaAbilita { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 16px; }
+.icona { flex: none; border-radius: 18px; }
+.corpoAbilita { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; }
+.kicker { font-size: var(--corpo-soprattitolo); font-weight: var(--peso-semi); letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); }
+.nomeAbilita { font-size: 18px; line-height: 1.15; color: var(--nero); }
+.descrizione { font-size: var(--corpo-piccolo); line-height: 1.55; color: var(--tenue); }
+.etichette { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.modulo { padding: 6px 11px; border-radius: var(--raggio-pillola); background: #F0F5F4; color: var(--petrolio); font-size: 11px; font-weight: var(--peso-semi); }
+.durata { padding: 6px 11px; border: 1px solid var(--terracotta); border-radius: var(--raggio-pillola); color: var(--terracotta); font-size: 11px; font-weight: var(--peso-semi); }
+.azioni { margin-top: 6px; }
+.altro { padding: 0; border: 0; background: none; color: var(--segnale); font-size: 12px; font-weight: 700; cursor: pointer; }
+
+/* ultimi sette giorni */
+.settimana { display: flex; flex-direction: column; gap: var(--spazio-m); cursor: pointer; }
+.rigaTitolo { display: flex; align-items: center; gap: var(--spazio-m); }
+.rigaTitolo .titolo { flex: 1; }
+.freccia { flex: none; color: var(--tenue); }
+.colonne { display: flex; justify-content: space-between; align-items: flex-end; height: 60px; }
+.colonna { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.colonnaBarra { width: 18px; border-radius: var(--raggio-pillola); background: var(--testata); }
+.vuota { background: var(--linea); height: 8px; }
+.oggi { background: var(--accento); }
+.lettera { font-size: 11px; font-weight: var(--peso-medio); color: var(--tenue); opacity: 0.7; }

@@ -1,30 +1,50 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '../../componenti/Hero.jsx';
 import Pulsante from '../../componenti/Pulsante.jsx';
-import Scheda from '../../componenti/Scheda.jsx';
 import { useAutenticazione } from '../autenticazione/useAutenticazione.js';
-import { dataEstesa, saluto } from './saluto.js';
+import { chiave } from '../diario/date.js';
+import { compilata } from '../diario/voce.js';
+import { emozioniDiIeri, giorniDiFila, indiceSuggerimento, ruotaSuggerimento, saluto, suggerimentiPer, ultimiSetteGiorni } from './calcoli.js';
+import HomeTerapeuta from './HomeTerapeuta.jsx';
+import SchedaAbilita from './SchedaAbilita.jsx';
+import SchedaIeri from './SchedaIeri.jsx';
+import SchedaSerie from './SchedaSerie.jsx';
+import SchedaSettimana from './SchedaSettimana.jsx';
+import { useVociRecenti } from './useVociRecenti.js';
 import stili from './PaginaHome.module.css';
 
 export default function PaginaHome() {
-  const { utente, esci } = useAutenticazione();
+  const { utente } = useAutenticazione();
+  if (utente.ruolo !== 'PAZIENTE') return <HomeTerapeuta />;
+  return <HomePaziente utente={utente} />;
+}
+
+function HomePaziente({ utente }) {
   const navigate = useNavigate();
-  const adesso = new Date();
-  const nome = utente.nome || utente.username;
-  const eUnaPaziente = utente.ruolo === 'PAZIENTE';
+  const [adesso] = useState(() => new Date());
+  const { voci } = useVociRecenti();
+
+  const oggi = chiave(adesso);
+  const [indice, setIndice] = useState(() => indiceSuggerimento(chiave(adesso)));
+  const voceDiOggi = voci.find((v) => v.data === oggi);
+  const fattaOggi = compilata(voceDiOggi);
+  const suggerimenti = suggerimentiPer(voceDiOggi);
+  const suggerimento = suggerimenti.length ? suggerimenti[indice % suggerimenti.length] : null;
 
   return (
     <>
       <Hero
-        saluto={dataEstesa(adesso)}
-        titolo={`${saluto(adesso)}, ${nome}`}
-        sottotitolo={eUnaPaziente ? 'Come è andata oggi?' : 'Le tue pazienti ti aspettano.'}
+        className={stili.hero}
+        saluto={saluto(adesso.getHours())}
+        titolo={utente.nome || utente.username}
+        sottotitolo={fattaOggi
+          ? 'La diary di oggi è compilata. Puoi rivederla quando vuoi.'
+          : 'La diary di oggi non è ancora compilata. Ci vogliono due minuti.'}
         azione={
-          eUnaPaziente && (
-            <Pulsante variante="accento" onClick={() => navigate('/diario')} className={stili.azione}>
-              Compila la diary
-            </Pulsante>
-          )
+          <Pulsante variante="accento" onClick={() => navigate('/diario')} className={stili.azione}>
+            {fattaOggi ? 'Rivedi la diary' : 'Compila la diary'}
+          </Pulsante>
         }
         angolo={
           <button type="button" className={stili.impostazioni} onClick={() => navigate('/impostazioni')} aria-label="Impostazioni">
@@ -36,11 +56,17 @@ export default function PaginaHome() {
         }
       />
       <section className={stili.pila}>
-        {eUnaPaziente && <Scheda soprattitolo="Il tuo codice" titolo={utente.codicePaziente}>
-          <span className={stili.nota}>Comunicalo a voce alla tua terapeuta se vuole collegarti a sé.</span>
-        </Scheda>}
-        <Scheda onClick={() => navigate('/guida')} soprattitolo="Guida DBT" titolo="Le abilità spiegate passo per passo" />
-        <button type="button" className={stili.esci} onClick={esci}>Esci</button>
+        <div className={stili.riga}>
+          <SchedaSerie giorni={giorniDiFila(voci, adesso)} />
+          <SchedaIeri emozioni={emozioniDiIeri(voci, adesso)} />
+        </div>
+        <SchedaAbilita
+          suggerimento={suggerimento}
+          quanti={suggerimenti.length}
+          onApri={() => navigate('/guida')}
+          onAltro={() => { ruotaSuggerimento(oggi, suggerimenti.length); setIndice(indiceSuggerimento(oggi)); }}
+        />
+        <SchedaSettimana giorni={ultimiSetteGiorni(voci, adesso)} onApri={() => navigate('/storico')} />
       </section>
     </>
   );

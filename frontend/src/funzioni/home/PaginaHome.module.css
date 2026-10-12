@@ -1,3 +1,10 @@
+/* La testata si adatta all'altezza dello schermo: si stringe su quelli bassi */
+header.hero {
+  padding-top: calc(env(safe-area-inset-top, 0px) + clamp(16px, 4dvh, 30px));
+  padding-bottom: clamp(28px, 5dvh, 48px);
+}
+header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
+
 .azione { margin-top: var(--spazio-m); }
 
 .impostazioni {
@@ -17,9 +24,11 @@
 .pila {
   display: flex;
   flex-direction: column;
-  gap: var(--spazio-m);
-  padding: 16px var(--margine-laterale) 14px;
+  gap: clamp(8px, 1.6dvh, 12px);
+  padding: clamp(10px, 2dvh, 16px) var(--margine-laterale) clamp(8px, 1.5dvh, 14px);
 }
+
+.riga { display: flex; gap: var(--spazio-m); }
 
 .nota { font-size: var(--corpo-meta); color: var(--tenue); }
 
