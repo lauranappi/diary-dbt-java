@@ -24,7 +24,7 @@ mvn spring-boot:run
 ```
 
 L'app parte su `http://localhost:8080`. Console H2 su `/h2-console`
-(JDBC URL: `jdbc:h2:mem:diarydbt`, utente `sa`, password vuota).
+(JDBC URL: `jdbc:h2:mem:marea`, utente `sa`, password vuota).
 
 ## Produzione
 
