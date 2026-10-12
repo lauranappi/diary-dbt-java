@@ -42,3 +42,14 @@
   padding: 0;
   text-decoration: underline;
 }
+
+/* Pulsanti di passaggio (Indietro / Avanti, Scegli le attivita'): stessi valori di Marea */
+.passoChiaro,
+.passo {
+  border-radius: var(--raggio-elemento);
+  font-size: 14.5px;
+  font-weight: var(--peso-semi);
+  padding: 15px 20px;
+}
+.passoChiaro { background: var(--segnale-chiaro); color: var(--segnale); }
+.passo { background: var(--testata); color: var(--testata-inchiostro); }

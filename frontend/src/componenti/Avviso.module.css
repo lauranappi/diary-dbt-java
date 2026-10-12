@@ -1,0 +1,32 @@
+.avviso {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--altezza-barra) + 22px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 40px);
+  padding: 12px 20px;
+  border-radius: var(--raggio-pillola);
+  background: var(--testata);
+  color: var(--testata-inchiostro);
+  box-shadow: 0 10px 30px rgba(27, 75, 74, 0.28);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  z-index: 400;
+}
+.errore { background: var(--errore); box-shadow: none; }
+
+.spunta {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--raggio-pillola);
+  background: rgba(255, 255, 255, 0.22);
+  font-size: 11px;
+  font-weight: var(--peso-grassetto);
+}

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Avviso from '../../componenti/Avviso.jsx';
 import Hero from '../../componenti/Hero.jsx';
 import Pulsante from '../../componenti/Pulsante.jsx';
 import { PASSI } from '../../contenuti/diario.js';
@@ -59,6 +60,7 @@ export default function PaginaDiario() {
   return (
     <>
       <Hero
+        soloDesktop
         titolo={titoloGiorno(giorno, oggi)}
         sottotitolo={dataLunga(giorno)}
         angolo={
@@ -82,18 +84,18 @@ export default function PaginaDiario() {
         ))}
 
         <div className={stili.navigazione}>
-          <Pulsante variante="secondario" className={stili.indietro} disabled={passo === 0} onClick={() => setPasso(passo - 1)}>
+          <Pulsante variante="passoChiaro" className={stili.indietro} disabled={passo === 0} onClick={() => setPasso(passo - 1)}>
             Indietro
           </Pulsante>
-          <Pulsante className={stili.avanti} onClick={ultimo ? salvaGiornata : () => { setPasso(passo + 1); window.scrollTo(0, 0); }}>
+          <Pulsante variante="passo" className={stili.avanti} onClick={ultimo ? salvaGiornata : () => { setPasso(passo + 1); window.scrollTo(0, 0); }}>
             {ultimo ? 'Salva giornata' : 'Avanti'}
           </Pulsante>
-          <Pulsante className={stili.salvaSempre} onClick={salvaGiornata}>Salva giornata</Pulsante>
+          <Pulsante variante="passo" className={stili.salvaSempre} onClick={salvaGiornata}>Salva giornata</Pulsante>
         </div>
         {stato === 'modificato' && <p className={stili.nota}>Modifiche non ancora salvate.</p>}
       </div>
 
-      {avviso && <p className={`${stili.avviso} ${avviso === 'errore' ? stili.avvisoErrore : ''}`} role="status">{MESSAGGI[avviso]}</p>}
+      <Avviso testo={avviso && MESSAGGI[avviso]} errore={avviso === 'errore'} />
     </>
   );
 }

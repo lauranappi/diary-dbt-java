@@ -20,10 +20,10 @@
 
 .navigazione { display: flex; gap: 10px; padding: 4px 0 8px; }
 
-.indietro { flex: none; }
-.indietro:disabled { opacity: 0.45; }
+.indietro { flex: 1; }
+.indietro:disabled { opacity: 0.45; pointer-events: none; }
 
-.avanti { flex: 1; }
+.avanti { flex: 2; }
 .salvaSempre { display: none; flex: 1; }
 
 @media (min-width: 701px) {
@@ -32,20 +32,3 @@
 }
 
 .nota { font-size: var(--corpo-meta); color: var(--tenue); text-align: center; }
-
-.avviso {
-  position: fixed;
-  left: 50%;
-  bottom: calc(var(--altezza-barra) + env(safe-area-inset-bottom, 0px) + 12px);
-  transform: translateX(-50%);
-  max-width: calc(100% - 40px);
-  padding: 12px 20px;
-  border-radius: var(--raggio-pillola);
-  background: var(--petrolio-scurissimo);
-  color: var(--bianco);
-  font-size: var(--corpo-piccolo);
-  font-weight: var(--peso-semi);
-  text-align: center;
-  z-index: 200;
-}
-.avvisoErrore { background: var(--errore); }

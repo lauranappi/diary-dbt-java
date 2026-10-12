@@ -4,11 +4,9 @@
 
 .soprattitolo {
   margin-bottom: 10px;
-  font-size: var(--corpo-soprattitolo);
-  font-weight: var(--peso-semi);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--segnale);
+  font-size: 16px;
+  font-weight: var(--peso-normale);
+  color: var(--inchiostro);
 }
 
 .scheda {
@@ -18,6 +16,7 @@
   background: var(--superficie);
   border-radius: var(--raggio-scheda);
   padding: 20px;
+  margin-bottom: 1rem;
 }
 
 .gruppo {

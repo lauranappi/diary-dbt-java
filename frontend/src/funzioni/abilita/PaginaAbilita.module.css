@@ -1,0 +1,11 @@
+.contenuto { padding: 0 var(--margine-laterale); }
+
+.errore {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: var(--raggio-interno);
+  background: var(--errore-chiaro);
+  color: var(--errore);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+}

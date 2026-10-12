@@ -29,8 +29,8 @@ body {
   background: var(--sfondo);
   color: var(--inchiostro);
   font-family: var(--font);
-  font-size: var(--corpo-testo);
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.5;
   overscroll-behavior-x: none;
 }
 

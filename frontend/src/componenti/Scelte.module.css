@@ -1,7 +1,7 @@
 .fila {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6.4px;
 }
 
 .cella {

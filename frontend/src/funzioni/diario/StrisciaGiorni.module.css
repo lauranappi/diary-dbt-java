@@ -2,7 +2,8 @@
   display: flex;
   gap: var(--spazio-s);
   overflow-x: auto;
-  padding: 16px var(--margine-laterale);
+  padding: 16px 20px;
+  margin: 2rem var(--margine-laterale) 0;
   scrollbar-width: none;
 }
 .striscia::-webkit-scrollbar { display: none; }
