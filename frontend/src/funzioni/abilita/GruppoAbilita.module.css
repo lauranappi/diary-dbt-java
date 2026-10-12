@@ -1,0 +1,55 @@
+.gruppo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.testata { display: flex; align-items: center; gap: 12px; }
+.icona { border-radius: 12px; flex: none; }
+
+.nome {
+  font-size: 12px;
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+}
+
+.scheda {
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 8px 18px;
+  margin-bottom: 17px;
+}
+
+.riga {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.casella {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--segnale-chiaro);
+}
+.spuntata { background: var(--senape); }
+
+.voce {
+  font-size: 15px;
+  font-weight: var(--peso-medio);
+  color: var(--inchiostro);
+}
+.voceAttiva { font-weight: var(--peso-semi); }

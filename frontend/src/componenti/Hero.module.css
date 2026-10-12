@@ -63,3 +63,17 @@
   line-height: 1.55;
   color: var(--testata-secondario);
 }
+
+@media (max-width: 700px) {
+  .soloDesktop {
+    background: transparent;
+    overflow: visible;
+    padding: calc(env(safe-area-inset-top, 0px) + 43px) 0 0;
+    margin: 0 var(--margine-laterale) 1.25rem;
+  }
+  .soloDesktop .decorazione,
+  .soloDesktop .onda { display: none; }
+  .soloDesktop .titolo { font-size: 27px; color: var(--inchiostro); }
+  .soloDesktop .sottotitolo { color: var(--tenue); }
+  .soloDesktop .riga { align-items: flex-start; }
+}

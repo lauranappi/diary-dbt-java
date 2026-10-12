@@ -1,0 +1,114 @@
+.scelta { padding-top: 8px; }
+
+.titolo { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.titolo h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: 27px;
+  font-weight: var(--peso-grassetto);
+  letter-spacing: -0.03em;
+  color: var(--inchiostro);
+}
+
+.indietro {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: var(--linea);
+  color: var(--tenue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fascia { margin: 6px 0 18px; font-size: var(--corpo-piccolo); color: var(--tenue); }
+
+.linguette {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  padding-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.linguette::-webkit-scrollbar { display: none; }
+
+.linguetta {
+  flex: none;
+  padding: 10px 18px;
+  border-radius: 18px;
+  border: 1.5px solid var(--segnale-chiaro);
+  background: var(--superficie);
+  color: var(--segnale);
+  font-size: 13px;
+  font-weight: var(--peso-semi);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.attiva { background: var(--testata); color: var(--testata-inchiostro); border-color: var(--testata); }
+
+.elenco { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+
+.nessuna { padding: 1rem 0; font-size: 13px; color: var(--tenue); }
+
+.voce { display: flex; align-items: center; gap: 4px; flex: none; max-width: 100%; }
+
+.pillola {
+  border: 0;
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  padding: 11px 18px;
+  border-radius: var(--raggio-pillola);
+  cursor: pointer;
+  text-align: left;
+}
+.pillola.scelta { background: var(--testata); color: var(--testata-inchiostro); }
+
+.piccolo {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--segnale);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.personale { border-top: 1px solid var(--linea); padding-top: 1rem; margin-top: 0.5rem; }
+
+.etichetta { display: block; margin-bottom: 8px; font-size: 12px; font-weight: var(--peso-semi); color: var(--tenue); }
+
+.riga { display: flex; gap: 8px; }
+
+.campo {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: var(--sfondo);
+  color: var(--inchiostro);
+  font-size: 13px;
+}
+
+.piu {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: var(--testata);
+  color: var(--testata-inchiostro);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}

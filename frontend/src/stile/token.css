@@ -65,7 +65,7 @@
   --spazio-m: 12px;
   --spazio-l: 14px;
   --spazio-xl: 20px;
-  --margine-laterale: 20px;
+  --margine-laterale: 0.9rem;
   --altezza-barra: 84px;
 
   /* Ombre */

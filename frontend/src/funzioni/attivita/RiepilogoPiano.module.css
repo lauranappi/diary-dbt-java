@@ -1,0 +1,51 @@
+.fascia {
+  background: var(--superficie);
+  border-radius: var(--raggio-scheda);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.testata { display: flex; align-items: center; gap: 10px; }
+
+.titolo {
+  flex: 1;
+  font-size: 12px;
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+}
+
+.piu {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: 17px;
+  font-weight: var(--peso-semi);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vuota { font-size: var(--corpo-piccolo); color: var(--tenue); opacity: 0.7; }
+
+.pillole { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.pillola {
+  border: 0;
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: 13px;
+  font-weight: var(--peso-semi);
+  padding: 10px 16px;
+  border-radius: var(--raggio-pillola);
+  cursor: pointer;
+  text-align: left;
+}
