@@ -27,11 +27,14 @@ public class DiarioService {
                     return VoceDiario.builder().paziente(paziente).data(dto.data()).build();
                 });
 
-        voce.setScale(dto.scale());
-        voce.setToggle(dto.toggle());
-        voce.setTesti(dto.testi());
-        voce.setAbilitaUsate(dto.abilitaUsate());
-        voce.setPlanner(dto.planner());
+        // Aggiornamento parziale: una parte non inviata (null) resta com'e'. Cosi' il
+        // Diary non cancella le abilita' spuntate o il planner, che hanno le loro pagine.
+        // Una parte inviata vuota ({}) invece svuota quella parte.
+        if (dto.scale() != null) voce.setScale(dto.scale());
+        if (dto.toggle() != null) voce.setToggle(dto.toggle());
+        if (dto.testi() != null) voce.setTesti(dto.testi());
+        if (dto.abilitaUsate() != null) voce.setAbilitaUsate(dto.abilitaUsate());
+        if (dto.planner() != null) voce.setPlanner(dto.planner());
 
         return voceDiarioRepository.save(voce);
     }

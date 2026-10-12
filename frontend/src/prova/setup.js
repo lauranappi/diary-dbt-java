@@ -7,3 +7,4 @@ afterEach(() => {
   cleanup();
   localStorage.clear();
 });
+window.scrollTo = () => {};

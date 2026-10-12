@@ -1,0 +1,47 @@
+.striscia {
+  display: flex;
+  gap: var(--spazio-s);
+  overflow-x: auto;
+  padding: 16px var(--margine-laterale);
+  scrollbar-width: none;
+}
+.striscia::-webkit-scrollbar { display: none; }
+
+.giorno {
+  flex: none;
+  width: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 0 9px;
+  border: 0;
+  border-radius: var(--raggio-elemento);
+  background: var(--superficie);
+  color: var(--inchiostro);
+  cursor: pointer;
+}
+
+.sel { background: var(--testata); color: var(--testata-inchiostro); }
+
+.sigla {
+  font-size: 11px;
+  font-weight: var(--peso-medio);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.numero {
+  font-size: 17px;
+  font-weight: var(--peso-grassetto);
+  letter-spacing: -0.02em;
+}
+
+.pallino {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--raggio-pillola);
+  background: transparent;
+}
+.piena { background: var(--accento); }

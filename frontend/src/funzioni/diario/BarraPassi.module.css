@@ -1,0 +1,22 @@
+.barra { display: flex; flex-direction: column; gap: 10px; padding-bottom: 14px; }
+
+.tacche { display: flex; gap: 7px; }
+
+.tacca {
+  flex: 1;
+  height: 5px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raggio-pillola);
+  background: var(--linea);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.fatto { background: var(--accento); }
+.on { background: var(--testata); }
+
+.nome { display: flex; align-items: baseline; gap: 8px; }
+.titolo { font-size: var(--corpo-riga); font-weight: var(--peso-grassetto); letter-spacing: -0.02em; }
+.conta { font-size: 12px; font-weight: var(--peso-medio); color: var(--tenue); opacity: 0.75; }
+
+@media (min-width: 701px) { .barra { display: none; } }
