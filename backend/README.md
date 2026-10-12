@@ -58,3 +58,42 @@ mvn test
 - Tutti gli endpoint principali sono scritti: autenticazione, diario
   (con la pianificazione attività inclusa nel campo `planner`), catalogo
   abilità DBT, collegamento paziente-terapeuta
+
+## Struttura (pacchetti per funzionalità)
+
+`auth`, `utente`, `diario`, `abilita`, `terapeuta`, `documenti`, `notifiche`, `migrazione`, `comune`.
+Ogni pacchetto ha il suo controller, service, repository, entità e DTO (vedi `ARCHITETTURA.md`).
+
+## Nuovi endpoint (Fase 1)
+
+| Metodo | Percorso | Cosa fa |
+|--------|----------|---------|
+| GET | `/api/documenti` | tutti i documenti personali |
+| GET/PUT/DELETE | `/api/documenti/{chiave}` | un documento (impostazioni, post-it, preferiti, fogli…) — il PUT richiede `versioneBase`, se è cambiato altrove risponde 409 con la versione attuale |
+| GET | `/api/terapeuta/pazienti/{id}/documenti` | la terapeuta legge i documenti *condivisi* della paziente collegata |
+| PUT | `/api/terapeuta/pazienti/{id}/documenti/note-terapeuta` | la terapeuta scrive le sue note |
+| PUT/DELETE | `/api/paziente/terapeuta` | la paziente indica/toglie la propria terapeuta (codice = username) |
+| GET | `/api/notifiche/chiave-pubblica` | chiave VAPID per il browser |
+| PUT/DELETE | `/api/notifiche/iscrizione` | attiva/aggiorna/spegne il promemoria di un dispositivo |
+
+Chiavi dei documenti condivise con la terapeuta: `attivita-provate`, `abilita-personali`, `note-paziente`, `note-terapeuta`, `fogli`.
+Tutte le altre (post-it, preferiti, impostazioni…) sono private.
+
+## Database
+
+In produzione lo schema lo gestisce **Flyway** (`src/main/resources/db/migration`): ogni modifica va in un nuovo file `V2__…sql`, mai modificando i precedenti. Un test (`MigrazioniPostgresTest`) avvia l'app su un PostgreSQL vero e verifica che migrazioni ed entità coincidano; in GitHub Actions gira ad ogni push.
+
+## Promemoria push
+
+1. Genera le chiavi una volta sola: `npx web-push generate-vapid-keys`
+2. Imposta sul server `VAPID_PUBLIC`, `VAPID_PRIVATE` e `VAPID_SUBJECT` (es. `mailto:tua@email`).
+3. Senza chiavi i promemoria sono spenti. Con le chiavi, ogni 5 minuti il server manda il promemoria a chi lo ha attivato, se l'orario scelto è passato da meno di 3 ore, oggi non ha compilato il diario e non ne ha già ricevuto uno.
+
+## Trasferire i dati da Supabase
+
+1. In Supabase → SQL Editor esegui `migrazione/esporta-supabase.sql` e salva il risultato in `esportazione.json`.
+2. Con il database di produzione configurato: 
+   `java -jar marea.jar --spring.profiles.active=prod,importa-supabase --importa.file=esportazione.json`
+3. Vengono creati utenti (con lo stesso hash password: si entra con la password di sempre), diario, post-it, preferiti, note, fogli e collegamenti terapeuta–paziente. Si può rilanciare senza duplicare: gli utenti già presenti sono saltati.
+4. Le iscrizioni push **non** si trasferiscono (sono legate al vecchio sito): dopo il passaggio basta riattivare le notifiche dalle impostazioni.
+5. Cancella `esportazione.json` a fine lavoro: contiene gli hash delle password.
