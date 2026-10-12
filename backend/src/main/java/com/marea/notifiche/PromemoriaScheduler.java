@@ -14,7 +14,7 @@ import java.time.Instant;
 // chiavi VAPID sono configurate (app.push.vapid-private).
 @Component
 @EnableScheduling
-@ConditionalOnExpression("!${app.push.vapid-private:}.isEmpty()")
+@ConditionalOnExpression("'${app.push.vapid-private:}' != ''")
 @RequiredArgsConstructor
 public class PromemoriaScheduler {
 
