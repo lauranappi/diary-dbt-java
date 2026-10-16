@@ -1,17 +1,13 @@
 // I moduli della Guida, nell'ordine del manuale.
 import { PARTE_GENERALE } from './parteGenerale.js';
 import { MINDFULNESS } from './mindfulness.js';
-import { SCHEDE_EFFICACIA, SCHEDE_REGOLAZIONE, SCHEDE_TOLLERANZA } from './indice.js';
+import { EFFICACIA } from './efficacia.js';
+import { SCHEDE_REGOLAZIONE, SCHEDE_TOLLERANZA } from './indice.js';
 
 export const MODULI_GUIDA = [
   PARTE_GENERALE,
   MINDFULNESS,
-  {
-    id: 'inter', titolo: 'Efficacia interpersonale', sottotitolo: 'Chiedere, dire no, restare in relazione',
-    icona: 'modulo-interpersonale',
-    quando: 'Quando vuoi ottenere qualcosa, dire di no, mantenere una relazione o il rispetto di te stessa, o capire se una relazione ti fa bene.',
-    schede: SCHEDE_EFFICACIA,
-  },
+  EFFICACIA,
   {
     id: 'reg', titolo: 'Regolazione emotiva', sottotitolo: 'Capire le emozioni e ridurre la vulnerabilità',
     icona: 'modulo-regolazione',
