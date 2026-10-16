@@ -18,6 +18,12 @@ describe('ricerca nella Guida', () => {
     expect(cerca('igiene del sonno').map((r) => r.scheda.id)).toContain('reg-20b');
   });
 
+  it('trova le schede di Tolleranza della sofferenza', () => {
+    expect(cerca('acqua fredda').map((r) => r.scheda.id)).toContain('tol-6a');
+    expect(cerca('body scan').map((r) => r.scheda.id)).toContain('tol-8a');
+    expect(cerca('mente chiara').map((r) => r.scheda.id)).toContain('tol-18');
+  });
+
   it('mette prima le schede che hanno la parola nel titolo', () => {
     expect(cerca('respiro')[0].punti).toBeGreaterThanOrEqual(cerca('respiro').at(-1).punti);
   });

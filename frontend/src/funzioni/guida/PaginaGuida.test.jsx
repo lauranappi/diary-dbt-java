@@ -6,6 +6,7 @@ import { documentiApi } from '../../api/documenti.js';
 import { salvaSessione } from '../../api/sessione.js';
 import PaginaGuida from './PaginaGuida.jsx';
 import PaginaModulo from './PaginaModulo.jsx';
+import RigaScheda from './RigaScheda.jsx';
 
 vi.mock('../../api/documenti.js', async (originale) => ({
   ...(await originale()),
@@ -70,10 +71,25 @@ describe('Guida', () => {
     }
   });
 
-  it('le schede senza testo sono segnate "in arrivo" e non si aprono', () => {
-    apri('/guida/tol');
-    expect(screen.getAllByText('in arrivo').length).toBeGreaterThan(10);
+  it('una scheda senza testo è segnata "in arrivo" e non si apre', () => {
+    render(
+      <RigaScheda
+        modulo={{ titolo: 'Prova' }}
+        scheda={{ id: 'x-1', numero: '1', titolo: 'Da scrivere', blocchi: [] }}
+        aperta={false}
+        preferita={false}
+        onApriChiudi={() => {}}
+        onPreferita={() => {}}
+      />,
+    );
+    expect(screen.getByText('in arrivo')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Aggiungi ai preferiti/ })).not.toBeInTheDocument();
+  });
+
+  it('Tolleranza della sofferenza è scritta: TIP si apre con la guida all\'acqua fredda', () => {
+    apri('/guida/tol?scheda=tol-6');
+    expect(screen.getByText(/Manuale: Tolleranza della sofferenza · Scheda 6, p\. 329/)).toBeInTheDocument();
+    expect(screen.queryByText('in arrivo')).not.toBeInTheDocument();
   });
 
   it('la stella salva il preferito sul server e lo mostra nella Guida', async () => {

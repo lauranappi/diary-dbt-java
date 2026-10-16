@@ -10,7 +10,7 @@ export default function Blocchi({ blocchi }) {
           {blocco.testo && <p className={stili.testo}>{blocco.testo}</p>}
           {blocco.voci?.map((voce, n) => (
             <div key={n} className={stili.voce}>
-              <span className={`${stili.segno} ${blocco.numerati ? '' : stili.punto}`}>{blocco.numerati ? n + 1 : ''}</span>
+              <span className={`${stili.segno} ${blocco.numerati ? '' : stili.punto}`}>{blocco.numerati ? n + (blocco.start ?? 1) : ''}</span>
               <p className={stili.testoVoce}>
                 {typeof voce === 'string' ? voce : <><b>{voce.t}</b> {voce.d}</>}
               </p>
