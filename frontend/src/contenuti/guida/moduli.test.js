@@ -41,4 +41,11 @@ describe('contenuti della Guida', () => {
       expect(trovata.modulo.id).toBe(s.guida);
     }
   });
+
+  it('le liste lunghe del manuale sono complete', () => {
+    const voci = (id) => trovaScheda(id).scheda.blocchi.flatMap((b) => b.voci ?? []);
+    expect(voci('reg-16')).toHaveLength(225);
+    expect(voci('reg-18')).toHaveLength(58);
+    expect(voci('reg-4a')).toHaveLength(20);
+  });
 });
