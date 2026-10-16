@@ -1,6 +1,8 @@
 // Regolazione emotiva: stesso ordine, numeri e pagine del manuale; testi riassunti con parole nostre.
 // Nel manuale la scheda 6 (modi per descrivere le emozioni) occupa dieci pagine: qui è riassunta emozione per emozione.
 
+import { EVENTI_PIACEVOLI } from './eventiPiacevoli.js';
+
 const emozione = (titolo, parole, { eventi, pensieri, corpo, azioni, conseguenze }) => ({
   titolo,
   testo: `Parole vicine: ${parole}.`,
@@ -461,32 +463,8 @@ export const REGOLAZIONE = {
       id: 'reg-16', numero: '16', etichetta: 'EVENTI PIACEVOLI', pagina: 249,
       titolo: 'Lista degli eventi piacevoli',
       blocchi: [
-        { testo: 'Il manuale ha una lista di 225 eventi piacevoli, da cui scegliere ogni giorno. Qui trovi i gruppi principali con qualche esempio: scegli ciò che fa per te.' },
-        { titolo: 'Con altre persone', voci: [
-          'Passare una serata tra buoni amici, pranzare con un’amica, telefonare o scrivere a qualcuno.',
-          'Ridere, flirtare, baciare, dire “ti amo”, esprimere affetto.',
-          'Fare un regalo, un favore a sorpresa, un biglietto per una persona a cui tieni.',
-          'Una riunione di famiglia, giocare con i figli o con gli animali, fare volontariato.',
-        ] },
-        { titolo: 'Per il corpo', voci: [
-          'Correre, camminare nei boschi o vicino all’acqua, nuotare, ballare, fare yoga o meditazione.',
-          'Un bagno caldo, un massaggio, una sauna, un pisolino, rilassarsi al sole.',
-          'Mangiare con calma, preparare un frullato e berlo lentamente, cucinare.',
-        ] },
-        { titolo: 'Creatività e interessi', voci: [
-          'Dipingere, scrivere, suonare o cantare, fotografare, cucire, lavorare a maglia, fare puzzle.',
-          'Leggere, andare in libreria, un film, un concerto, un museo.',
-          'Imparare qualcosa di nuovo, una lingua, uno strumento; giocare a un gioco da tavolo o a un videogame.',
-        ] },
-        { titolo: 'Natura e uscite', voci: [
-          'Un picnic, una gita, il campeggio, guardare la luna e le stelle, ascoltare i suoni della natura.',
-          'Fare giardinaggio, curare le piante, passeggiare per mercatini, andare al mare o in montagna.',
-        ] },
-        { titolo: 'Pensieri e soddisfazione', voci: [
-          'Completare un compito, fare una lista, pianificare la giornata, riordinare.',
-          'Pensare “ho fatto proprio bene”, “sono una persona che può farcela”, alle mie qualità, ai miglioramenti, ai momenti felici passati.',
-          'Fantasticare sul futuro, ricordare un bel paesaggio, un profumo preferito.',
-        ] },
+        { testo: 'Gli eventi piacevoli del manuale, nello stesso ordine e con la stessa numerazione (225). Scegline uno ogni giorno e aggiungi i tuoi: il manuale lascia spazio per “altro”.' },
+        { numerati: true, voci: EVENTI_PIACEVOLI },
       ],
     },
     {
@@ -509,22 +487,92 @@ export const REGOLAZIONE = {
       id: 'reg-18', numero: '18', etichetta: 'VALORI', pagina: 253,
       titolo: 'Lista dei valori e delle priorità',
       blocchi: [
-        { testo: 'Nel manuale la lista (adattata da Schwartz) ha 58 valori; l’idea è chiederti: “nella mia mente saggia, cosa credo sia importante?”. Questi sono i gruppi, con qualche esempio.' },
-        { voci: [
-          { t: 'Occuparsi delle relazioni:', d: 'riparare quelle vecchie, cercarne di nuove, curare quelle attuali, chiudere quelle distruttive.' },
-          { t: 'Far parte di un gruppo:', d: 'intimità, appartenenza, affetto, amicizie, famiglia, persone con cui fare cose.' },
-          { t: 'Essere forti e influenzare gli altri:', d: 'autorità, leadership, denaro, rispetto, successo, riconoscimento, popolarità.' },
-          { t: 'Ottenere cose nella vita:', d: 'obiettivi significativi, produttività, impegno, ambizione.' },
-          { t: 'Piacere e soddisfazione:', d: 'divertimento, tempo libero, apprezzare il proprio lavoro.' },
-          { t: 'Una vita stimolante:', d: 'provare cose nuove, avventura.' },
-          { t: 'Comportarsi rispettosamente:', d: 'umiltà, tradizioni, seguire le regole, trattare bene gli altri.' },
-          { t: 'Essere padroni di sé:', d: 'seguire il proprio percorso, creatività, libertà, indipendenza.' },
-          { t: 'Spiritualità:', d: 'vivere secondo principi spirituali, praticare una fede, crescere nella comprensione di sé e del proprio scopo.' },
-          { t: 'Sicurezza:', d: 'ambiente sicuro, salute e forma fisica, reddito stabile.' },
-          { t: 'Giustizia e natura:', d: 'equità, mente aperta, cura dell’ambiente.' },
-          { t: 'Contribuire alla comunità:', d: 'aiutare chi ha bisogno, lealtà, impegno per una causa, sacrificio.' },
-          { t: 'Sviluppo personale:', d: 'una filosofia di vita, imparare cose impegnative che fanno crescere.' },
-          { t: 'Integrità:', d: 'onestà, responsabilità, coraggio, riparare i danni causati, accettare sé stessa, gli altri e la vita così com’è senza risentimento.' },
+        { testo: 'La lista del manuale (adattata da Schwartz) con la stessa numerazione (58 valori). Chiediti: “nella mia mente saggia, cosa credo sia importante?”. Dopo ogni gruppo il manuale lascia spazio per aggiungere i tuoi.' },
+        { titolo: 'A. Occuparsi delle relazioni', numerati: true, start: 1, voci: [
+          'Riparare vecchie relazioni.',
+          'Cercare nuove relazioni.',
+          'Lavorare sulle relazioni attuali.',
+          'Chiudere relazioni distruttive.',
+        ] },
+        { titolo: 'B. Far parte di un gruppo', numerati: true, start: 5, voci: [
+          'Avere relazioni intime e soddisfacenti con gli altri.',
+          'Sentire di appartenere.',
+          'Ricevere affetto e amore.',
+          'Essere coinvolta e in intimità con gli altri; avere e mantenere amici intimi.',
+          'Avere una famiglia; restare in contatto e passare tempo con i familiari.',
+          'Avere persone con cui fare cose.',
+        ] },
+        { titolo: 'C. Essere forti e influenzare gli altri', numerati: true, start: 11, voci: [
+          'Avere l’autorità di approvare o disapprovare ciò che le persone fanno o di controllare come si usano le risorse.',
+          'Essere una leader.',
+          'Fare molti soldi.',
+          'Essere rispettata dagli altri.',
+          'Essere vista come di successo, diventare nota, ottenere riconoscimento e status.',
+          'Competere con successo con gli altri.',
+          'Essere popolare e accettata.',
+        ] },
+        { titolo: 'D. Ottenere cose nella vita', numerati: true, start: 18, voci: [
+          'Raggiungere obiettivi significativi; impegnarsi in imprese che ritengo significative.',
+          'Essere produttiva.',
+          'Lavorare verso gli obiettivi; lavorare sodo.',
+          'Essere ambiziosa.',
+        ] },
+        { titolo: 'E. Vivere una vita di piacere e soddisfazione', numerati: true, start: 22, voci: [
+          'Divertirsi.',
+          'Cercare il divertimento e le cose che danno piacere.',
+          'Avere tempo libero.',
+          'Apprezzare il lavoro che faccio.',
+        ] },
+        { titolo: 'F. Avere una vita piena di eventi, relazioni e cose stimolanti', numerati: true, start: 26, voci: [
+          'Provare cose nuove e diverse nella vita.',
+          'Essere audace e cercare avventure.',
+          'Avere una vita stimolante.',
+        ] },
+        { titolo: 'G. Comportarsi rispettosamente', numerati: true, start: 29, voci: [
+          'Essere umile e modesta; non attirare l’attenzione.',
+          'Seguire tradizioni e usanze; comportarsi in modo appropriato.',
+          'Fare ciò che mi viene detto e seguire le regole.',
+          'Trattare bene gli altri.',
+        ] },
+        { titolo: 'H. Essere padroni di se stessi', numerati: true, start: 33, voci: [
+          'Seguire il mio percorso di vita.',
+          'Essere innovativa, pensare idee nuove, essere creativa.',
+          'Prendere le mie decisioni ed essere libera.',
+          'Essere indipendente; prendermi cura di me e di chi dipende da me.',
+          'Avere libertà di pensiero e di azione; poter agire secondo le mie priorità.',
+        ] },
+        { titolo: 'I. Essere una persona spirituale', numerati: true, start: 38, voci: [
+          'Fare spazio alla spiritualità; vivere secondo principi spirituali.',
+          'Praticare una religione o una fede.',
+          'Crescere nella comprensione di me, di ciò a cui sono destinata e del mio vero scopo di vita.',
+          'Riconoscere e fare il volere di Dio (o del potere superiore) e trovare il significato duraturo della vita.',
+        ] },
+        { titolo: 'J. Essere sicura', numerati: true, start: 42, voci: [
+          'Vivere in un ambiente sicuro e privo di pericoli.',
+          'Essere fisicamente sana e in forma.',
+          'Avere un reddito stabile che soddisfi i bisogni di base miei e della mia famiglia.',
+        ] },
+        { titolo: 'K. Giustizia e natura (nel manuale il titolo ripete “Vivere una vita di piacere e soddisfazione”)', numerati: true, start: 45, voci: [
+          'Essere giusta, trattare le persone equamente e dare uguali opportunità.',
+          'Comprendere persone diverse; avere una mente aperta.',
+          'Preoccuparmi per la natura e per l’ambiente.',
+        ] },
+        { titolo: 'L. Dare un contributo alla comunità', numerati: true, start: 48, voci: [
+          'Aiutare le persone e chi ha bisogno; occuparmi del benessere altrui; migliorare la società.',
+          'Essere leale con gli amici e dedicarmi al prossimo; impegnarmi in un gruppo che condivide le mie credenze, i miei valori e i miei principi etici.',
+          'Impegnarmi in una causa o in un gruppo con uno scopo più ampio.',
+          'Fare sacrifici per gli altri.',
+        ] },
+        { titolo: 'M. Lavorare allo sviluppo personale', numerati: true, start: 52, voci: [
+          'Sviluppare una filosofia di vita personale.',
+          'Imparare e fare cose impegnative che mi aiutano a crescere e maturare come essere umano.',
+        ] },
+        { titolo: 'N. Avere integrità', numerati: true, start: 54, voci: [
+          'Essere onesta, riconoscere e sostenere ciò in cui credo.',
+          'Essere una persona responsabile; mantenere la parola data.',
+          'Essere coraggiosa nell’affrontare e vivere la vita.',
+          'Essere una persona che paga i debiti agli altri e ripara i danni che ha causato.',
+          'Accettare me, gli altri e la vita così com’è; vivere senza risentimento.',
         ] },
       ],
     },
