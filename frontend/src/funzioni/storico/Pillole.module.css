@@ -1,4 +1,4 @@
-.fila { display: flex; gap: 8px; margin-bottom: 16px; }
+.fila { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 
 .pillola {
   padding: 11px 18px;

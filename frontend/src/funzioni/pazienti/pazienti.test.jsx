@@ -102,6 +102,21 @@ describe('scheda paziente', () => {
     await waitFor(() => expect(documentiApi.salva).toHaveBeenCalledWith('note-paziente', { note: { anna: 'ok' } }, 0), { timeout: 3000 });
   });
 
+  it('la vista Abilità conta le spunte e la vista Giornata mostra il piano', async () => {
+    terapeutaApi.voci.mockResolvedValue([
+      { data: oggi, abilitaUsate: { 'sk_Tolleranza della sofferenza_TIP': true }, planner: { mattina: ['Passeggiata'], pomeriggio: [], sera: [] } },
+    ]);
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Abilità' }));
+    expect(screen.getByText('TIP')).toBeInTheDocument();
+    expect(screen.getByText('1/1')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Giornata' }));
+    expect(screen.getByText('Passeggiata')).toBeInTheDocument();
+    expect(screen.getByText('Mattina')).toBeInTheDocument();
+    expect(screen.queryByText('Sera')).not.toBeInTheDocument();
+  });
+
   it('una paziente non collegata non si apre', async () => {
     terapeutaApi.pazienti.mockResolvedValue([]);
     apri('/pazienti/altra');

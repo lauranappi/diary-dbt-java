@@ -8,6 +8,8 @@ import Pillole from '../storico/Pillole.jsx';
 import Riepilogo from '../storico/Riepilogo.jsx';
 import Trend from '../storico/Trend.jsx';
 import { useVoci } from '../storico/useVoci.js';
+import AbilitaPaziente from './AbilitaPaziente.jsx';
+import GiornatePaziente from './GiornatePaziente.jsx';
 import NotePaziente from './NotePaziente.jsx';
 import { giorniEtichetta, nomePaziente } from './nomePaziente.js';
 import { usePazienti } from './usePazienti.js';
@@ -22,6 +24,8 @@ const VISTE = [
   { valore: 'panoramica', etichetta: 'Panoramica' },
   { valore: 'storico', etichetta: 'Storico' },
   { valore: 'trend', etichetta: 'Trend' },
+  { valore: 'abilita', etichetta: 'Abilità' },
+  { valore: 'giornata', etichetta: 'Giornata' },
   { valore: 'note', etichetta: 'Note' },
 ];
 
@@ -62,6 +66,8 @@ export default function PaginaPaziente() {
             )}
             {!caricamento && vista === 'storico' && <ElencoGiornate voci={delPeriodo} onApri={setAperta} />}
             {!caricamento && vista === 'trend' && <Trend voci={perGrafici} />}
+            {!caricamento && vista === 'abilita' && <AbilitaPaziente voci={delPeriodo} />}
+            {!caricamento && vista === 'giornata' && <GiornatePaziente voci={delPeriodo} />}
             {vista === 'note' && <NotePaziente username={paziente.username} />}
           </>
         )}
