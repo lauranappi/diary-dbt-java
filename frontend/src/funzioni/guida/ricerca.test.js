@@ -11,6 +11,13 @@ describe('ricerca nella Guida', () => {
     expect(cerca('astinenza').map((r) => r.scheda.id)).toContain('tol-17');
   });
 
+  it('trova le schede di Regolazione emotiva, anche dentro il testo', () => {
+    expect(cerca('azione opposta').map((r) => r.scheda.id)).toContain('reg-10');
+    expect(cerca('PLEASE').map((r) => r.scheda.id)).toContain('reg-20');
+    expect(cerca('gelosia').map((r) => r.scheda.id)).toContain('reg-6');
+    expect(cerca('igiene del sonno').map((r) => r.scheda.id)).toContain('reg-20b');
+  });
+
   it('mette prima le schede che hanno la parola nel titolo', () => {
     expect(cerca('respiro')[0].punti).toBeGreaterThanOrEqual(cerca('respiro').at(-1).punti);
   });

@@ -2,18 +2,14 @@
 import { PARTE_GENERALE } from './parteGenerale.js';
 import { MINDFULNESS } from './mindfulness.js';
 import { EFFICACIA } from './efficacia.js';
-import { SCHEDE_REGOLAZIONE, SCHEDE_TOLLERANZA } from './indice.js';
+import { REGOLAZIONE } from './regolazione.js';
+import { SCHEDE_TOLLERANZA } from './indice.js';
 
 export const MODULI_GUIDA = [
   PARTE_GENERALE,
   MINDFULNESS,
   EFFICACIA,
-  {
-    id: 'reg', titolo: 'Regolazione emotiva', sottotitolo: 'Capire le emozioni e ridurre la vulnerabilità',
-    icona: 'modulo-regolazione',
-    quando: 'Quando le emozioni sono difficili da capire o da gestire, o per costruire una vita meno esposta alla mente emotiva.',
-    schede: SCHEDE_REGOLAZIONE,
-  },
+  REGOLAZIONE,
   {
     id: 'tol', titolo: 'Tolleranza della sofferenza', sottotitolo: 'Quando la crisi è già in corso',
     icona: 'modulo-tolleranza',
