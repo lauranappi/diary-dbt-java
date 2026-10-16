@@ -62,6 +62,14 @@ describe('Guida', () => {
     expect(screen.getByText(/Il sassolino nel lago/)).toBeInTheDocument();
   });
 
+  it('DEAR MAN si apre con i sette passi e il riferimento al manuale', async () => {
+    apri('/guida/inter?scheda=inter-5');
+    expect(screen.getByText(/Manuale: Efficacia interpersonale · Scheda 5, p\. 125/)).toBeInTheDocument();
+    for (const passo of ['Descrivi.', 'Esprimi.', 'Afferma.', 'Rinforza.', '(Sii) Mindful.', 'Agisci in modo sicuro.', 'Negozia.']) {
+      expect(screen.getByText(passo)).toBeInTheDocument();
+    }
+  });
+
   it('le schede senza testo sono segnate "in arrivo" e non si aprono', () => {
     apri('/guida/tol');
     expect(screen.getAllByText('in arrivo').length).toBeGreaterThan(10);

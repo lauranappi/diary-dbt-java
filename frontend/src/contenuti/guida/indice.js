@@ -13,39 +13,6 @@ function indice(idModulo, voci) {
   }));
 }
 
-export const SCHEDE_EFFICACIA = indice('inter', [
-  ['1', 'Obiettivi dell’efficacia interpersonale', 117, 'Obiettivi e fattori che interferiscono'],
-  ['2', 'Fattori che riducono l’efficacia interpersonale', 118],
-  ['2A', 'Convinzioni comuni che interferiscono con l’efficacia interpersonale', 119],
-  ['3', 'Panoramica: conseguire obiettivi in modo efficace', null, 'Conseguire obiettivi in modo efficace'],
-  ['4', 'Chiarire gli obiettivi nelle situazioni interpersonali', null],
-  ['5', 'Linee guida per l’efficacia negli obiettivi: ottenere ciò che si desidera (DEAR MAN)', 125],
-  ['5A', 'Applicare le abilità DEAR MAN in una interazione difficile', 127],
-  ['6', 'Linee guida per l’efficacia nelle relazioni: mantenere le relazioni (GIVE)', 128],
-  ['6A', 'Approfondire la V di GIVE: livelli di validazione', 129],
-  ['7', 'Linee guida per l’efficacia nel rispetto di sé: mantenere il rispetto di sé (FAST)', 130],
-  ['8', 'Per decidere se e quanto chiedere o rifiutare con fermezza', null],
-  ['9', 'Fattori che possono interferire con la risoluzione dei problemi', null],
-  ['10', 'Panoramica: costruire nuove relazioni e chiudere quelle distruttive', 139, 'Costruire relazioni e chiudere quelle distruttive'],
-  ['11', 'Trovare le persone giuste e fare in modo di piacere loro', 140],
-  ['11A', 'Riconoscere le abilità per trovare le persone giuste e piacere loro', 142],
-  ['12', 'Mindfulness verso gli altri', 143],
-  ['12A', 'Riconoscere la mindfulness verso gli altri', 144],
-  ['13', 'Chiudere le relazioni', null],
-  ['13A', 'Riconoscere come chiudere le relazioni', 146],
-  ['14', 'Panoramica: percorrere il sentiero di mezzo', null, 'Il sentiero di mezzo'],
-  ['15', 'Dialettica', 150],
-  ['16', 'Come pensare e agire in modo dialettico', 151],
-  ['16A', 'Esempi di posizioni opposte che possono essere entrambe vere', 152],
-  ['16B', 'Importanti posizioni opposte da bilanciare', 153],
-  ['16C', 'Riconoscere la dialettica', 154],
-  ['17', 'Validazione', null],
-  ['18', 'Guida alla validazione', 156],
-  ['18A', 'Riconoscere la validazione', 157],
-  ['19', 'Riprendersi dall’invalidazione', null],
-  ['19A', 'Riconoscere l’autovalidazione', 160],
-]);
-
 export const SCHEDE_REGOLAZIONE = indice('reg', [
   ['1', 'Obiettivi della regolazione emotiva', 205, 'Comprendere e denominare le emozioni'],
   ['2', 'Panoramica: comprendere e denominare le emozioni', null],

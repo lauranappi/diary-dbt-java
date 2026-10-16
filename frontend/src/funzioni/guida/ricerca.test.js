@@ -6,6 +6,8 @@ describe('ricerca nella Guida', () => {
     const ids = cerca('amorevole gentilezza').map((r) => r.scheda.id);
     expect(ids).toContain('mind-8');
     expect(cerca('mente SAGGIA').map((r) => r.scheda.id)).toContain('mind-3');
+    expect(cerca('DEAR MAN').map((r) => r.scheda.id)).toContain('inter-5');
+    expect(cerca('validazione').map((r) => r.scheda.id)).toEqual(expect.arrayContaining(['inter-6a', 'inter-17', 'inter-18']));
     expect(cerca('astinenza').map((r) => r.scheda.id)).toContain('tol-17');
   });
 
