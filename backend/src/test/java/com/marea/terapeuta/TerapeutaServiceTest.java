@@ -1,5 +1,7 @@
 package com.marea.terapeuta;
 
+import com.marea.diario.VoceDiario;
+import com.marea.diario.VoceDiarioRepository;
 import com.marea.utente.Utente;
 import com.marea.utente.UtenteRepository;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,7 @@ import static org.mockito.Mockito.*;
 class TerapeutaServiceTest {
 
     @Mock private UtenteRepository utenteRepository;
+    @Mock private VoceDiarioRepository voceDiarioRepository;
 
     @InjectMocks private TerapeutaService terapeutaService;
 
@@ -114,5 +118,31 @@ class TerapeutaServiceTest {
         assertThatThrownBy(() -> terapeutaService.scollegaPaziente("terapeuta-1", "paziente-1"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("non è collegata a te");
+    }
+
+    @Test
+    void conRiepilogoContaIGiorniEIndicaLUltimo() {
+        Utente paziente = Utente.builder().id("paziente-1").username("anna").nome("Anna").cognome("Rossi").build();
+        VoceDiario ultima = VoceDiario.builder().data(LocalDate.of(2026, 10, 14)).build();
+        when(voceDiarioRepository.countByPazienteId("paziente-1")).thenReturn(12L);
+        when(voceDiarioRepository.findFirstByPazienteIdOrderByDataDesc("paziente-1")).thenReturn(Optional.of(ultima));
+
+        PazienteRisposta r = terapeutaService.conRiepilogo(paziente);
+
+        assertThat(r.nome()).isEqualTo("Anna");
+        assertThat(r.giorniCompilati()).isEqualTo(12);
+        assertThat(r.ultimoGiorno()).isEqualTo(LocalDate.of(2026, 10, 14));
+    }
+
+    @Test
+    void conRiepilogoSenzaVociNonHaUltimoGiorno() {
+        Utente paziente = Utente.builder().id("paziente-2").username("bea").build();
+        when(voceDiarioRepository.countByPazienteId("paziente-2")).thenReturn(0L);
+        when(voceDiarioRepository.findFirstByPazienteIdOrderByDataDesc("paziente-2")).thenReturn(Optional.empty());
+
+        PazienteRisposta r = terapeutaService.conRiepilogo(paziente);
+
+        assertThat(r.giorniCompilati()).isZero();
+        assertThat(r.ultimoGiorno()).isNull();
     }
 }

@@ -23,15 +23,14 @@ public class TerapeutaController {
             @Valid @RequestBody CollegaPazienteRequest req, Authentication auth) {
         String terapeutaId = (String) auth.getPrincipal();
         var paziente = terapeutaService.collegaPaziente(terapeutaId, req.codicePaziente());
-        return ResponseEntity.ok(new PazienteRisposta(
-                paziente.getId(), paziente.getUsername(), paziente.getCollegataIl()));
+        return ResponseEntity.ok(terapeutaService.conRiepilogo(paziente));
     }
 
     @GetMapping("/pazienti")
     public ResponseEntity<List<PazienteRisposta>> mieiePazienti(Authentication auth) {
         String terapeutaId = (String) auth.getPrincipal();
         var risposta = terapeutaService.mieiePazienti(terapeutaId).stream()
-                .map(p -> new PazienteRisposta(p.getId(), p.getUsername(), p.getCollegataIl()))
+                .map(terapeutaService::conRiepilogo)
                 .toList();
         return ResponseEntity.ok(risposta);
     }

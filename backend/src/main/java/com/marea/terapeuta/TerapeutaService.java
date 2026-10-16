@@ -1,5 +1,7 @@
 package com.marea.terapeuta;
 
+import com.marea.diario.VoceDiario;
+import com.marea.diario.VoceDiarioRepository;
 import com.marea.utente.Utente;
 import com.marea.utente.UtenteRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.List;
 public class TerapeutaService {
 
     private final UtenteRepository utenteRepository;
+    private final VoceDiarioRepository voceDiarioRepository;
 
     // La terapeuta collega a se' una paziente usando il codice che la
     // paziente le ha comunicato (a voce, di persona - non è pensato per
@@ -39,6 +42,14 @@ public class TerapeutaService {
 
     public List<Utente> mieiePazienti(String terapeutaId) {
         return utenteRepository.findByTerapeutaId(terapeutaId);
+    }
+
+    // Una paziente con i numeri per l'elenco: giorni con una voce e data dell'ultima
+    public PazienteRisposta conRiepilogo(Utente paziente) {
+        long giorni = voceDiarioRepository.countByPazienteId(paziente.getId());
+        var ultimo = voceDiarioRepository.findFirstByPazienteIdOrderByDataDesc(paziente.getId())
+                .map(VoceDiario::getData).orElse(null);
+        return PazienteRisposta.da(paziente, giorni, ultimo);
     }
 
     // La terapeuta puo' scollegare una paziente (es. fine del percorso

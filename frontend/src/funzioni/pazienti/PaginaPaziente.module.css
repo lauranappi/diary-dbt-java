@@ -1,0 +1,21 @@
+.contenuto { padding: 0 var(--margine-laterale); }
+
+.indietro {
+  display: inline-block;
+  margin: 4px 0 14px;
+  font-size: var(--corpo-meta);
+  font-weight: var(--peso-grassetto);
+  color: var(--petrolio);
+  text-decoration: none;
+}
+.nome { margin: 0; font-size: 24px; font-weight: var(--peso-grassetto); letter-spacing: -0.02em; line-height: 1.2; }
+.meta { margin: 4px 0 18px; font-size: var(--corpo-meta); color: var(--tenue); }
+
+.note { margin-top: 4px; }
+.stato { min-height: 1.4em; margin: 8px 2px 0; font-size: var(--corpo-meta); color: var(--tenue); }
+
+.errore { margin-bottom: 12px; font-size: var(--corpo-piccolo); font-weight: var(--peso-semi); color: var(--errore); }
+
+@media (min-width: 701px) {
+  .nome, .meta { display: none; }
+}
