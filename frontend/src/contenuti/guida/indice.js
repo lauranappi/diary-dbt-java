@@ -1,4 +1,4 @@
-// Indice delle schede dei moduli i cui testi arrivano nelle prossime fasi:
+// Indice delle schede del modulo i cui testi arrivano nella prossima fase:
 // stessi numeri, titoli e pagine del manuale. Finché una scheda non ha i "blocchi",
 // nella Guida compare come "in arrivo".
 
@@ -12,35 +12,6 @@ function indice(idModulo, voci) {
     blocchi: [],
   }));
 }
-
-export const SCHEDE_REGOLAZIONE = indice('reg', [
-  ['1', 'Obiettivi della regolazione emotiva', 205, 'Comprendere e denominare le emozioni'],
-  ['2', 'Panoramica: comprendere e denominare le emozioni', null],
-  ['3', 'Cosa fanno le emozioni per te', 210],
-  ['4', 'Cosa rende difficile regolare le tue emozioni', 211],
-  ['4A', 'Miti e convinzioni comuni sulle emozioni', 212],
-  ['6', 'Modi per descrivere le emozioni', 214],
-  ['8', 'Controlla i fatti', 228, 'Cambiare le risposte emotive'],
-  ['8A', 'Esempi di emozioni che corrispondono ai fatti', 229],
-  ['9', 'Azione opposta e problem solving: decidere quale abilità usare', 230],
-  ['10', 'L’azione opposta', 231],
-  ['11', 'Trovare le azioni opposte', 232],
-  ['12', 'Problem solving', 241],
-  ['13', 'Sintesi dell’azione opposta e del problem solving', 242],
-  ['14', 'Panoramica: ridurre la vulnerabilità alla mente emotiva e costruire una vita degna di essere vissuta', null, 'Ridurre la vulnerabilità'],
-  ['15', 'Accumula emozioni positive nel breve termine', 248],
-  ['16', 'Lista degli eventi piacevoli', 249],
-  ['17', 'Accumula emozioni positive nel lungo termine', 252],
-  ['18', 'Lista dei valori e delle priorità', 253],
-  ['19', 'Diventa bravo nella mastery e gestisci in anticipo', 256],
-  ['20', 'Prenditi cura della mente prendendoti cura del corpo (PLEASE)', 257],
-  ['20A', 'Protocollo sugli incubi, passo dopo passo', 258],
-  ['20B', 'Protocollo sull’igiene del sonno', 259],
-  ['21', 'Panoramica: gestire emozioni particolarmente difficili', 263, 'Gestire emozioni particolarmente difficili'],
-  ['22', 'Mindfulness delle emozioni del momento: lasciare andare la sofferenza', 264],
-  ['23', 'Gestire le emozioni estreme', 265],
-  ['24', 'Risolvere i problemi delle abilità di regolazione emotiva', null],
-]);
 
 export const SCHEDE_TOLLERANZA = indice('tol', [
   ['1', 'Obiettivi della tolleranza della sofferenza', 321],

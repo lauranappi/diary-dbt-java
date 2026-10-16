@@ -30,8 +30,8 @@ describe('contenuti della Guida', () => {
     }
   });
 
-  it('Parte generale, Mindfulness ed Efficacia interpersonale sono scritte per intero', () => {
-    for (const id of ['pg', 'mind', 'inter']) expect(trovaModulo(id).schede.every(haTesto)).toBe(true);
+  it('Parte generale, Mindfulness, Efficacia interpersonale e Regolazione emotiva sono scritte per intero', () => {
+    for (const id of ['pg', 'mind', 'inter', 'reg']) expect(trovaModulo(id).schede.every(haTesto)).toBe(true);
   });
 
   it('ogni suggerimento della Home porta a una scheda che esiste, nel suo modulo', () => {
