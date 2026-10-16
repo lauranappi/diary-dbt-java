@@ -3,19 +3,14 @@ import { PARTE_GENERALE } from './parteGenerale.js';
 import { MINDFULNESS } from './mindfulness.js';
 import { EFFICACIA } from './efficacia.js';
 import { REGOLAZIONE } from './regolazione.js';
-import { SCHEDE_TOLLERANZA } from './indice.js';
+import { TOLLERANZA } from './tolleranza.js';
 
 export const MODULI_GUIDA = [
   PARTE_GENERALE,
   MINDFULNESS,
   EFFICACIA,
   REGOLAZIONE,
-  {
-    id: 'tol', titolo: 'Tolleranza della sofferenza', sottotitolo: 'Quando la crisi è già in corso',
-    icona: 'modulo-tolleranza',
-    quando: 'Quando provi un dolore intenso che non puoi alleviare subito, o agiresti sulla spinta dell’emozione peggiorando le cose. Include le abilità per quando la crisi è la dipendenza.',
-    schede: SCHEDE_TOLLERANZA,
-  },
+  TOLLERANZA,
 ];
 
 export const trovaModulo = (id) => MODULI_GUIDA.find((m) => m.id === id);
