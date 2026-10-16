@@ -1,0 +1,58 @@
+.pagina { padding: calc(env(safe-area-inset-top, 0px) + 48px) 20px 24px; }
+
+.indietro {
+  border: 0;
+  background: var(--linea);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--raggio-pillola);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 16px;
+  color: var(--tenue);
+}
+
+.intestazione { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.illustrazione { flex: none; width: 66px; height: 66px; border-radius: 20px; }
+.titolo { margin: 0; font-size: 24px; font-weight: var(--peso-grassetto); letter-spacing: -0.03em; color: var(--inchiostro); line-height: 1.15; }
+
+.quando {
+  background: var(--senape-chiara);
+  border-radius: var(--raggio-scheda);
+  padding: 20px;
+  margin: 0 0 14px;
+  color: var(--inchiostro);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.quando strong {
+  display: block;
+  font-size: 12px;
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--segnale);
+  margin-bottom: 7px;
+}
+
+.sezione {
+  margin: 18px 0 8px;
+  font-size: var(--corpo-meta);
+  font-weight: var(--peso-grassetto);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tenue);
+}
+
+.torna {
+  display: block;
+  text-decoration: none;
+  margin-top: 8px;
+  text-align: center;
+  font-size: var(--corpo-piccolo);
+  font-weight: var(--peso-semi);
+  color: var(--petrolio);
+}

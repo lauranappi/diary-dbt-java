@@ -63,7 +63,7 @@ function HomePaziente({ utente }) {
         <SchedaAbilita
           suggerimento={suggerimento}
           quanti={suggerimenti.length}
-          onApri={() => navigate('/guida')}
+          onApri={() => navigate(`/guida/${suggerimento.guida}?scheda=${suggerimento.scheda}`)}
           onAltro={() => { ruotaSuggerimento(oggi, suggerimenti.length); setIndice(indiceSuggerimento(oggi)); }}
         />
         <SchedaSettimana giorni={ultimiSetteGiorni(voci, adesso)} onApri={() => navigate('/storico')} />

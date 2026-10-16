@@ -1,0 +1,84 @@
+.scheda {
+  background: var(--superficie);
+  border-radius: 22px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+}
+
+.testata { display: flex; align-items: center; gap: 10px; }
+
+.apri {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--inchiostro);
+}
+.apri:disabled { cursor: default; }
+
+.etichetta {
+  flex: none;
+  max-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  border-radius: var(--raggio-pillola);
+  font-size: 11px;
+  font-weight: var(--peso-grassetto);
+  padding: 4px 10px;
+  line-height: 1.5;
+}
+.spenta { background: var(--linea); color: var(--tenue); }
+
+.nome {
+  flex: 1;
+  font-size: 15px;
+  font-weight: var(--peso-grassetto);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  color: var(--inchiostro);
+}
+.spento { color: var(--tenue); font-weight: var(--peso-semi); }
+
+.inArrivo { flex: none; font-size: var(--corpo-meta); color: var(--tenue); opacity: 0.7; }
+
+.stella {
+  flex: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  margin: -6px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tenue);
+}
+.accesa { color: var(--segnale); }
+
+.freccia { display: inline-flex; flex: none; }
+
+.corpo {
+  margin-top: 10px;
+  background: var(--senape-chiara);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.riferimento {
+  margin: 0 0 12px;
+  font-size: var(--corpo-meta);
+  font-weight: var(--peso-semi);
+  color: var(--petrolio);
+  line-height: 1.4;
+}
