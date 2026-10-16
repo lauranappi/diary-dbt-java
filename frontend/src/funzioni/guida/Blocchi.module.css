@@ -1,0 +1,41 @@
+.blocchi { display: flex; flex-direction: column; gap: 14px; }
+.blocco { display: flex; flex-direction: column; gap: 8px; }
+
+.titolo {
+  margin: 0;
+  font-size: var(--corpo-meta);
+  font-weight: var(--peso-semi);
+  color: var(--petrolio);
+  line-height: 1.4;
+}
+
+.testo { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--inchiostro); }
+
+.voce { display: flex; gap: 10px; align-items: flex-start; }
+
+.segno {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--raggio-pillola);
+  background: var(--segnale-chiaro);
+  color: var(--segnale);
+  font-size: 11.5px;
+  font-weight: var(--peso-grassetto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* elenco puntato: un pallino al posto del numero, nello stesso cerchio */
+.punto::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--segnale);
+}
+
+.testoVoce { margin: 0; flex: 1; font-size: 13.5px; line-height: 1.5; color: var(--inchiostro); }
+.testoVoce b { font-weight: var(--peso-grassetto); }

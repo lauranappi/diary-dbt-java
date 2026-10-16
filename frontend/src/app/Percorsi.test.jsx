@@ -49,9 +49,9 @@ describe('Percorsi', () => {
   });
 
   it('le sezioni non ancora pronte mostrano il segnaposto', () => {
-    sessione('PAZIENTE');
-    apri('/guida');
-    expect(screen.getByRole('heading', { name: 'Guida' })).toBeInTheDocument();
+    sessione('TERAPEUTA');
+    apri('/pazienti');
+    expect(screen.getByRole('heading', { name: 'Pazienti' })).toBeInTheDocument();
     expect(screen.getByText('Questa sezione è in preparazione')).toBeInTheDocument();
   });
 });

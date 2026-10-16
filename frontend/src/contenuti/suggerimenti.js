@@ -1,7 +1,7 @@
 // I suggerimenti per "Abilita' di oggi": ogni voce dice quando si applica (in base a come e'
 // andata la giornata), il titolo, la spiegazione e dove porta nella Guida.
 // priorita': 1 momenti difficili, 2 emozioni difficili, 3 crescita, 4 sempre disponibili.
-// 'guida' e' il modulo, 'abilita' l'abilita' (per aprire la Guida nel punto giusto).
+// 'guida' e' il modulo, 'scheda' la scheda del manuale (per aprire la Guida nel punto giusto).
 
 export const MODULI = {
   tol: { nome: 'Tolleranza', icona: 'modulo-tolleranza' },
@@ -18,7 +18,7 @@ export const SUGGERIMENTI = [
     titolo: "TIP — cambia la chimica del corpo",
     descrizione: "La tua sofferenza sembra alta. TIP può calmarti rapidamente: acqua fredda sul viso, esercizio intenso, respirazione lenta.",
     guida: 'tol',
-    abilita: 'tip',
+    scheda: 'tol-6',
   },
   {
     priorita: 1,
@@ -26,7 +26,7 @@ export const SUGGERIMENTI = [
     titolo: "Acqua fredda sul viso",
     descrizione: "Immergi il viso in acqua fredda per 15-30 sec trattenendo il fiato. Il riflesso da immersione calma il sistema nervoso in pochi secondi.",
     guida: 'tol',
-    abilita: 'tip',
+    scheda: 'tol-6',
   },
   {
     priorita: 1,
@@ -34,7 +34,7 @@ export const SUGGERIMENTI = [
     titolo: "STOP prima di agire",
     descrizione: "Quando senti un forte impulso, fermarti anche solo 5 secondi può cambiare tutto. STOP — fai un passo indietro — Osserva — Procedi mindfully.",
     guida: 'tol',
-    abilita: 'stop',
+    scheda: 'tol-4',
   },
   {
     priorita: 2,
@@ -42,7 +42,7 @@ export const SUGGERIMENTI = [
     titolo: "Migliora il momento presente",
     descrizione: "Quando tristezza o vuoto sono presenti, MIGLIORA aiuta a rendere il momento più tollerabile con 7 strategie pratiche.",
     guida: 'tol',
-    abilita: 'migliora',
+    scheda: 'tol-9',
   },
   {
     priorita: 2,
@@ -50,7 +50,7 @@ export const SUGGERIMENTI = [
     titolo: "Rilassamento muscolare progressivo",
     descrizione: "Vergogna e colpa si tengono spesso nel corpo. Il rilassamento muscolare scioglie quella tensione e riduce l'intensità emotiva.",
     guida: 'tol',
-    abilita: 'tip',
+    scheda: 'tol-6',
   },
   {
     priorita: 2,
@@ -58,7 +58,7 @@ export const SUGGERIMENTI = [
     titolo: "Respira: 5 sec dentro, 7 fuori",
     descrizione: "Quando hai paura, rallentare il respiro attiva il sistema parasimpatico. Inspira 5 sec, espira 7 sec. Ripeti per 5 minuti.",
     guida: 'tol',
-    abilita: 'tip',
+    scheda: 'tol-6',
   },
   {
     priorita: 2,
@@ -66,7 +66,7 @@ export const SUGGERIMENTI = [
     titolo: "Controlla i fatti della rabbia",
     descrizione: "La rabbia spesso nasce da interpretazioni, non dai fatti. Chiediti: la situazione è davvero come la vedo? Ci sono spiegazioni alternative?",
     guida: 'reg',
-    abilita: 'rcheck',
+    scheda: 'reg-8',
   },
   {
     priorita: 2,
@@ -74,7 +74,7 @@ export const SUGGERIMENTI = [
     titolo: "È normale avere dubbi sulla terapia",
     descrizione: "Avere pensieri di abbandonare il percorso fa parte del percorso stesso. L'accettazione radicale può aiutarti a stare con questo disagio.",
     guida: 'tol',
-    abilita: 'accrad',
+    scheda: 'tol-11',
   },
   {
     priorita: 2,
@@ -82,7 +82,7 @@ export const SUGGERIMENTI = [
     titolo: "Accettazione radicale",
     descrizione: "Stai rimuginando su qualcosa. L'accettazione radicale non significa approvare — significa smettere di lottare contro ciò che non puoi cambiare ora.",
     guida: 'tol',
-    abilita: 'accrad',
+    scheda: 'tol-11',
   },
   {
     priorita: 2,
@@ -90,7 +90,7 @@ export const SUGGERIMENTI = [
     titolo: "Costruisci emozioni positive oggi",
     descrizione: "Serenità e gioia sono molto basse. Non aspettare che le emozioni positive arrivino — costruiscile attivamente con una piccola azione piacevole.",
     guida: 'reg',
-    abilita: 'rpositivo',
+    scheda: 'reg-15',
   },
   {
     priorita: 3,
@@ -98,7 +98,7 @@ export const SUGGERIMENTI = [
     titolo: "Coccola i tuoi sensi",
     descrizione: "Piccoli gesti sensoriali possono ricaricarti. L'autoconsolazione attraverso i 5 sensi è semplice e immediata.",
     guida: 'tol',
-    abilita: 'sensi',
+    scheda: 'tol-8',
   },
   {
     priorita: 3,
@@ -106,7 +106,7 @@ export const SUGGERIMENTI = [
     titolo: "Mindfulness — mente saggia",
     descrizione: "Quando la fiducia nel cambiamento è bassa, connettiti con la tua mente saggia. Lei sa cose che la mente razionale ed emotiva da sole non vedono.",
     guida: 'mind',
-    abilita: 'msaggio',
+    scheda: 'mind-3a',
   },
   {
     priorita: 3,
@@ -114,7 +114,7 @@ export const SUGGERIMENTI = [
     titolo: "Azione opposta alla vergogna",
     descrizione: "Vergogna ci spinge a nasconderci. L’azione opposta è mostrarsi, non nascondersi.",
     guida: 'reg',
-    abilita: 'razione',
+    scheda: 'reg-10',
   },
   {
     priorita: 3,
@@ -122,7 +122,7 @@ export const SUGGERIMENTI = [
     titolo: "GIVE — mantieni la relazione",
     descrizione: "Quando sei arrabbiata con qualcuno, GIVE aiuta a gestire la situazione senza danneggiare il legame.",
     guida: 'inter',
-    abilita: 'give',
+    scheda: 'inter-6',
   },
   {
     priorita: 4,
@@ -130,7 +130,7 @@ export const SUGGERIMENTI = [
     titolo: "Cosa potresti fare di bello oggi?",
     descrizione: "Esplorare attività nuove costruisce la vita che vale la pena di essere vissuta. Dai un'occhiata alle attività dei sensi o di MIGLIORA.",
     guida: 'tol',
-    abilita: 'sensi',
+    scheda: 'tol-8',
   },
   {
     priorita: 4,
@@ -138,7 +138,7 @@ export const SUGGERIMENTI = [
     titolo: "Hai 10 minuti liberi?",
     descrizione: "Distrarsi non è evitare — è dare spazio alla mente. ACCETTA offre 7 strategie per spostare l'attenzione dalla sofferenza.",
     guida: 'tol',
-    abilita: 'accept',
+    scheda: 'tol-7',
   },
   {
     priorita: 4,
@@ -146,7 +146,7 @@ export const SUGGERIMENTI = [
     titolo: "Ripassi le abilità DBT?",
     descrizione: "Usare le abilità anche nei momenti tranquilli le rende più accessibili quando servono davvero. Esplora la Guida DBT.",
     guida: 'mind',
-    abilita: 'mstati',
+    scheda: 'mind-3',
   },
   {
     priorita: 4,
@@ -154,7 +154,7 @@ export const SUGGERIMENTI = [
     titolo: "Un suono che ti calma",
     descrizione: "Musica, natura, silenzio. I suoni possono cambiare il tono emotivo di tutta una giornata. Provare per credere.",
     guida: 'tol',
-    abilita: 'sensi',
+    scheda: 'tol-8',
   },
   {
     priorita: 4,
@@ -162,7 +162,7 @@ export const SUGGERIMENTI = [
     titolo: "DEAR MAN — chiedi ciò che vuoi",
     descrizione: "Imparare a fare richieste e dire no efficacemente è una delle abilità più trasformative. Scopri la tecnica DEAR MAN.",
     guida: 'inter',
-    abilita: 'dearman',
+    scheda: 'inter-5',
   },
   {
     priorita: 4,
@@ -170,7 +170,7 @@ export const SUGGERIMENTI = [
     titolo: "Prova il mezzo sorriso",
     descrizione: "Il corpo comunica con la mente. Rilassa il viso e lascia che le labbra salgano leggermente.",
     guida: 'tol',
-    abilita: 'sorriso',
+    scheda: 'tol-14',
   },
   {
     priorita: 4,
@@ -178,7 +178,7 @@ export const SUGGERIMENTI = [
     titolo: "Mente saggia — cosa sa?",
     descrizione: "Siediti, respira e chiediti: nel profondo, cosa so che è giusto fare?",
     guida: 'mind',
-    abilita: 'msaggio',
+    scheda: 'mind-3a',
   },
   {
     priorita: 4,
@@ -186,6 +186,6 @@ export const SUGGERIMENTI = [
     titolo: "Costruisci una vita degna",
     descrizione: "Ogni giorno un piccolo passo verso la vita che vuoi. Identifica un valore su cui lavorare.",
     guida: 'reg',
-    abilita: 'rvalori',
+    scheda: 'reg-18',
   },
 ];

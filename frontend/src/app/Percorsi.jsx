@@ -6,6 +6,8 @@ import PaginaAbilita from '../funzioni/abilita/PaginaAbilita.jsx';
 import PaginaAttivita from '../funzioni/attivita/PaginaAttivita.jsx';
 import PaginaDiario from '../funzioni/diario/PaginaDiario.jsx';
 import PaginaImpostazioni from '../funzioni/impostazioni/PaginaImpostazioni.jsx';
+import PaginaGuida from '../funzioni/guida/PaginaGuida.jsx';
+import PaginaModulo from '../funzioni/guida/PaginaModulo.jsx';
 import PaginaStorico from '../funzioni/storico/PaginaStorico.jsx';
 import PaginaHome from '../funzioni/home/PaginaHome.jsx';
 import Guscio from './Guscio.jsx';
@@ -13,7 +15,6 @@ import RottaProtetta from './RottaProtetta.jsx';
 
 // Sezioni che arrivano nelle fasi successive: per ora mostrano un segnaposto
 const SEZIONI_IN_ARRIVO = [
-  { percorso: 'guida', titolo: 'Guida' },
   { percorso: 'pazienti', titolo: 'Pazienti', ruolo: 'TERAPEUTA' },
 ];
 
@@ -30,6 +31,8 @@ export default function Percorsi() {
         <Route path="attivita" element={<RottaProtetta ruolo="PAZIENTE"><PaginaAttivita /></RottaProtetta>} />
         <Route path="impostazioni" element={<PaginaImpostazioni />} />
         <Route path="storico" element={<RottaProtetta ruolo="PAZIENTE"><PaginaStorico /></RottaProtetta>} />
+        <Route path="guida" element={<PaginaGuida />} />
+        <Route path="guida/:modulo" element={<PaginaModulo />} />
         {SEZIONI_IN_ARRIVO.map(({ percorso, titolo, ruolo }) => (
           <Route
             key={percorso}
