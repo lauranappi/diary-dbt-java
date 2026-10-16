@@ -1,9 +1,22 @@
 package com.marea.terapeuta;
 
-import java.time.Instant;
+import com.marea.utente.Utente;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
+// Una paziente nell'elenco della terapeuta: chi e', da quando e' collegata e quanto ha compilato.
 public record PazienteRisposta(
         String id,
         String username,
-        Instant collegataIl
-) {}
+        String nome,
+        String cognome,
+        Instant collegataIl,
+        long giorniCompilati,
+        LocalDate ultimoGiorno
+) {
+    public static PazienteRisposta da(Utente paziente, long giorniCompilati, LocalDate ultimoGiorno) {
+        return new PazienteRisposta(paziente.getId(), paziente.getUsername(), paziente.getNome(),
+                paziente.getCognome(), paziente.getCollegataIl(), giorniCompilati, ultimoGiorno);
+    }
+}

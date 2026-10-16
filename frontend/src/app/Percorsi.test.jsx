@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { salvaSessione } from '../api/sessione.js';
 import { ProviderAutenticazione } from '../funzioni/autenticazione/ProviderAutenticazione.jsx';
 import Percorsi from './Percorsi.jsx';
+
+vi.mock('../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn().mockResolvedValue([]), voci: vi.fn().mockResolvedValue([]) } }));
 
 function apri(percorso) {
   render(
@@ -48,10 +50,9 @@ describe('Percorsi', () => {
     expect(screen.getByRole('heading', { name: /Laura/ })).toBeInTheDocument(); // rimandata alla home
   });
 
-  it('le sezioni non ancora pronte mostrano il segnaposto', () => {
+  it('la terapeuta apre l\'elenco delle pazienti', async () => {
     sessione('TERAPEUTA');
     apri('/pazienti');
-    expect(screen.getByRole('heading', { name: 'Pazienti' })).toBeInTheDocument();
-    expect(screen.getByText('Questa sezione è in preparazione')).toBeInTheDocument();
+    expect(await screen.findByText(/Nessuna paziente ti ha ancora aggiunto/)).toBeInTheDocument();
   });
 });
