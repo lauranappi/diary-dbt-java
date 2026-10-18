@@ -13,10 +13,9 @@ Il progetto originale resta intoccato e in funzione — questo repository
 
 ## Stato
 
-Impalcatura iniziale. Sul backend: registrazione/accesso e salvataggio del
-diario sono scritti (**ma non ancora compilati/testati** — vedi
-`backend/README.md`). Sul frontend: solo lo scaffold di default di Vite,
-nessuna pagina ancora migrata.
+Funzionante nelle parti principali (diary, storico, abilità, fogli, piano di crisi,
+appunti, diario del gruppo, emozioni, area terapeuta con note e sessioni). Vedi
+`DEPLOY.md` per la messa online e i limiti noti, `ARCHITETTURA.md` per la struttura.
 
 ## Dove vivrà
 
