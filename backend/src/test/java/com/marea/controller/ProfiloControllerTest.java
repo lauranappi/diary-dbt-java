@@ -70,7 +70,7 @@ class ProfiloControllerTest {
         AuthResponse paziente = registra();
         mockMvc.perform(put("/api/paziente/terapeuta").header("Authorization", "Bearer " + paziente.token())
                 .contentType("application/json").content("{\"codiceTerapeuta\":\"" + terapeuta.username() + "\"}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         mockMvc.perform(get("/api/profilo").header("Authorization", "Bearer " + paziente.token()))
                 .andExpect(status().isOk())
