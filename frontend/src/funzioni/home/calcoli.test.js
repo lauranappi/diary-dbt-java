@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { emozioniDiIeri, giorniDiFila, indiceSuggerimento, ruotaSuggerimento, saluto, suggerimentiPer, ultimiSetteGiorni } from './calcoli.js';
+import { emozioniDiIeri, giorniDiFila, indiceSuggerimento, recordDiFila, ruotaSuggerimento, saluto, sofferenzaMedia, suggerimentiPer, ultimiSetteGiorni, vociCompilate } from './calcoli.js';
 
 const oggi = new Date(2026, 9, 12); // lunedì 12 ottobre 2026
 const voce = (data, scale = { ser: 1 }) => ({ data, scale, toggle: {}, testi: {} });
@@ -63,5 +63,25 @@ describe('suggerimenti', () => {
 describe('saluto', () => {
   it('cambia con l\'ora', () => {
     expect([2, 9, 15, 19, 22].map(saluto)).toEqual(['Notte fonda', 'Buongiorno', 'Buon pomeriggio', 'Buonasera', 'Buonanotte']);
+  });
+});
+
+const voceSe = (data, scale = { se: 2 }) => ({ data, scale, toggle: {}, testi: {} });
+
+describe('desktop: record, sofferenza media, voci compilate', () => {
+  it('il record e la serie piu\' lunga, anche se non e quella di oggi', () => {
+    const voci = [voceSe('2026-05-01'), voceSe('2026-05-02'), voceSe('2026-05-03'), voceSe('2026-05-10'), voceSe('2026-05-11')];
+    expect(recordDiFila(voci)).toBe(3);
+    expect(recordDiFila([])).toBe(0);
+  });
+
+  it('la sofferenza media usa gli ultimi 14 giorni compilati', () => {
+    expect(sofferenzaMedia([])).toBeNull();
+    expect(sofferenzaMedia([voceSe('2026-05-01', { se: 4 }), voceSe('2026-05-02', { se: 2 }), voceSe('2026-05-03', { ser: 3 })])).toBe(3);
+  });
+
+  it('conta le risposte di scale e sì/no', () => {
+    expect(vociCompilate({ scale: { ser: 1, se: 2 }, toggle: { sa: 'No' } })).toBe(3);
+    expect(vociCompilate(undefined)).toBe(0);
   });
 });

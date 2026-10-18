@@ -8,5 +8,5 @@
 }
 
 @media (min-width: 1024px) {
-  .contenuto { max-width: 760px; }
+  .contenuto.contenuto { max-width: 760px; }
 }

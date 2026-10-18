@@ -1,0 +1,47 @@
+.pagina { display: flex; flex-direction: column; gap: 24px; padding: 32px var(--margine-laterale) 0; }
+
+.riga { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+
+.scheda { background: var(--superficie); border-radius: var(--raggio-scheda); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.oggi { flex: 2 1 420px; }
+.laterali { flex: 0 1 260px; max-width: 260px; display: flex; flex-direction: column; gap: 24px; }
+
+.testata { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.titolo { flex: 1; font-size: 16px; font-weight: var(--peso-grassetto); letter-spacing: -0.02em; color: var(--inchiostro); }
+.conta { font-size: 13px; color: var(--tenue); }
+
+.binario { height: 10px; margin: 4px 0 8px; border-radius: var(--raggio-pillola); background: var(--linea); overflow: hidden; }
+.binario i { display: block; height: 100%; border-radius: var(--raggio-pillola); background: var(--segnale); }
+
+.rapide { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px 20px; margin-bottom: 8px; }
+.rapida { display: flex; flex-direction: column; gap: 8px; }
+.nomeRapida { font-size: 13.5px; font-weight: var(--peso-semi); color: var(--inchiostro); }
+.celle { justify-content: space-between; gap: 6px; flex-wrap: nowrap; }
+.cella { flex: none; width: 42px; min-width: 0; border-radius: 12px; }
+
+.secondario {
+  align-self: flex-start; padding: 9.5px 20px; border: 1.5px solid var(--linea); border-radius: var(--raggio-pillola);
+  background: var(--superficie); color: var(--petrolio); font-weight: var(--peso-semi); font-size: 13.5px; cursor: pointer;
+}
+.secondario:hover { background: var(--crema); }
+
+.kicker { font-size: var(--corpo-soprattitolo); font-weight: var(--peso-semi); letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); }
+.serie { display: flex; align-items: flex-end; gap: 10px; margin: 6px 0 4px; }
+.numero { font-size: 52px; line-height: 0.9; color: #8E4C2C; }
+.etichettaSerie { font-size: 13px; line-height: 1.3; color: var(--tenue); padding-bottom: 4px; }
+.pallini { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+.pallini span { width: 9px; height: 9px; min-width: 9px; border-radius: var(--raggio-pillola); background: var(--linea); }
+.pallini .pieno { background: var(--testata); }
+.nota { font-size: 13px; line-height: 1.5; color: var(--tenue); }
+
+.gruppi { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px 20px; margin-top: 12px; }
+.gruppo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.abilita { display: flex; align-items: center; gap: 12px; width: 100%; padding: 6px 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
+.casella { width: 24px; height: 24px; flex: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: var(--segnale-chiaro); }
+.spuntata { background: var(--accento); }
+.nomeAbilita { font-size: 14px; font-weight: var(--peso-medio); color: var(--inchiostro); }
+.nomeAttiva { font-weight: 700; }
+
+@media (max-width: 1280px) {
+  .gruppi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

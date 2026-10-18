@@ -64,3 +64,9 @@ export function vociPerGrafici(voci, giorni, oggi = new Date()) {
 
 export const serieScala = (voci, id) => voci.map((v) => v.scale?.[id] ?? null);
 export const serieSino = (voci, id) => voci.map((v) => (v.toggle?.[id] === 'Sì' ? 1 : 0));
+
+// Media di una scala nei giorni dati (null se non c'e' nessun valore)
+export function mediaScala(voci, id) {
+  const valori = voci.map((v) => v.scale?.[id]).filter((x) => x != null);
+  return valori.length ? valori.reduce((a, b) => a + b, 0) / valori.length : null;
+}

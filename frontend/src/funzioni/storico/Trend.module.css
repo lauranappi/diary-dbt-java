@@ -13,3 +13,9 @@
   color: var(--inchiostro);
 }
 .vuoto { padding: 1rem 0; font-size: 14px; color: var(--tenue); }
+
+/* Da schermo largo i grafici stanno affiancati */
+@media (min-width: 1024px) {
+  .griglia { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin-bottom: 24px; }
+  .griglia .scheda { margin-bottom: 0; min-width: 0; }
+}

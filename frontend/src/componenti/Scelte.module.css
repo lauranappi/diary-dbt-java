@@ -24,3 +24,9 @@
   background: var(--testata);
   color: var(--testata-inchiostro);
 }
+
+/* Da schermo largo le celle restano quadrate e allineate a sinistra, non si allungano */
+@media (min-width: 1024px) {
+  .fila { gap: 8px; justify-content: flex-start; }
+  .cella:not(.larga) { flex: none; width: 42px; min-width: 0; }
+}

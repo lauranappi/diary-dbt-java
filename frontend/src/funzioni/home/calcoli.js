@@ -85,3 +85,34 @@ export function saluto(ora) {
   if (ora < 21) return 'Buonasera';
   return 'Buonanotte';
 }
+
+// La serie piu' lunga di giorni compilati nelle voci che si hanno (anche passata)
+export function recordDiFila(voci) {
+  const giorni = voci.filter((v) => compilata(v)).map((v) => v.data).sort();
+  let record = 0;
+  let corrente = 0;
+  let precedente = null;
+  for (const g of giorni) {
+    const atteso = precedente && chiave(aggiungiGiorni(new Date(`${precedente}T12:00:00`), 1));
+    corrente = atteso === g ? corrente + 1 : 1;
+    record = Math.max(record, corrente);
+    precedente = g;
+  }
+  return record;
+}
+
+// Media della sofferenza emotiva negli ultimi quattordici giorni compilati (null se non c'e' nulla)
+export function sofferenzaMedia(voci) {
+  const valori = voci
+    .filter((v) => compilata(v))
+    .sort((a, b) => a.data.localeCompare(b.data))
+    .slice(-14)
+    .map((v) => v.scale?.se)
+    .filter((x) => x != null);
+  return valori.length ? valori.reduce((a, b) => a + b, 0) / valori.length : null;
+}
+
+// Quante voci (scale e sì/no) di una giornata hanno una risposta
+export function vociCompilate(voce) {
+  return Object.keys(voce?.scale || {}).length + Object.keys(voce?.toggle || {}).length;
+}
