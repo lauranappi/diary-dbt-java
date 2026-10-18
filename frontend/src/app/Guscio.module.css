@@ -22,6 +22,5 @@
   .laterale { display: block; position: fixed; top: 0; left: 0; bottom: 0; width: 248px; z-index: 50; }
   .inferiore { display: none; }
   .contenuto { grid-column: 2; padding-bottom: 48px; min-width: 0; }
-  /* Le pagine non si allargano oltre una misura leggibile */
-  .contenuto > :not(header) { max-width: 1180px; }
+  /* Il contenuto usa tutta la larghezza, come in Marea */
 }

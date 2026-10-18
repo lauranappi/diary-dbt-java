@@ -43,3 +43,4 @@
 .avviso { color: var(--tenue); }
 
 .rigaAzione { display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; }
+.valore { font-size: 14px; font-weight: var(--peso-semi); color: var(--inchiostro); }
