@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Hero from '../../componenti/Hero.jsx';
 import Pulsante from '../../componenti/Pulsante.jsx';
 import { trovaFoglio } from '../../contenuti/fogli/index.js';
+import Postit from '../postit/Postit.jsx';
 import FormFoglio from './FormFoglio.jsx';
 import { anteprima } from './riassunto.js';
 import { useFogli } from './useFogli.js';
@@ -56,6 +57,7 @@ export default function PaginaFoglio() {
                 </span>
               </button>
             ))}
+            <Postit chiave={`fg:${foglio.id}`} titolo="Note per compilarlo" />
             {stato === 'offline' && <p className={stili.sottoRiga}>Salvato su questo dispositivo, si sincronizza appena c’è rete.</p>}
           </>
         )}

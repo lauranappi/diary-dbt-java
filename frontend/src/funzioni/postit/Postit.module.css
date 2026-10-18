@@ -1,0 +1,49 @@
+.blocco { margin: 14px 0 4px; padding-top: 12px; border-top: 1.5px dashed var(--linea); }
+.testata { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.titolo { flex: 1; min-width: 0; margin: 0; line-height: 1.3; font-size: var(--corpo-meta); font-weight: var(--peso-grassetto); letter-spacing: 0.06em; text-transform: uppercase; color: var(--tenue); }
+.aggiungi { flex: none; white-space: nowrap; border: 0; cursor: pointer; min-height: 36px; padding: 0 14px; border-radius: var(--raggio-pillola); background: var(--accento); color: var(--nero); font-size: var(--corpo-meta); font-weight: var(--peso-grassetto); }
+.aggiungi:active { transform: scale(0.97); }
+.vuoto { margin: 0; font-size: var(--corpo-piccolo); color: var(--tenue); opacity: 0.8; line-height: 1.5; }
+
+.griglia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; padding: 4px 2px 8px; }
+@media (min-width: 720px) { .griglia { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.nota {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+  text-align: left; border: 0; cursor: pointer; min-height: 112px; padding: 16px 13px 10px;
+  border-radius: 4px 4px 4px 18px; color: var(--nero);
+  font-family: 'Patrick Hand', 'Bradley Hand', 'Segoe Print', cursive; font-size: 16px; line-height: 1.25; font-weight: 400;
+  box-shadow: 0 1px 1px rgba(14, 42, 41, 0.1), 0 6px 12px -4px rgba(14, 42, 41, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.nota::before { content: ''; position: absolute; top: -7px; left: 50%; width: 46px; height: 15px; margin-left: -23px; background: rgba(255, 255, 255, 0.55); border-radius: 2px; transform: rotate(-2deg); box-shadow: 0 1px 2px rgba(14, 42, 41, 0.12); }
+.nota::after { content: ''; position: absolute; right: 0; bottom: 0; width: 20px; height: 20px; border-radius: 0 0 0 14px; background: linear-gradient(135deg, rgba(0, 0, 0, 0.14) 0 50%, rgba(255, 255, 255, 0.35) 50% 100%); }
+.rot0 { transform: rotate(-1.6deg); }
+.rot1 { transform: rotate(1.2deg); }
+.rot2 { transform: rotate(-0.7deg); }
+.rot3 { transform: rotate(1.7deg); }
+.nota:active { transform: rotate(0) scale(0.98); }
+.testo { display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; word-break: break-word; }
+.data { font-family: var(--font); font-size: 11px; font-weight: var(--peso-semi); opacity: 0.55; letter-spacing: 0.02em; }
+
+/* il foglietto a comparsa */
+.sfondo { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: flex-end; justify-content: center; background: rgba(14, 42, 41, 0.46); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.foglio { width: 100%; max-width: 480px; background: var(--crema); border-radius: var(--raggio-scheda) var(--raggio-scheda) 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -12px 40px rgba(14, 42, 41, 0.25); }
+@media (min-width: 720px) { .sfondo { align-items: center; } .foglio { border-radius: var(--raggio-scheda); } }
+.fogliettoGrande { position: relative; border-radius: 3px; padding: 16px 16px 8px; box-shadow: 0 1px 1px rgba(14, 42, 41, 0.1), 0 8px 16px -6px rgba(14, 42, 41, 0.25); transition: background 0.15s ease; }
+.scrittura { display: block; width: 100%; box-sizing: border-box; min-height: 210px; max-height: 38vh; resize: none; border: 0; outline: 0; background: transparent; color: var(--nero); font-family: 'Patrick Hand', 'Bradley Hand', 'Segoe Print', cursive; font-size: 20px; line-height: 1.2; font-weight: 500; }
+.scrittura::placeholder { color: rgba(20, 32, 31, 0.45); }
+.vista .scrittura { font-size: 19px; line-height: 1.3; }
+.conta { font-size: 11px; font-weight: var(--peso-semi); opacity: 0.5; text-align: right; padding-top: 2px; }
+.strumenti { display: flex; gap: 8px; margin-top: 12px; }
+.strumento { border: 0; cursor: pointer; min-height: 38px; padding: 0 14px; border-radius: var(--raggio-pillola); background: var(--linea); color: var(--petrolio); font-size: var(--corpo-piccolo); font-weight: var(--peso-semi); }
+.colori { display: flex; gap: 12px; justify-content: center; margin: 16px 0 14px; }
+.pallino { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(14, 42, 41, 0.12); cursor: pointer; padding: 0; }
+.acceso { border-color: var(--petrolio); box-shadow: 0 0 0 3px var(--crema), 0 0 0 5px var(--petrolio); }
+.azioni { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.spazio { flex: 1; }
+.tasto { border: 0; cursor: pointer; min-height: 44px; padding: 0 18px; border-radius: var(--raggio-pillola); background: var(--linea); color: var(--petrolio); font-size: var(--corpo-riga); font-weight: var(--peso-grassetto); }
+.primario { background: var(--petrolio); color: var(--bianco); }
+.elimina { background: transparent; color: var(--terracotta); padding: 0 10px; }
+.conferma { background: var(--terracotta-chiara); }
+@media (prefers-reduced-motion: reduce) { .nota, .fogliettoGrande { transition: none; } }

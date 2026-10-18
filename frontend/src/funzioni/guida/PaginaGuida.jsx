@@ -86,6 +86,16 @@ export default function PaginaGuida() {
                 <Freccia />
               </Link>
             )}
+            {ruolo === 'PAZIENTE' && (
+              <Link to="/appunti" className={stili.riga}>
+                <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/strumenti-generali.svg`} alt="" />
+                <span className={stili.testoRiga}>
+                  <span className={stili.titoloRiga}>I tuoi appunti</span>
+                  <span className={stili.sottoRiga}>I post-it scritti durante i gruppi</span>
+                </span>
+                <Freccia />
+              </Link>
+            )}
           </>
         )}
       </div>
