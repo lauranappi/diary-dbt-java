@@ -1,7 +1,11 @@
+import { adattaMarea } from './adattaMarea.js';
+
 // Il documento 'fogli' ha la stessa forma di Marea:
 //   { generici: { '<idFoglio>': [{ id, ts, m?, v: {campo: valore} }] }, cancellati: { '<idFoglio>:<id>': ts }, ...altri fogli }
 // "cancellati" ricorda gli eliminati: senza, un foglio tolto qui tornerebbe da un dispositivo che lo ha ancora.
 const NOVANTA_GIORNI = 90 * 86400000;
+
+export const pienoDiTesto = (piano) => !!piano && Object.values(piano).some((x) => typeof x === 'string' && x.trim());
 
 export const FOGLI_VUOTI = { generici: {}, cancellati: {} };
 
@@ -17,7 +21,9 @@ function unisciLista(locale = [], remoto = [], cancellati, idFoglio) {
   return [...per.values()].sort((a, b) => b.ts - a.ts);
 }
 
-export function unisciFogli(locale, remoto, adesso = Date.now()) {
+export function unisciFogli(localeGrezzo, remotoGrezzo, adesso = Date.now()) {
+  const locale = adattaMarea(localeGrezzo);
+  const remoto = adattaMarea(remotoGrezzo);
   const cancellati = {};
   for (const fonte of [remoto?.cancellati, locale?.cancellati]) {
     for (const [k, t] of Object.entries(fonte || {})) {
@@ -31,7 +37,9 @@ export function unisciFogli(locale, remoto, adesso = Date.now()) {
     if (lista.length) generici[id] = lista;
   }
   // gli altri fogli (controllaFatti, proContro...) restano come sono: li gestiscono altre schermate
-  return { ...(remoto || {}), ...(locale || {}), generici, cancellati };
+  // il piano di crisi è un documento unico: vale quello di questo dispositivo, se ha qualcosa scritto
+  const pianoCrisi = pienoDiTesto(locale?.pianoCrisi) ? locale.pianoCrisi : (remoto?.pianoCrisi ?? locale?.pianoCrisi);
+  return { ...(remoto || {}), ...(locale || {}), generici, cancellati, ...(pianoCrisi ? { pianoCrisi } : {}) };
 }
 
 export const nuovoIdFoglio = () => `f${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`;

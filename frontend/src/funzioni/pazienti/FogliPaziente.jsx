@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import Pannello from '../../componenti/Pannello.jsx';
 import { GRUPPI_FOGLI } from '../../contenuti/fogli/index.js';
+import { adattaMarea } from '../fogli/adattaMarea.js';
+import { pienoDiTesto } from '../fogli/unisciFogli.js';
 import FormFoglio from '../fogli/FormFoglio.jsx';
 import { anteprima } from '../fogli/riassunto.js';
 import stili from '../fogli/Fogli.module.css';
+import VistaPianoCrisi from './VistaPianoCrisi.jsx';
 import { useDocumentiPaziente } from './useDocumentiPaziente.js';
 
 const dataBreve = (ts) => new Date(ts).toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -15,14 +18,22 @@ export default function FogliPaziente({ pazienteId }) {
 
   if (errore) return <p className={stili.errore} role="alert">Non riesco a caricare i fogli: controlla la connessione e riprova.</p>;
   if (caricamento) return null;
-  const generici = documenti?.fogli?.contenuto?.generici ?? {};
+  const fogli = adattaMarea(documenti?.fogli?.contenuto) ?? {};
+  const generici = fogli.generici ?? {};
+  const haPiano = pienoDiTesto(fogli.pianoCrisi);
   const gruppi = GRUPPI_FOGLI
     .map((g) => ({ ...g, fogli: g.fogli.filter((f) => generici[f.id]?.length) }))
     .filter((g) => g.fogli.length);
-  if (!gruppi.length) return <p className={stili.vuoto}>Nessun foglio di lavoro compilato.</p>;
+  if (!gruppi.length && !haPiano) return <p className={stili.vuoto}>Nessun foglio di lavoro compilato.</p>;
 
   return (
     <>
+      {haPiano && (
+        <section className={stili.gruppo} aria-label="Piano di crisi">
+          <h2 className={stili.nomeGruppo}>Piano di crisi</h2>
+          <VistaPianoCrisi piano={fogli.pianoCrisi} />
+        </section>
+      )}
       {gruppi.map((g) => (
         <section key={g.id} className={stili.gruppo} aria-label={g.nome}>
           <h2 className={stili.nomeGruppo}>{g.nome}</h2>

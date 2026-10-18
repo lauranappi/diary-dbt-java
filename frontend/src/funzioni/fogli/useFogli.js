@@ -1,10 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { adattaMarea } from './adattaMarea.js';
 import { useDocumento } from '../../api/useDocumento.js';
 import { FOGLI_VUOTI, nuovoIdFoglio, unisciFogli } from './unisciFogli.js';
 
 // I fogli di lavoro compilati (documento 'fogli' sul server): { compilati(id), salva, elimina, stato }
 export function useFogli() {
-  const { valore, imposta, stato } = useDocumento('fogli', { predefinito: FOGLI_VUOTI, unisci: unisciFogli });
+  const { valore: grezzo, imposta: impostaGrezzo, stato } = useDocumento('fogli', { predefinito: FOGLI_VUOTI, unisci: unisciFogli });
+  const valore = useMemo(() => adattaMarea(grezzo), [grezzo]);
+  // chi modifica parte sempre dalla forma nuova, anche se il documento arriva da Marea
+  const imposta = useCallback((modifica) => impostaGrezzo((prima) => modifica(adattaMarea(prima))), [impostaGrezzo]);
 
   const compilati = useCallback((idFoglio) => valore?.generici?.[idFoglio] ?? [], [valore]);
 
@@ -30,5 +34,8 @@ export function useFogli() {
     });
   }, [imposta]);
 
-  return { compilati, salva, elimina, stato };
+  const pianoCrisi = valore?.pianoCrisi ?? {};
+  const salvaPianoCrisi = useCallback((piano) => imposta((prima) => ({ ...prima, pianoCrisi: piano })), [imposta]);
+
+  return { compilati, salva, elimina, pianoCrisi, salvaPianoCrisi, stato };
 }

@@ -3,10 +3,10 @@ import { GRUPPI_FOGLI, TUTTI_I_FOGLI, trovaFoglio } from './index.js';
 
 describe('fogli di lavoro', () => {
   it('sono quelli di Marea, con id unici e riferimento al manuale', () => {
-    expect(TUTTI_I_FOGLI).toHaveLength(31);
-    expect(new Set(TUTTI_I_FOGLI.map((f) => f.id)).size).toBe(31);
-    expect(GRUPPI_FOGLI.map((g) => g.fogli.length)).toEqual([6, 12, 6, 7]);
-    for (const f of TUTTI_I_FOGLI) expect(f.riferimento, f.id).toMatch(/Foglio di lavoro|Fogli di lavoro/);
+    expect(TUTTI_I_FOGLI).toHaveLength(35);
+    expect(new Set(TUTTI_I_FOGLI.map((f) => f.id)).size).toBe(35);
+    expect(GRUPPI_FOGLI.map((g) => g.fogli.length)).toEqual([2, 6, 14, 6, 7]);
+    for (const f of TUTTI_I_FOGLI.filter((x) => !['g-catena', 'r-diario-emozioni'].includes(x.id))) expect(f.riferimento, f.id).toMatch(/Foglio di lavoro|Fogli di lavoro/);
   });
 
   it('ogni campo ha chiave unica nel foglio e le scelte hanno opzioni', () => {

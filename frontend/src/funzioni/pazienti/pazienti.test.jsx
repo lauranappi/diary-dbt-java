@@ -132,6 +132,18 @@ describe('scheda paziente', () => {
     expect(within(pannello).queryByRole('button', { name: 'Salva' })).not.toBeInTheDocument();
   });
 
+  it('i dati di Marea (elenchi vecchi e piano di crisi) si leggono come fogli', async () => {
+    terapeutaApi.documenti.mockResolvedValue({
+      fogli: { contenuto: { diarioEmozioni: [{ id: 1700000000003, data: '2026-03-03', emozione: 'Tristezza', intensita: 4 }], pianoCrisi: { a1: 'Respirare' } } },
+    });
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Fogli' }));
+    expect(await screen.findByText('Respirare')).toBeInTheDocument();
+    expect(screen.getByText('Diario delle emozioni')).toBeInTheDocument();
+    expect(screen.getByText('Tristezza')).toBeInTheDocument();
+  });
+
   it('senza fogli compilati lo dice', async () => {
     terapeutaApi.documenti.mockResolvedValue({});
     apri('/pazienti/p1');
