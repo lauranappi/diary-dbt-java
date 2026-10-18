@@ -63,9 +63,6 @@ mvn test
 
 `controller`, `service`, `repository`, `model`, `dto`, `config`, `exception`, `util` (vedi `ARCHITETTURA.md`).
 
-`auth`, `utente`, `diario`, `abilita`, `terapeuta`, `documenti`, `notifiche`, `migrazione`, `comune`.
-Ogni pacchetto ha il suo controller, service, repository, entità e DTO (vedi `ARCHITETTURA.md`).
-
 ## Nuovi endpoint (Fase 1)
 
 | Metodo | Percorso | Cosa fa |
