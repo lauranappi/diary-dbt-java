@@ -11,6 +11,7 @@ import { useVoci } from '../storico/useVoci.js';
 import AbilitaPaziente from './AbilitaPaziente.jsx';
 import FogliPaziente from './FogliPaziente.jsx';
 import GiornatePaziente from './GiornatePaziente.jsx';
+import NoteSessione from './NoteSessione.jsx';
 import NotePaziente from './NotePaziente.jsx';
 import { giorniEtichetta, nomePaziente } from './nomePaziente.js';
 import { usePazienti } from './usePazienti.js';
@@ -28,6 +29,7 @@ const VISTE = [
   { valore: 'abilita', etichetta: 'Abilità' },
   { valore: 'giornata', etichetta: 'Giornata' },
   { valore: 'fogli', etichetta: 'Fogli' },
+  { valore: 'sessioni', etichetta: 'Sessioni' },
   { valore: 'note', etichetta: 'Note' },
 ];
 
@@ -61,7 +63,7 @@ export default function PaginaPaziente() {
             <h2 className={stili.nome}>{titolo}</h2>
             <p className={stili.meta}>{sotto}</p>
             <Pillole nome="Vista" opzioni={VISTE} valore={vista} onScegli={setVista} />
-            {vista !== 'note' && vista !== 'fogli' && <Pillole nome="Periodo" opzioni={PERIODI} valore={periodo} onScegli={setPeriodo} />}
+            {vista !== 'note' && vista !== 'fogli' && vista !== 'sessioni' && <Pillole nome="Periodo" opzioni={PERIODI} valore={periodo} onScegli={setPeriodo} />}
             {errore && <p className={stili.errore} role="alert">Non riesco a caricare i dati: controlla la connessione e riprova.</p>}
             {!caricamento && vista === 'panoramica' && (
               <Riepilogo numeri={numeri} periodo={periodo === 0 ? delPeriodo.length : periodo} />
@@ -71,6 +73,7 @@ export default function PaginaPaziente() {
             {!caricamento && vista === 'abilita' && <AbilitaPaziente voci={delPeriodo} />}
             {!caricamento && vista === 'giornata' && <GiornatePaziente voci={delPeriodo} />}
             {vista === 'fogli' && <FogliPaziente pazienteId={id} />}
+            {vista === 'sessioni' && <NoteSessione username={paziente.username} />}
             {vista === 'note' && <NotePaziente username={paziente.username} />}
           </>
         )}

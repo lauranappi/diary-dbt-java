@@ -9,6 +9,7 @@ import { aggiungiGiorni, chiave } from '../diario/date.js';
 import PaginaHome from './PaginaHome.jsx';
 
 vi.mock('../../api/diario.js', () => ({ diarioApi: { salva: vi.fn(), intervallo: vi.fn() } }));
+vi.mock('../../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn().mockResolvedValue([]), voci: vi.fn().mockResolvedValue([]) } }));
 
 const oggi = new Date();
 const voce = (giorno, scale) => ({ data: chiave(giorno), scale, toggle: {}, testi: {} });
@@ -59,10 +60,11 @@ describe('PaginaHome', () => {
     expect(localStorage.getItem(`marea:suggerimento:${chiave(oggi)}`)).toBe('1');
   });
 
-  it('la terapeuta vede la sua home', () => {
+  it('la terapeuta vede la sua home', async () => {
     diarioApi.intervallo.mockResolvedValue([]);
     apri('TERAPEUTA');
-    expect(screen.getByText('Le tue pazienti ti aspettano.')).toBeInTheDocument();
+    expect(await screen.findByText('0 pazienti · 0 hanno compilato oggi')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tutte le pazienti' })).toBeInTheDocument();
     expect(diarioApi.intervallo).not.toHaveBeenCalled();
   });
 });
