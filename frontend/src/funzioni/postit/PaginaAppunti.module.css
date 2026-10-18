@@ -1,0 +1,3 @@
+.contenuto { padding: 0 var(--margine-laterale); }
+.indietro { display: inline-block; margin: 4px 0 14px; font-size: var(--corpo-meta); font-weight: var(--peso-grassetto); color: var(--petrolio); text-decoration: none; }
+.vuoto { text-align: center; padding: 28px 18px; line-height: 1.6; color: var(--tenue); background: var(--superficie); border: 1.5px dashed var(--linea); border-radius: var(--raggio-scheda); }

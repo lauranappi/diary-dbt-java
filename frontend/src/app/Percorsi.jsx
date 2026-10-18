@@ -6,6 +6,7 @@ import PaginaAttivita from '../funzioni/attivita/PaginaAttivita.jsx';
 import PaginaDiario from '../funzioni/diario/PaginaDiario.jsx';
 import PaginaImpostazioni from '../funzioni/impostazioni/PaginaImpostazioni.jsx';
 import PaginaPianoCrisi from '../funzioni/fogli/PaginaPianoCrisi.jsx';
+import PaginaAppunti from '../funzioni/postit/PaginaAppunti.jsx';
 import PaginaFoglio from '../funzioni/fogli/PaginaFoglio.jsx';
 import PaginaFogli from '../funzioni/fogli/PaginaFogli.jsx';
 import PaginaGuida from '../funzioni/guida/PaginaGuida.jsx';
@@ -32,6 +33,7 @@ export default function Percorsi() {
         <Route path="storico" element={<RottaProtetta ruolo="PAZIENTE"><PaginaStorico /></RottaProtetta>} />
         <Route path="guida" element={<PaginaGuida />} />
         <Route path="guida/:modulo" element={<PaginaModulo />} />
+        <Route path="appunti" element={<RottaProtetta ruolo="PAZIENTE"><PaginaAppunti /></RottaProtetta>} />
         <Route path="fogli" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFogli /></RottaProtetta>} />
         <Route path="fogli/piano-crisi" element={<RottaProtetta ruolo="PAZIENTE"><PaginaPianoCrisi /></RottaProtetta>} />
         <Route path="fogli/:id" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFoglio /></RottaProtetta>} />

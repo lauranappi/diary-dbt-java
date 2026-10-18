@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { leggiSessione } from '../../api/sessione.js';
 import { trovaModulo } from '../../contenuti/guida/moduli.js';
+import Postit from '../postit/Postit.jsx';
 import RigaScheda from './RigaScheda.jsx';
 import { useGuidaPreferiti } from './useGuidaPreferiti.js';
 import stili from './PaginaModulo.module.css';
@@ -48,6 +50,7 @@ export default function PaginaModulo() {
           </div>
         );
       })}
+      {leggiSessione()?.utente?.ruolo === 'PAZIENTE' && <Postit chiave={`mod:${modulo.id}`} />}
       <Link to="/guida" className={stili.torna}>Torna alla Guida</Link>
     </div>
   );
