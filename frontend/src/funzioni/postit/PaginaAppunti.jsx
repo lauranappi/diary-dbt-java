@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Hero from '../../componenti/Hero.jsx';
 import { trovaFoglio } from '../../contenuti/fogli/index.js';
 import { trovaModulo } from '../../contenuti/guida/moduli.js';
+import { trovaEmozione } from '../../contenuti/emozioni.js';
 import { dataLunga } from '../gruppo/incontri.js';
 import Postit from './Postit.jsx';
 import { CHIAVE_INCONTRI, usePostit } from './usePostit.js';
@@ -12,6 +13,7 @@ function titoloDi(chiave, incontri = []) {
   const [tipo, id] = [chiave.slice(0, chiave.indexOf(':')), chiave.slice(chiave.indexOf(':') + 1)];
   if (tipo === 'mod') return trovaModulo(id)?.titolo ?? 'Modulo';
   if (tipo === 'fg') return trovaFoglio(id)?.titolo ?? 'Foglio di lavoro';
+  if (tipo === 'emo') return trovaEmozione(id)?.nome ? `Emozione: ${trovaEmozione(id).nome}` : 'Emozione';
   if (tipo === 'gn') {
     const x = incontri.find((i) => i.id === id);
     return x ? `Incontro del ${dataLunga(x.g)}` : 'Incontro del gruppo';
