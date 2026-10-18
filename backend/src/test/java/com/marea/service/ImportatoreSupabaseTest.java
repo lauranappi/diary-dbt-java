@@ -102,7 +102,7 @@ class ImportatoreSupabaseTest {
         assertEquals(1, r.vociDiario());
         assertEquals(1, r.collegamenti());
         var aggiornata = utenti.findByUsername("pz3").orElseThrow();
-        assertTrue(encoder.matches("nuovapassword1", aggiornata.getPasswordHash())); // la password non cambia
+        assertTrue(encoder.matches("passwordvecchia1", aggiornata.getPasswordHash())); // torna la password di Marea vecchia
         assertEquals(dott.getId(), aggiornata.getTerapeuta().getId());
         assertEquals(1, diario.storico(pz.getId(), LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 1)).size());
         assertTrue(documenti.leggi(pz.getId(), "post-it").isPresent());

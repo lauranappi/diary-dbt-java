@@ -63,7 +63,8 @@ public class ImportatoreSupabase {
                 continue;
             }
             // Un account gia' presente ma ancora vuoto (registrato per prova, senza diario ne' documenti)
-            // si completa con i dati vecchi; la sua password non cambia. Uno con dati viene lasciato com'e'.
+            // si completa con i dati vecchi e riprende la password di Marea vecchia (cosi' si entra con quella di
+            // sempre). Uno con dati viene lasciato com'e'.
             var esistente = utenti.findByUsername(username);
             if (esistente.isPresent()) {
                 String id = esistente.get().getId();
@@ -74,6 +75,8 @@ public class ImportatoreSupabase {
                     saltati++;
                     continue;
                 }
+                esistente.get().setPasswordHash(account.path("hash").asText());
+                utenti.save(esistente.get());
                 JsonNode datiVecchi = riga.path("data");
                 voci += importaVoci(id, datiVecchi.path("entries"));
                 documenti += importaDocumenti(id, datiVecchi, guidaPerId.get(riga.path("user_id").asText()));
