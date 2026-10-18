@@ -5,7 +5,7 @@ import { salvaSessione } from '../api/sessione.js';
 import { ProviderAutenticazione } from '../funzioni/autenticazione/ProviderAutenticazione.jsx';
 import Percorsi from './Percorsi.jsx';
 
-vi.mock('../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn().mockResolvedValue([]), voci: vi.fn().mockResolvedValue([]) } }));
+vi.mock('../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn().mockResolvedValue([]), voci: vi.fn().mockResolvedValue([]), documenti: vi.fn().mockResolvedValue({}) } }));
 
 function apri(percorso) {
   render(

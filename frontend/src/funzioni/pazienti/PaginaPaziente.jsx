@@ -9,6 +9,7 @@ import Riepilogo from '../storico/Riepilogo.jsx';
 import Trend from '../storico/Trend.jsx';
 import { useVoci } from '../storico/useVoci.js';
 import AbilitaPaziente from './AbilitaPaziente.jsx';
+import FogliPaziente from './FogliPaziente.jsx';
 import GiornatePaziente from './GiornatePaziente.jsx';
 import NotePaziente from './NotePaziente.jsx';
 import { giorniEtichetta, nomePaziente } from './nomePaziente.js';
@@ -26,6 +27,7 @@ const VISTE = [
   { valore: 'trend', etichetta: 'Trend' },
   { valore: 'abilita', etichetta: 'Abilità' },
   { valore: 'giornata', etichetta: 'Giornata' },
+  { valore: 'fogli', etichetta: 'Fogli' },
   { valore: 'note', etichetta: 'Note' },
 ];
 
@@ -59,7 +61,7 @@ export default function PaginaPaziente() {
             <h2 className={stili.nome}>{titolo}</h2>
             <p className={stili.meta}>{sotto}</p>
             <Pillole nome="Vista" opzioni={VISTE} valore={vista} onScegli={setVista} />
-            {vista !== 'note' && <Pillole nome="Periodo" opzioni={PERIODI} valore={periodo} onScegli={setPeriodo} />}
+            {vista !== 'note' && vista !== 'fogli' && <Pillole nome="Periodo" opzioni={PERIODI} valore={periodo} onScegli={setPeriodo} />}
             {errore && <p className={stili.errore} role="alert">Non riesco a caricare i dati: controlla la connessione e riprova.</p>}
             {!caricamento && vista === 'panoramica' && (
               <Riepilogo numeri={numeri} periodo={periodo === 0 ? delPeriodo.length : periodo} />
@@ -68,6 +70,7 @@ export default function PaginaPaziente() {
             {!caricamento && vista === 'trend' && <Trend voci={perGrafici} />}
             {!caricamento && vista === 'abilita' && <AbilitaPaziente voci={delPeriodo} />}
             {!caricamento && vista === 'giornata' && <GiornatePaziente voci={delPeriodo} />}
+            {vista === 'fogli' && <FogliPaziente pazienteId={id} />}
             {vista === 'note' && <NotePaziente username={paziente.username} />}
           </>
         )}

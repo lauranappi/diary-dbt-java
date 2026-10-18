@@ -10,7 +10,7 @@ import { chiave } from '../diario/date.js';
 import PaginaPaziente from './PaginaPaziente.jsx';
 import PaginaPazienti from './PaginaPazienti.jsx';
 
-vi.mock('../../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn(), voci: vi.fn() } }));
+vi.mock('../../api/terapeuta.js', () => ({ terapeutaApi: { pazienti: vi.fn(), voci: vi.fn(), documenti: vi.fn() } }));
 vi.mock('../../api/documenti.js', async (originale) => ({
   ...(await originale()),
   documentiApi: { leggi: vi.fn().mockResolvedValue(null), salva: vi.fn().mockResolvedValue({ versione: 1 }) },
@@ -115,6 +115,29 @@ describe('scheda paziente', () => {
     expect(screen.getByText('Passeggiata')).toBeInTheDocument();
     expect(screen.getByText('Mattina')).toBeInTheDocument();
     expect(screen.queryByText('Sera')).not.toBeInTheDocument();
+  });
+
+  it('la vista Fogli mostra quelli compilati e li apre in sola lettura', async () => {
+    terapeutaApi.documenti.mockResolvedValue({
+      fogli: { contenuto: { generici: { 't-stop': [{ id: 'a', ts: Date.UTC(2026, 9, 1), v: { ev: 'Una discussione', prima: 70 } }] } } },
+    });
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Fogli' }));
+    expect(terapeutaApi.documenti).toHaveBeenCalledWith('p1');
+    expect(await screen.findByText('Tolleranza della sofferenza')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Una discussione'));
+    const pannello = screen.getByRole('dialog');
+    expect(within(pannello).getByLabelText('Livello di sofferenza prima (0-100)')).toBeDisabled();
+    expect(within(pannello).queryByRole('button', { name: 'Salva' })).not.toBeInTheDocument();
+  });
+
+  it('senza fogli compilati lo dice', async () => {
+    terapeutaApi.documenti.mockResolvedValue({});
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Fogli' }));
+    expect(await screen.findByText('Nessun foglio di lavoro compilato.')).toBeInTheDocument();
   });
 
   it('una paziente non collegata non si apre', async () => {
