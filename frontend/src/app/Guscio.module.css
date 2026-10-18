@@ -16,11 +16,12 @@
     max-width: none;
     margin: 0;
     display: grid;
-    grid-template-columns: minmax(210px, 248px) minmax(0, 1fr);
+    grid-template-columns: 248px minmax(0, 1fr);
   }
-  .laterale { display: block; }
+  /* Fissa: resta ferma mentre la pagina scorre */
+  .laterale { display: block; position: fixed; top: 0; left: 0; bottom: 0; width: 248px; z-index: 50; }
   .inferiore { display: none; }
-  .contenuto { padding-bottom: 48px; min-width: 0; }
+  .contenuto { grid-column: 2; padding-bottom: 48px; min-width: 0; }
   /* Le pagine non si allargano oltre una misura leggibile */
   .contenuto > :not(header) { max-width: 1180px; }
 }
