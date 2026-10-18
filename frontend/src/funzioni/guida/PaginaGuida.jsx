@@ -87,6 +87,16 @@ export default function PaginaGuida() {
               </Link>
             )}
             {ruolo === 'PAZIENTE' && (
+              <Link to="/gruppo" className={stili.riga}>
+                <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/strumenti-generali.svg`} alt="" />
+                <span className={stili.testoRiga}>
+                  <span className={stili.titoloRiga}>Diario del gruppo</span>
+                  <span className={stili.sottoRiga}>Le pagine viste negli incontri, da ripassare</span>
+                </span>
+                <Freccia />
+              </Link>
+            )}
+            {ruolo === 'PAZIENTE' && (
               <Link to="/appunti" className={stili.riga}>
                 <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/strumenti-generali.svg`} alt="" />
                 <span className={stili.testoRiga}>

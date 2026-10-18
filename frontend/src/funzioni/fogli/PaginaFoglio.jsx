@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Hero from '../../componenti/Hero.jsx';
 import Pulsante from '../../componenti/Pulsante.jsx';
 import { trovaFoglio } from '../../contenuti/fogli/index.js';
@@ -18,6 +18,10 @@ export default function PaginaFoglio() {
   const { compilati, salva, elimina, stato } = useFogli();
   // null = elenco; 'nuovo' = foglio vuoto; altrimenti il foglio compilato aperto
   const [aperto, setAperto] = useState(null);
+  // ?voce=<id>: si arriva da un collegamento (Diario del gruppo) e si apre quel foglio compilato
+  const [params] = useSearchParams();
+  const richiesta = params.get('voce');
+  const [aperta, setAperta] = useState(false);
 
   if (!foglio) {
     return (
@@ -28,6 +32,8 @@ export default function PaginaFoglio() {
     );
   }
   const lista = compilati(foglio.id);
+  const daAprire = richiesta && !aperta ? lista.find((e) => e.id === richiesta) : null;
+  if (daAprire) { setAperta(true); setAperto(daAprire); }
 
   return (
     <>
