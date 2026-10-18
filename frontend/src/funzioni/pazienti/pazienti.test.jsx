@@ -152,6 +152,34 @@ describe('scheda paziente', () => {
     expect(await screen.findByText('Nessun foglio di lavoro compilato.')).toBeInTheDocument();
   });
 
+  it('le note di sessione si aggiungono per paziente, si vedono dalla più recente e si eliminano', async () => {
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Sessioni' }));
+    expect(screen.getByText('Nessuna nota ancora.')).toBeInTheDocument();
+    await userEvent.type(screen.getByLabelText('Temi'), 'Lavoro e sonno');
+    await userEvent.type(screen.getByLabelText('Abilità'), 'PLEASE');
+    await userEvent.type(screen.getByLabelText('Note'), 'Più serena');
+    await userEvent.click(screen.getByRole('button', { name: 'Aggiungi nota' }));
+    expect(screen.getByText('Lavoro e sonno')).toBeInTheDocument();
+    expect(screen.getByLabelText('Temi')).toHaveValue('');
+    await waitFor(() => expect(documentiApi.salva).toHaveBeenCalled(), { timeout: 3000 });
+    const [chiave, contenuto] = documentiApi.salva.mock.calls.at(-1);
+    expect(chiave).toBe('sessioni');
+    expect(contenuto.pazienti.anna[0]).toMatchObject({ temi: 'Lavoro e sonno', abilita: 'PLEASE', note: 'Più serena' });
+    await userEvent.click(screen.getByRole('button', { name: 'Elimina' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Eliminare davvero?' }));
+    expect(screen.getByText('Nessuna nota ancora.')).toBeInTheDocument();
+  });
+
+  it('una nota di sessione vuota non si aggiunge', async () => {
+    apri('/pazienti/p1');
+    await screen.findByText('Az. suicidarie');
+    await userEvent.click(screen.getByRole('button', { name: 'Sessioni' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Aggiungi nota' }));
+    expect(screen.getByText('Nessuna nota ancora.')).toBeInTheDocument();
+  });
+
   it('una paziente non collegata non si apre', async () => {
     terapeutaApi.pazienti.mockResolvedValue([]);
     apri('/pazienti/altra');

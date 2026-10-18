@@ -1,0 +1,13 @@
+.etichetta { font-size: 12px; font-weight: var(--peso-semi); letter-spacing: 0.1em; text-transform: uppercase; color: var(--segnale); }
+.username { font-size: 22px; font-weight: var(--peso-grassetto); letter-spacing: -0.02em; overflow-wrap: anywhere; }
+.nota { font-size: var(--corpo-meta); color: var(--tenue); line-height: 1.45; margin: 0; }
+.titoloSezione { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; }
+.titoloSezione .etichetta { flex: 1; }
+.conta { font-size: 12px; font-weight: var(--peso-medio); color: var(--tenue); opacity: 0.8; }
+.errore { margin: 0; font-size: var(--corpo-piccolo); font-weight: var(--peso-semi); color: var(--errore); }
+.segnalazione { display: flex; align-items: center; gap: 12px; background: var(--superficie); border-radius: var(--raggio-scheda); padding: 16px 18px; color: var(--inchiostro); text-decoration: none; }
+.segnalazione:active { background: var(--senape-chiara); }
+.punto { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--errore); }
+.testo { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.nome { font-size: var(--corpo-riga); font-weight: var(--peso-grassetto); }
+.cosa { font-size: var(--corpo-meta); color: var(--tenue); }
