@@ -66,6 +66,7 @@ export default function PaginaGuida() {
                 </div>
               </div>
             )}
+            <div className={stili.elenco}>
             {MODULI_GUIDA.map((modulo) => (
               <Link key={modulo.id} to={`/guida/${modulo.id}`} className={stili.riga}>
                 <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/${modulo.icona}.svg`} alt="" />
@@ -114,6 +115,7 @@ export default function PaginaGuida() {
                 <Freccia />
               </Link>
             )}
+            </div>
           </>
         )}
       </div>

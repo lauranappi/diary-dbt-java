@@ -7,3 +7,20 @@
 .contenuto {
   padding-bottom: calc(var(--altezza-barra) + env(safe-area-inset-bottom, 0px) + 16px);
 }
+
+.laterale { display: none; }
+
+@media (min-width: 1024px) {
+  .guscio {
+    --margine-laterale: 40px;
+    max-width: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(210px, 248px) minmax(0, 1fr);
+  }
+  .laterale { display: block; }
+  .inferiore { display: none; }
+  .contenuto { padding-bottom: 48px; min-width: 0; }
+  /* Le pagine non si allargano oltre una misura leggibile */
+  .contenuto > :not(header) { max-width: 1180px; }
+}
