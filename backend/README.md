@@ -1,4 +1,4 @@
-# Backend — diary-dbt
+# Backend — Marea
 
 Spring Boot 3.4 / Java 21 / PostgreSQL / JWT.
 
