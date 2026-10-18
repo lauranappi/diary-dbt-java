@@ -42,3 +42,9 @@ header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
   font-weight: var(--peso-semi);
   cursor: pointer;
 }
+
+/* Su schermi larghi le schede si dispongono su due colonne */
+@media (min-width: 1024px) {
+  .pila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spazio-xl); padding-top: 0; align-items: stretch; }
+  .pila > .riga { grid-column: 1 / -1; }
+}
