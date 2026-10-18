@@ -83,6 +83,28 @@ class ImportatoreSupabaseTest {
         importatore.importa(mapper.readTree(esportazione("2")));
         var seconda = importatore.importa(mapper.readTree(esportazione("2")));
         assertEquals(0, seconda.utentiCreati());
-        assertEquals(3, seconda.utentiSaltati());
+        // pz ha gia' dei dati e fantasma non ha account; dott e' vuoto e viene solo "completato"
+        assertEquals(2, seconda.utentiSaltati());
+        assertEquals(0, seconda.vociDiario());
+    }
+
+    @Test
+    void unAccountGiaPresenteMaVuotoSiCompletaConIDatiVecchi() throws Exception {
+        // L'account esiste gia' (registrato per prova) ma non ha diario ne' documenti
+        var dott = utenti.save(Utente.builder().username("dott3").passwordHash(encoder.encode("nuova"))
+                .nome("Anna").ruolo(Utente.Ruolo.TERAPEUTA).creatoIl(java.time.Instant.now()).build());
+        var pz = utenti.save(Utente.builder().username("pz3").passwordHash(encoder.encode("nuovapassword1"))
+                .nome("Maria").ruolo(Utente.Ruolo.PAZIENTE).codicePaziente("ZZZ999").creatoIl(java.time.Instant.now()).build());
+
+        var r = importatore.importa(mapper.readTree(esportazione("3")));
+
+        assertEquals(0, r.utentiCreati());
+        assertEquals(1, r.vociDiario());
+        assertEquals(1, r.collegamenti());
+        var aggiornata = utenti.findByUsername("pz3").orElseThrow();
+        assertTrue(encoder.matches("nuovapassword1", aggiornata.getPasswordHash())); // la password non cambia
+        assertEquals(dott.getId(), aggiornata.getTerapeuta().getId());
+        assertEquals(1, diario.storico(pz.getId(), LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 1)).size());
+        assertTrue(documenti.leggi(pz.getId(), "post-it").isPresent());
     }
 }

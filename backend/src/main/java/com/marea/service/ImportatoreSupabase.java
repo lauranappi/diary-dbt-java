@@ -50,17 +50,39 @@ public class ImportatoreSupabase {
         Map<String, JsonNode> guidaPerId = new HashMap<>();
         esportazione.path("guida").forEach(g -> guidaPerId.put(g.path("user_id").asText(), g.path("data")));
 
-        int creati = 0, saltati = 0, voci = 0, documenti = 0, collegamenti = 0;
+        int creati = 0, completati = 0, saltati = 0, voci = 0, documenti = 0, collegamenti = 0;
         Map<String, String> terapeutaDi = new LinkedHashMap<>(); // username paziente -> codice terapeuta
         Set<String> nuovi = new HashSet<>();
 
         for (JsonNode riga : esportazione.path("diario")) {
             String username = riga.path("code").asText("").trim().toLowerCase();
             JsonNode account = accountPerId.get(riga.path("user_id").asText());
-            if (username.isEmpty() || account == null || account.path("hash").asText("").isEmpty()
-                    || utenti.existsByUsername(username)) {
-                log.warn("Utente '{}' saltato (gia' presente o senza account Supabase)", username);
+            if (username.isEmpty() || account == null || account.path("hash").asText("").isEmpty()) {
+                log.warn("Utente '{}' saltato (senza account Supabase)", username);
                 saltati++;
+                continue;
+            }
+            // Un account gia' presente ma ancora vuoto (registrato per prova, senza diario ne' documenti)
+            // si completa con i dati vecchi; la sua password non cambia. Uno con dati viene lasciato com'e'.
+            var esistente = utenti.findByUsername(username);
+            if (esistente.isPresent()) {
+                String id = esistente.get().getId();
+                boolean vuoto = diarioService.storico(id, LocalDate.of(2000, 1, 1), LocalDate.of(2100, 1, 1)).isEmpty()
+                        && documentoService.tutti(id).isEmpty();
+                if (!vuoto) {
+                    log.warn("Utente '{}' saltato (gia' presente con dei dati)", username);
+                    saltati++;
+                    continue;
+                }
+                JsonNode datiVecchi = riga.path("data");
+                voci += importaVoci(id, datiVecchi.path("entries"));
+                documenti += importaDocumenti(id, datiVecchi, guidaPerId.get(riga.path("user_id").asText()));
+                String codiceVecchio = testo(datiVecchi.path("profile"), "terapeutaCode");
+                if (esistente.get().getRuolo() == Utente.Ruolo.PAZIENTE && esistente.get().getTerapeuta() == null && codiceVecchio != null) {
+                    terapeutaDi.put(username, codiceVecchio.trim().toLowerCase());
+                }
+                completati++;
+                log.info("Utente '{}' gia' presente e vuoto: completato con i dati vecchi", username);
                 continue;
             }
 
@@ -99,6 +121,7 @@ public class ImportatoreSupabase {
             var terapeuta = utenti.findByUsername(e.getValue())
                     .filter(u -> u.getRuolo() == Utente.Ruolo.TERAPEUTA);
             if (terapeuta.isPresent()) {
+                if (paziente.getTerapeuta() != null) continue;
                 paziente.setTerapeuta(terapeuta.get());
                 paziente.setCollegataIl(Instant.now());
                 utenti.save(paziente);
@@ -108,6 +131,7 @@ public class ImportatoreSupabase {
             }
         }
 
+        log.info("Account gia' presenti e vuoti, completati: {}", completati);
         var riepilogo = new RiepilogoImportazione(creati, saltati, voci, documenti, collegamenti);
         log.info("Importazione terminata: {}", riepilogo);
         return riepilogo;
