@@ -6,6 +6,9 @@ import PaginaAttivita from '../funzioni/attivita/PaginaAttivita.jsx';
 import PaginaDiario from '../funzioni/diario/PaginaDiario.jsx';
 import PaginaImpostazioni from '../funzioni/impostazioni/PaginaImpostazioni.jsx';
 import PaginaPianoCrisi from '../funzioni/fogli/PaginaPianoCrisi.jsx';
+import PaginaFormIncontro from '../funzioni/gruppo/PaginaFormIncontro.jsx';
+import PaginaGruppo from '../funzioni/gruppo/PaginaGruppo.jsx';
+import PaginaIncontro from '../funzioni/gruppo/PaginaIncontro.jsx';
 import PaginaAppunti from '../funzioni/postit/PaginaAppunti.jsx';
 import PaginaFoglio from '../funzioni/fogli/PaginaFoglio.jsx';
 import PaginaFogli from '../funzioni/fogli/PaginaFogli.jsx';
@@ -33,6 +36,10 @@ export default function Percorsi() {
         <Route path="storico" element={<RottaProtetta ruolo="PAZIENTE"><PaginaStorico /></RottaProtetta>} />
         <Route path="guida" element={<PaginaGuida />} />
         <Route path="guida/:modulo" element={<PaginaModulo />} />
+        <Route path="gruppo" element={<RottaProtetta ruolo="PAZIENTE"><PaginaGruppo /></RottaProtetta>} />
+        <Route path="gruppo/nuovo" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFormIncontro /></RottaProtetta>} />
+        <Route path="gruppo/:id" element={<RottaProtetta ruolo="PAZIENTE"><PaginaIncontro /></RottaProtetta>} />
+        <Route path="gruppo/:id/modifica" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFormIncontro /></RottaProtetta>} />
         <Route path="appunti" element={<RottaProtetta ruolo="PAZIENTE"><PaginaAppunti /></RottaProtetta>} />
         <Route path="fogli" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFogli /></RottaProtetta>} />
         <Route path="fogli/piano-crisi" element={<RottaProtetta ruolo="PAZIENTE"><PaginaPianoCrisi /></RottaProtetta>} />
