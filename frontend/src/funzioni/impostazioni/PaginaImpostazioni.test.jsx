@@ -8,7 +8,7 @@ import PaginaImpostazioni from './PaginaImpostazioni.jsx';
 import * as push from './push.js';
 
 vi.mock('../../api/profilo.js', () => ({
-  profiloApi: { modifica: vi.fn(), collegaTerapeuta: vi.fn(), scollegaTerapeuta: vi.fn() },
+  profiloApi: { leggi: vi.fn(), modifica: vi.fn(), collegaTerapeuta: vi.fn(), scollegaTerapeuta: vi.fn() },
 }));
 vi.mock('./push.js', () => ({
   pushSupportato: vi.fn(() => true),
@@ -35,12 +35,20 @@ describe('PaginaImpostazioni', () => {
     localStorage.clear();
     vi.stubGlobal('Notification', { permission: 'granted' });
     push.iscrizioneAttuale.mockResolvedValue(null);
+    profiloApi.leggi.mockResolvedValue({});
   });
 
   it('mostra profilo e codice della paziente', () => {
     apri();
     expect(screen.getByLabelText('Nome')).toHaveValue('Laura');
     expect(screen.getByLabelText('Il tuo codice')).toHaveValue('K7M2QX');
+  });
+
+  it('mostra il nome della terapeuta collegata, anche se la sessione non lo sapeva', async () => {
+    profiloApi.leggi.mockResolvedValue({ codiceTerapeuta: 'e.roder', nomeTerapeuta: 'Emanuela Roder' });
+    apri();
+    expect(await screen.findByText('Emanuela Roder')).toBeInTheDocument();
+    expect(screen.getByLabelText('Username della tua terapeuta')).toHaveValue('e.roder');
   });
 
   it('uscendo dal campo salva nome e cognome e aggiorna la sessione', async () => {

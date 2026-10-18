@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -59,5 +60,36 @@ class ProfiloControllerTest {
         mockMvc.perform(put("/api/profilo").header("Authorization", "Bearer " + a.token())
                 .contentType("application/json").content("{\"nome\":\"  \",\"cognome\":\"\"}"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void ilProfiloMostraLaTerapeutaCollegata() throws Exception {
+        AuthResponse terapeuta = registraRuolo("TERAPEUTA");
+        mockMvc.perform(put("/api/profilo").header("Authorization", "Bearer " + terapeuta.token())
+                .contentType("application/json").content("{\"nome\":\"Emanuela\",\"cognome\":\"Roder\"}"));
+        AuthResponse paziente = registra();
+        mockMvc.perform(put("/api/paziente/terapeuta").header("Authorization", "Bearer " + paziente.token())
+                .contentType("application/json").content("{\"codiceTerapeuta\":\"" + terapeuta.username() + "\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/profilo").header("Authorization", "Bearer " + paziente.token()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.codiceTerapeuta").value(terapeuta.username()))
+                .andExpect(jsonPath("$.nomeTerapeuta").value("Emanuela Roder"));
+    }
+
+    @Test
+    void senzaTerapeutaIlProfiloNonHaIlCampo() throws Exception {
+        AuthResponse paziente = registra();
+        mockMvc.perform(get("/api/profilo").header("Authorization", "Bearer " + paziente.token()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nomeTerapeuta").doesNotExist());
+    }
+
+    private AuthResponse registraRuolo(String ruolo) throws Exception {
+        var req = new RegistrazioneRequest("t" + UUID.randomUUID().toString().substring(0, 8), "passwordsicura123", ruolo);
+        String json = mockMvc.perform(post("/api/auth/registrati").contentType("application/json")
+                .content(objectMapper.writeValueAsString(req))).andReturn().getResponse().getContentAsString();
+        return objectMapper.readValue(json, AuthResponse.class);
     }
 }

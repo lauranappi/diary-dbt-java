@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class ProfiloService {
@@ -22,5 +25,22 @@ public class ProfiloService {
         utente.setNome(req.nome().trim());
         utente.setCognome(req.cognome() == null ? "" : req.cognome().trim());
         return utente;
+    }
+
+    // Nome, cognome e terapeuta collegata (username e nome per esteso, se c'e')
+    @Transactional(readOnly = true)
+    public Map<String, String> leggi(String utenteId) {
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new IllegalArgumentException("Utente non trovato"));
+        Map<String, String> out = new LinkedHashMap<>();
+        out.put("nome", utente.getNome() == null ? "" : utente.getNome());
+        out.put("cognome", utente.getCognome() == null ? "" : utente.getCognome());
+        Utente t = utente.getTerapeuta();
+        if (t != null) {
+            out.put("codiceTerapeuta", t.getUsername());
+            out.put("nomeTerapeuta", ((t.getNome() == null ? "" : t.getNome()) + " "
+                    + (t.getCognome() == null ? "" : t.getCognome())).trim());
+        }
+        return out;
     }
 }

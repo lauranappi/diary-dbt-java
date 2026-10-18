@@ -90,7 +90,7 @@
   .hero, .soloDesktop, .semplice, .inAlto { background: var(--testata); overflow: hidden; margin: 0; padding: 42px 44px 72px; }
   .decorazione { right: -75px; top: auto; bottom: 0; width: 300px; opacity: 0.35; }
   .soloDesktop .decorazione, .soloDesktop .onda { display: block; }
-  .onda { height: 44px; }
+  .onda { height: 72px; }
   .riga { align-items: flex-end; }
   /* Testo a sinistra, eventuale pulsante a destra, in basso */
   .testo { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--spazio-xl); align-items: start; gap: 0 var(--spazio-xl); }

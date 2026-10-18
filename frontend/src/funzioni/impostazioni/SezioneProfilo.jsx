@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { profiloApi } from '../../api/profilo.js';
 import { useAutenticazione } from '../autenticazione/useAutenticazione.js';
 import Riga from './Riga.jsx';
@@ -11,7 +11,27 @@ export default function SezioneProfilo() {
   const [nome, setNome] = useState(utente.nome || '');
   const [cognome, setCognome] = useState(utente.cognome || '');
   const [terapeuta, setTerapeuta] = useState(utente.codiceTerapeuta || '');
+  const [nomeTerapeuta, setNomeTerapeuta] = useState('');
   const [errore, setErrore] = useState('');
+
+  // Il nome per esteso della terapeuta lo sa solo il server; legge anche il collegamento attuale
+  useEffect(() => {
+    if (utente.ruolo !== 'PAZIENTE') return undefined;
+    let annullato = false;
+    profiloApi.leggi()
+      .then((p) => {
+        if (annullato) return;
+        setNomeTerapeuta(p.nomeTerapeuta || '');
+        if ((p.codiceTerapeuta || '') !== (utente.codiceTerapeuta || '')) {
+          setTerapeuta(p.codiceTerapeuta || '');
+          aggiornaUtente({ codiceTerapeuta: p.codiceTerapeuta || null });
+        }
+      })
+      .catch(() => {});
+    return () => { annullato = true; };
+    // solo all'apertura della pagina
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function salvaNome() {
     if (nome.trim() === (utente.nome || '') && cognome.trim() === (utente.cognome || '')) return;
@@ -33,6 +53,8 @@ export default function SezioneProfilo() {
       if (codice) await profiloApi.collegaTerapeuta(codice);
       else await profiloApi.scollegaTerapeuta();
       aggiornaUtente({ codiceTerapeuta: codice || null });
+      const p = await profiloApi.leggi().catch(() => ({}));
+      setNomeTerapeuta(codice ? p.nomeTerapeuta || '' : '');
     } catch (e) {
       setErrore(e.message);
       setTerapeuta(utente.codiceTerapeuta || '');
@@ -59,6 +81,11 @@ export default function SezioneProfilo() {
             <input id="impostazioni-terapeuta" className={`${stili.campo} ${stili.codice}`} type="text" placeholder="es. dott.bianchi"
               autoCapitalize="none" value={terapeuta} onChange={(e) => setTerapeuta(e.target.value)} onBlur={salvaTerapeuta} />
           </Riga>
+          {nomeTerapeuta && terapeuta.trim() === (utente.codiceTerapeuta || '') && (
+            <Riga nome="La tua terapeuta">
+              <span className={stili.valore}>{nomeTerapeuta}</span>
+            </Riga>
+          )}
         </>
       )}
       {errore && <p className={stili.errore} role="alert">{errore}</p>}

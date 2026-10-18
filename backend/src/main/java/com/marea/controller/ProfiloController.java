@@ -7,6 +7,7 @@ import com.marea.service.ProfiloService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,11 @@ import java.util.Map;
 public class ProfiloController {
 
     private final ProfiloService profiloService;
+
+    @GetMapping
+    public Map<String, String> leggi(Authentication auth) {
+        return profiloService.leggi((String) auth.getPrincipal());
+    }
 
     @PutMapping
     public Map<String, String> modifica(@Valid @RequestBody ModificaProfiloRequest req, Authentication auth) {
