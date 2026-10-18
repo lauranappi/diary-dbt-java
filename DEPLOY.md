@@ -35,7 +35,7 @@ Chiavi VAPID (una volta sola): `npx web-push generate-vapid-keys`; `VAPID_SUBJEC
    variabile `API_URL` con l'indirizzo pubblico del backend (senza `/` finale).
 3. Ad ogni modifica a `frontend/` sul ramo `main` il workflow "Pubblica frontend"
    compila e pubblica da solo (si può anche lanciare a mano da Actions).
-4. L'app è servita da `/diary-dbt-java/` (vedi `base` in `vite.config.js`). Se
+4. L'app è servita da `/marea/` (vedi `base` in `vite.config.js`). Se
    la sposti su un altro percorso, cambia `base` e `start_url`.
 
 ## 4. Portare i dati da Marea (Supabase)
