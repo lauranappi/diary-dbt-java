@@ -1,7 +1,5 @@
 .laterale {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 28px;
