@@ -10,9 +10,9 @@
 
 .laterale { display: none; }
 
-@media (min-width: 1024px) {
+@media (min-width: 701px) {
   .guscio {
-    --margine-laterale: 40px;
+    --margine-laterale: 32px;
     max-width: none;
     margin: 0;
     display: grid;

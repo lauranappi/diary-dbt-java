@@ -1,9 +1,11 @@
 /* La testata si adatta all'altezza dello schermo: si stringe su quelli bassi */
+@media (max-width: 700px) {
 header.hero {
-  padding-top: calc(env(safe-area-inset-top, 0px) + clamp(16px, 4dvh, 30px));
-  padding-bottom: clamp(28px, 5dvh, 48px);
+    padding-top: calc(env(safe-area-inset-top, 0px) + clamp(16px, 4dvh, 30px));
+    padding-bottom: clamp(28px, 5dvh, 48px);
+  }
+  header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
 }
-header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
 
 .azione { margin-top: var(--spazio-m); }
 
@@ -44,7 +46,7 @@ header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
 }
 
 /* Da schermo largo: il pulsante sta nella testata, la scheda abilita' e' bianca come in Marea */
-@media (min-width: 1024px) {
-  .azione { margin-top: 0; }
+@media (min-width: 701px) {
+  .azione { margin-top: 0; padding: 14px 24px; font-size: 14.5px; }
   .abilitaBianca.abilitaBianca { background: var(--superficie); }
 }

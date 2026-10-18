@@ -1,8 +1,8 @@
-.pagina { display: flex; flex-direction: column; gap: 24px; padding: 32px var(--margine-laterale) 0; }
+.pagina { display: flex; flex-direction: column; gap: 24px; padding: 24px var(--margine-laterale) 0; }
 
 .riga { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
 
-.scheda { background: var(--superficie); border-radius: var(--raggio-scheda); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.scheda { background: var(--superficie); border-radius: var(--raggio-scheda); padding: 28px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .oggi { flex: 2 1 420px; }
 .laterali { flex: 0 1 260px; max-width: 260px; display: flex; flex-direction: column; gap: 24px; }
 
