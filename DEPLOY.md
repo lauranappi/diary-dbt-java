@@ -10,8 +10,9 @@ JDBC, utente e password. Le tabelle le crea Flyway al primo avvio.
 
 ## 2. Backend
 
-Hosting con Java 21 o Docker (Render, Railway, Fly…). Comando di build:
-`mvn -q package -DskipTests`; avvio: `java -jar target/*.jar`.
+Il più semplice è Docker: `backend/Dockerfile` è già pronto (su Render: New → Web
+Service, root directory `backend`, runtime Docker). Senza Docker: build
+`mvn -q package -DskipTests`, avvio `java -jar target/*.jar`.
 
 Variabili d'ambiente:
 
@@ -29,11 +30,12 @@ Chiavi VAPID (una volta sola): `npx web-push generate-vapid-keys`; `VAPID_SUBJEC
 
 ## 3. Frontend
 
-1. Nel repository su GitHub: Settings → Pages → sorgente "GitHub Actions"
-   (oppure pubblica la cartella `frontend/dist` sul ramo `gh-pages`).
-2. Imposta `VITE_API_URL` all'indirizzo pubblico del backend (senza `/` finale)
-   prima di `npm run build` (in `frontend/`).
-3. L'app è servita da `/diary-dbt-java/` (vedi `base` in `vite.config.js`). Se
+1. Nel repository su GitHub: Settings → Pages → Source: "GitHub Actions".
+2. Settings → Secrets and variables → Actions → scheda Variables → nuova
+   variabile `API_URL` con l'indirizzo pubblico del backend (senza `/` finale).
+3. Ad ogni modifica a `frontend/` sul ramo `main` il workflow "Pubblica frontend"
+   compila e pubblica da solo (si può anche lanciare a mano da Actions).
+4. L'app è servita da `/diary-dbt-java/` (vedi `base` in `vite.config.js`). Se
    la sposti su un altro percorso, cambia `base` e `start_url`.
 
 ## 4. Portare i dati da Marea (Supabase)
