@@ -59,10 +59,9 @@ mvn test
   (con la pianificazione attività inclusa nel campo `planner`), catalogo
   abilità DBT, collegamento paziente-terapeuta
 
-## Struttura (pacchetti per funzionalità)
+## Struttura (a livelli)
 
-`auth`, `utente`, `diario`, `abilita`, `terapeuta`, `documenti`, `notifiche`, `migrazione`, `comune`.
-Ogni pacchetto ha il suo controller, service, repository, entità e DTO (vedi `ARCHITETTURA.md`).
+`controller`, `service`, `repository`, `model`, `dto`, `config`, `exception`, `util` (vedi `ARCHITETTURA.md`).
 
 ## Nuovi endpoint (Fase 1)
 
