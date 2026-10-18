@@ -76,6 +76,14 @@ export default function PaginaGuida() {
                 <Freccia />
               </Link>
             ))}
+            <Link to="/emozioni" className={stili.riga}>
+              <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/emo-tristezza.svg`} alt="" />
+              <span className={stili.testoRiga}>
+                <span className={stili.titoloRiga}>Le emozioni</span>
+                <span className={stili.sottoRiga}>Paura, rabbia, tristezza, colpa… e l’azione opposta</span>
+              </span>
+              <Freccia />
+            </Link>
             {ruolo === 'PAZIENTE' && (
               <Link to="/fogli" className={stili.riga}>
                 <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/strumenti-generali.svg`} alt="" />

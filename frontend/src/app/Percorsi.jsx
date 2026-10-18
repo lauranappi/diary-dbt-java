@@ -6,6 +6,8 @@ import PaginaAttivita from '../funzioni/attivita/PaginaAttivita.jsx';
 import PaginaDiario from '../funzioni/diario/PaginaDiario.jsx';
 import PaginaImpostazioni from '../funzioni/impostazioni/PaginaImpostazioni.jsx';
 import PaginaPianoCrisi from '../funzioni/fogli/PaginaPianoCrisi.jsx';
+import PaginaEmozione from '../funzioni/emozioni/PaginaEmozione.jsx';
+import PaginaEmozioni from '../funzioni/emozioni/PaginaEmozioni.jsx';
 import PaginaFormIncontro from '../funzioni/gruppo/PaginaFormIncontro.jsx';
 import PaginaGruppo from '../funzioni/gruppo/PaginaGruppo.jsx';
 import PaginaIncontro from '../funzioni/gruppo/PaginaIncontro.jsx';
@@ -36,6 +38,8 @@ export default function Percorsi() {
         <Route path="storico" element={<RottaProtetta ruolo="PAZIENTE"><PaginaStorico /></RottaProtetta>} />
         <Route path="guida" element={<PaginaGuida />} />
         <Route path="guida/:modulo" element={<PaginaModulo />} />
+        <Route path="emozioni" element={<PaginaEmozioni />} />
+        <Route path="emozioni/:id" element={<PaginaEmozione />} />
         <Route path="gruppo" element={<RottaProtetta ruolo="PAZIENTE"><PaginaGruppo /></RottaProtetta>} />
         <Route path="gruppo/nuovo" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFormIncontro /></RottaProtetta>} />
         <Route path="gruppo/:id" element={<RottaProtetta ruolo="PAZIENTE"><PaginaIncontro /></RottaProtetta>} />
