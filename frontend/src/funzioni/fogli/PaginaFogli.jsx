@@ -12,6 +12,12 @@ export default function PaginaFogli() {
       <Hero soloDesktop semplice titolo="Fogli di lavoro" sottotitolo="Per esercitarti con le abilità, passo dopo passo." />
       <div className={stili.contenuto}>
         <Link to="/guida" className={stili.indietro}>← Guida</Link>
+        <Link to="/fogli/piano-crisi" className={stili.riga}>
+          <span className={stili.testoRiga}>
+            <span className={stili.titoloRiga}>Piano di crisi</span>
+            <span className={stili.sottoRiga}>Le mie abilità e contatti per i momenti difficili</span>
+          </span>
+        </Link>
         {GRUPPI_FOGLI.map((g) => (
           <section key={g.id} className={stili.gruppo} aria-label={g.nome}>
             <h2 className={stili.nomeGruppo}>{g.nome}</h2>
