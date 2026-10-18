@@ -3,11 +3,11 @@ import stili from './Schede.module.css';
 
 // "Abilita' di oggi": un suggerimento scelto in base a come e' andata la giornata.
 // Toccando la scheda si va alla Guida; "Altro" mostra un altro suggerimento.
-export default function SchedaAbilita({ suggerimento, quanti, onApri, onAltro }) {
+export default function SchedaAbilita({ suggerimento, quanti, onApri, onAltro, className = '' }) {
   if (!suggerimento) return null;
   const modulo = MODULI[suggerimento.guida] || MODULI.gen;
   return (
-    <div className={`${stili.scheda} ${stili.abilita}`} role="link" tabIndex={0} onClick={onApri}
+    <div className={`${stili.scheda} ${stili.abilita} ${className}`} role="link" tabIndex={0} onClick={onApri}
       onKeyDown={(e) => e.key === 'Enter' && onApri()}>
       <div className={stili.rigaAbilita}>
         <img className={stili.icona} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/${modulo.icona}.svg`} width="46" height="46" alt="" />

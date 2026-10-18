@@ -43,8 +43,8 @@ header.hero h1 { font-size: clamp(24px, 6dvh, 30px); line-height: 1.5; }
   cursor: pointer;
 }
 
-/* Su schermi larghi le schede si dispongono su due colonne */
+/* Da schermo largo: il pulsante sta nella testata, la scheda abilita' e' bianca come in Marea */
 @media (min-width: 1024px) {
-  .pila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spazio-xl); padding-top: 0; align-items: stretch; }
-  .pila > .riga { grid-column: 1 / -1; }
+  .azione { margin-top: 0; }
+  .abilitaBianca.abilitaBianca { background: var(--superficie); }
 }

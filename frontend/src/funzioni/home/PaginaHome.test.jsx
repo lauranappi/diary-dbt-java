@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { diarioApi } from '../../api/diario.js';
 import { salvaSessione } from '../../api/sessione.js';
 import { ProviderAutenticazione } from '../autenticazione/ProviderAutenticazione.jsx';
@@ -66,5 +66,35 @@ describe('PaginaHome', () => {
     expect(await screen.findByText('0 pazienti · 0 hanno compilato oggi')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Tutte le pazienti' })).toBeInTheDocument();
     expect(diarioApi.intervallo).not.toHaveBeenCalled();
+  });
+
+  describe('schermo largo (desktop)', () => {
+    beforeEach(() => {
+      window.matchMedia = vi.fn().mockImplementation((query) => ({
+        matches: true, media: query, addEventListener: vi.fn(), removeEventListener: vi.fn(),
+      }));
+      diarioApi.salva.mockResolvedValue({});
+    });
+    afterEach(() => { delete window.matchMedia; });
+
+    it('mostra la dashboard: diary di oggi compilabile, costanza e abilità usate', async () => {
+      diarioApi.intervallo.mockResolvedValue([]);
+      apri();
+      expect(screen.getByRole('heading', { name: /Laura/ })).toBeInTheDocument();
+      expect(screen.getByRole('region', { name: 'Diary di oggi' })).toBeInTheDocument();
+      expect(screen.getByText('Costanza')).toBeInTheDocument();
+      expect(screen.getByText('Sofferenza emotiva media')).toBeInTheDocument();
+      expect(screen.getByRole('region', { name: 'Abilità usate oggi' })).toBeInTheDocument();
+      expect(screen.getByText('non iniziata')).toBeInTheDocument();
+    });
+
+    it('toccando una cella la diary di oggi si salva subito', async () => {
+      diarioApi.intervallo.mockResolvedValue([]);
+      apri();
+      const serenita = screen.getByRole('group', { name: 'Serenità' });
+      await userEvent.click(within(serenita).getByRole('button', { name: '3' }));
+      await waitFor(() => expect(diarioApi.salva).toHaveBeenCalledWith(expect.objectContaining({ scale: { ser: 3 } })));
+      expect(await screen.findByText('1 voce su 22')).toBeInTheDocument();
+    });
   });
 });

@@ -2,18 +2,18 @@ import { Outlet } from 'react-router-dom';
 import BarraInferiore from '../componenti/BarraInferiore.jsx';
 import BarraLaterale from '../componenti/BarraLaterale.jsx';
 import { useAutenticazione } from '../funzioni/autenticazione/useAutenticazione.js';
-import { vociPerRuolo } from './navigazione.js';
+import { vociLateraliPerRuolo, vociPerRuolo } from './navigazione.js';
 import stili from './Guscio.module.css';
 
 // Cornice delle pagine per chi ha fatto l'accesso: sul telefono contenuto + barra in basso,
 // da 1024px in su barra laterale a sinistra e contenuto largo.
 export default function Guscio() {
-  const { utente, esci } = useAutenticazione();
+  const { utente } = useAutenticazione();
   const voci = vociPerRuolo(utente.ruolo);
   return (
     <div className={stili.guscio}>
       <div className={stili.laterale}>
-        <BarraLaterale voci={voci} utente={utente} onEsci={esci} />
+        <BarraLaterale voci={vociLateraliPerRuolo(utente.ruolo)} utente={utente} />
       </div>
       <main className={stili.contenuto}>
         <Outlet />

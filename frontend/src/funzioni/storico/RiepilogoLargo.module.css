@@ -1,0 +1,5 @@
+.griglia { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px; }
+.cella { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--raggio-scheda); background: var(--superficie); min-width: 0; }
+.valore { font-size: 23px; font-weight: var(--peso-grassetto); letter-spacing: -0.03em; line-height: 1; color: var(--inchiostro); }
+.allarme { color: var(--segnale); }
+.nome { font-size: var(--corpo-meta); line-height: 1.35; color: var(--tenue); }

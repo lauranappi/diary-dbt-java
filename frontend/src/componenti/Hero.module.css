@@ -87,14 +87,17 @@
 }
 
 @media (min-width: 1024px) {
-  .hero { padding: 56px var(--margine-laterale) 68px; }
-  .decorazione { right: 0; top: 0; width: 300px; opacity: 0.22; }
-  .onda { height: 44px; }
-  .titolo { font-size: 34px; line-height: 1.1; }
-  .sottotitolo { max-width: 62ch; font-size: 14.5px; }
-  /* Anche con soloDesktop/semplice la testata verde resta piena */
-  .soloDesktop, .semplice, .inAlto { background: var(--testata); overflow: hidden; margin: 0; padding: 56px var(--margine-laterale) 68px; }
+  .hero, .soloDesktop, .semplice, .inAlto { background: var(--testata); overflow: hidden; margin: 0; padding: 44px var(--margine-laterale) 64px; }
+  .decorazione { right: -75px; top: auto; bottom: 0; width: 300px; opacity: 0.35; }
   .soloDesktop .decorazione, .soloDesktop .onda { display: block; }
-  .soloDesktop .titolo { color: var(--testata-inchiostro); }
-  .soloDesktop .sottotitolo { color: var(--testata-secondario); max-width: 62ch; }
+  .onda { height: 44px; }
+  .riga { align-items: flex-end; }
+  /* Testo a sinistra, eventuale pulsante a destra, in basso */
+  .testo { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--spazio-xl); align-items: start; gap: 0 var(--spazio-xl); }
+  .testo > * { grid-column: 1; }
+  .testo > .azione { grid-column: 2; grid-row: 1 / span 3; align-self: end; margin: 0; }
+  .saluto { font-size: 12px; font-weight: var(--peso-semi); }
+  .dataLarga { letter-spacing: 0.1em; text-transform: uppercase; color: var(--accento); }
+  .titolo, .soloDesktop .titolo { margin: 4px 0 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.05; color: var(--testata-inchiostro); }
+  .sottotitolo, .soloDesktop .sottotitolo { margin: 0; max-width: 62ch; font-size: 14.5px; color: var(--testata-secondario); }
 }
