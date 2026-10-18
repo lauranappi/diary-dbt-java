@@ -46,3 +46,9 @@
   background: transparent;
 }
 .piena { background: var(--accento); }
+
+/* Da schermo largo i giorni riempiono tutta la riga */
+@media (min-width: 701px) {
+  .striscia { padding-left: 0; padding-right: 0; }
+  .giorno { flex: 1 1 0; width: auto; min-width: 54px; }
+}

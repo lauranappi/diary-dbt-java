@@ -10,6 +10,6 @@
   font-weight: var(--peso-semi);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 701px) {
   .contenuto.contenuto { max-width: 800px; margin: 0 auto; padding-top: 32px; display: flex; flex-direction: column; gap: 22px; }
 }

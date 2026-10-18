@@ -86,8 +86,8 @@
   .inAlto { padding-top: calc(env(safe-area-inset-top, 0px) + 13px); }
 }
 
-@media (min-width: 1024px) {
-  .hero, .soloDesktop, .semplice, .inAlto { background: var(--testata); overflow: hidden; margin: 0; padding: 44px var(--margine-laterale) 64px; }
+@media (min-width: 701px) {
+  .hero, .soloDesktop, .semplice, .inAlto { background: var(--testata); overflow: hidden; margin: 0; padding: 42px 44px 72px; }
   .decorazione { right: -75px; top: auto; bottom: 0; width: 300px; opacity: 0.35; }
   .soloDesktop .decorazione, .soloDesktop .onda { display: block; }
   .onda { height: 44px; }

@@ -56,7 +56,7 @@
 
 /* Da schermo largo ogni riga ha la sua spiegazione accanto */
 .spiegazione { display: none; }
-@media (min-width: 1024px) {
+@media (min-width: 701px) {
   .spiegazione { display: block; flex: 1; font-size: 12.5px; line-height: 1.4; color: var(--tenue); }
   .riga .voce { flex: none; width: 210px; }
 }

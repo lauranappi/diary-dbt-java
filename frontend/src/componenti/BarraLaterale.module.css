@@ -6,13 +6,13 @@
   color: var(--crema);
 }
 
-.scorri { flex: 1; min-height: 0; overflow-y: auto; padding: 32px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
+.scorri { flex: 1; min-height: 0; overflow-y: auto; padding: 28px 20px 16px; display: flex; flex-direction: column; gap: 4px; }
 
 .marchio { display: flex; align-items: center; gap: var(--spazio-m); margin-bottom: 28px; padding: 0 12px 0 0; }
 .icona { border-radius: 20px; border: 0.5px solid var(--crema); display: block; }
 .nome { font-size: 19px; line-height: 1.1; color: var(--testata-inchiostro); }
 
-.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav { display: flex; flex-direction: column; gap: 2px; }
 
 .voce {
   display: flex;
@@ -20,7 +20,8 @@
   gap: var(--spazio-m);
   padding: 10px 16px;
   border-radius: var(--raggio-pillola);
-  font-size: var(--corpo-riga);
+  font-size: 14.5px;
+  line-height: 1.25;
   font-weight: var(--peso-semi);
   color: var(--crema);
   text-decoration: none;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const QUERY = '(min-width: 1024px)';
+const QUERY = '(min-width: 701px)';
 
-// true da 1024px in su (versione desktop). Dove matchMedia non esiste (test) vale false.
+// true da 701px in su (versione desktop). Dove matchMedia non esiste (test) vale false.
 export function useSchermoLargo() {
   const leggi = () => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(QUERY).matches;
   const [largo, setLargo] = useState(leggi);

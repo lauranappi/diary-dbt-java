@@ -7,6 +7,6 @@
   margin-bottom: 14px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 701px) {
   .contenuto.contenuto { max-width: 760px; }
 }

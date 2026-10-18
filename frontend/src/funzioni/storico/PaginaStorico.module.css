@@ -11,6 +11,6 @@
 
 .errore { margin-bottom: 12px; font-size: var(--corpo-piccolo); font-weight: var(--peso-semi); color: var(--errore); }
 
-@media (min-width: 1024px) {
+@media (min-width: 701px) {
   .contenuto { padding-top: 32px; }
 }
