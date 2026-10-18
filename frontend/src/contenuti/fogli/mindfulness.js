@@ -1,0 +1,93 @@
+import { area, multi, scelta, testo, titolo } from './campi.js';
+
+// Fogli di lavoro: Parte MINDFULNESS (testi in parole nostre, ispirati ai fogli del manuale)
+export const FOGLI_MINDFULNESS = [
+  {
+    id: "m-abilita",
+    titolo: "Diario delle abilità nucleari di mindfulness",
+    riferimento: "Mindfulness · Foglio di lavoro 2C, p. 81",
+    intro: "Foglio 2C: scegli l’abilità che hai praticato, descrivi come l’hai fatta, cosa hai vissuto (corpo, emozioni, pensieri) e come stai ora.",
+    campi: [
+      multi("ab", "Quale abilità hai praticato?", ["Mente saggia","Osserva","Descrivi","Partecipa","In modo non giudicante","Facendo una cosa per volta","In modo efficace"]),
+      area("come", "Come hai praticato l’abilità?"),
+      area("esp", "Descrivi la tua esperienza: sensazioni corporee, emozioni e pensieri mentre praticavi"),
+      area("ora", "Qual è la tua esperienza ora, dopo aver usato l’abilità?"),
+      area("sagge", "Cose sagge che hai fatto oggi"),
+    ],
+  },
+  {
+    id: "m-piacevoli",
+    titolo: "Diario degli eventi piacevoli",
+    riferimento: "Mindfulness · Foglio di lavoro 8, p. 101",
+    intro: "Foglio 8: nota un evento piacevole mentre accade, restando nel presente, e descrivi corpo, emozioni, pensieri e come ti senti ora.",
+    campi: [
+      area("ev", "Qual era l’esperienza?"),
+      scelta("cons", "Eri consapevole delle sensazioni piacevoli mentre l’evento accadeva?", ["Sì","No"]),
+      area("corpo", "Nel dettaglio, cosa ha provato il tuo corpo durante questa esperienza?"),
+      area("emo", "Descrivi le tue emozioni e i tuoi pensieri mentre vivevi questa esperienza"),
+      area("ora", "Quali sono le tue sensazioni ora, dopo aver vissuto questa esperienza?"),
+    ],
+  },
+  {
+    id: "m-spiacevoli",
+    titolo: "Diario degli eventi spiacevoli",
+    riferimento: "Mindfulness · Foglio di lavoro 9, p. 103",
+    intro: "Foglio 9: nota un evento spiacevole mentre accade, restando nel presente, e descrivi corpo, emozioni, pensieri e come ti senti ora.",
+    campi: [
+      area("ev", "Qual era l’esperienza?"),
+      scelta("cons", "Eri consapevole delle sensazioni spiacevoli mentre l’evento accadeva?", ["Sì","No"]),
+      area("corpo", "Nel dettaglio, cosa ha provato il tuo corpo durante questa esperienza?"),
+      area("emo", "Descrivi le tue emozioni e i tuoi pensieri mentre vivevi questa esperienza"),
+      area("ora", "Quali sono le tue sensazioni ora, dopo aver vissuto questa esperienza?"),
+    ],
+  },
+  {
+    id: "m-fare-essere",
+    titolo: "Diario della mindfulness dell’essere e del fare",
+    riferimento: "Mindfulness · Foglio di lavoro 7A, p. 99",
+    intro: "Foglio 7A: quando ti senti esausta, sopraffatta o disorientata, riporta l’attenzione solo a questo momento e descrivi cosa hai vissuto.",
+    campi: [
+      area("esp", "Qual è stata l’esperienza (es. mi sento sopraffatta da ciò che devo fare)?"),
+      area("unica", "Qual è stata l’unica attività, in un unico momento, su cui hai potuto portare l’attenzione?"),
+      area("corpo", "Come si è sentito il tuo corpo nel fare una cosa per volta?"),
+      area("prat", "Descrivi la tua esperienza di pratica delle abilità"),
+      area("ora", "Qual è la tua esperienza adesso, dopo aver usato le abilità?"),
+      area("sagge", "Cose sagge che hai fatto oggi"),
+    ],
+  },
+  {
+    id: "m-sentiero",
+    titolo: "Sentiero di mezzo",
+    riferimento: "Mindfulness · Foglio di lavoro 10A, p. 106",
+    intro: "Foglio 10A: renditi conto di dove ti poni rispetto all’equilibrio, scegli un dilemma e decidi una o due cose specifiche da fare nella prossima settimana.",
+    campi: [
+      multi("dilemma", "Per quale dilemma della mente saggia lavori? (uno solo)", ["Mente razionale / mente emotiva","Mente del fare / mente del nulla-da-fare","Desiderio vivo di cambiare il momento / accettazione radicale di ciò che è","Abnegazione / indulgenza verso di sé"]),
+      titolo("Dove ti poni"),
+      area("dove", "Verso quale estremo sei troppo sbilanciata, la maggior parte del tempo?"),
+      titolo("Cosa fai in eccesso e in difetto"),
+      area("troppo", "Cosa fai troppo? Descrivilo in modo dettagliato"),
+      area("poco", "Cosa fai troppo poco?"),
+      titolo("Controlla i fatti"),
+      area("fatti", "Riscrivi le due risposte in modo aderente ai fatti, senza giudizi (“buono”, “cattivo”) né interpretazioni"),
+      titolo("Per la prossima settimana"),
+      area("azioni", "Una (o al massimo due) cose molto specifiche da fare per avvicinarti all’equilibrio"),
+      titolo("Alla fine della settimana"),
+      area("fatto", "Descrivi cosa hai fatto"),
+      testo("efficacia", "Quanto è stato efficace? Da 1 (per nulla) a 5 (molto)"),
+      area("sagge", "Elenca le cose sagge che hai fatto questa settimana"),
+    ],
+  },
+  {
+    id: "m-gentilezza",
+    titolo: "Amorevole gentilezza",
+    riferimento: "Mindfulness · Foglio di lavoro 6, p. 97",
+    intro: "Foglio 6: segna verso chi hai praticato l’amorevole gentilezza, le frasi usate e cosa è aumentato in te.",
+    campi: [
+      multi("per", "Verso chi hai praticato?", ["Me stessa","Una persona cara","Un’amica o un amico","Qualcuno con cui ero arrabbiata","Una persona difficile","Un nemico","Tutti gli esseri umani","Altro"]),
+      area("frasi", "Quali frasi hai usato (i desideri gentili che hai inviato)?"),
+      multi("aum", "Praticare ha aumentato, anche solo un poco, verso quella persona:", ["Sentimenti di cura o calore","Amore","Compassione","Senso di connessione profonda","Saggezza","Felicità","Senso di valore personale"]),
+      area("comp", "Descrivi come l’abilità ti ha (o non ti ha) aiutata a diventare più compassionevole"),
+      area("sagge", "Cose sagge che hai fatto oggi"),
+    ],
+  },
+];

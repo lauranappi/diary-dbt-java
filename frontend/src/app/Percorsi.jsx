@@ -5,6 +5,8 @@ import PaginaAbilita from '../funzioni/abilita/PaginaAbilita.jsx';
 import PaginaAttivita from '../funzioni/attivita/PaginaAttivita.jsx';
 import PaginaDiario from '../funzioni/diario/PaginaDiario.jsx';
 import PaginaImpostazioni from '../funzioni/impostazioni/PaginaImpostazioni.jsx';
+import PaginaFoglio from '../funzioni/fogli/PaginaFoglio.jsx';
+import PaginaFogli from '../funzioni/fogli/PaginaFogli.jsx';
 import PaginaGuida from '../funzioni/guida/PaginaGuida.jsx';
 import PaginaModulo from '../funzioni/guida/PaginaModulo.jsx';
 import PaginaPaziente from '../funzioni/pazienti/PaginaPaziente.jsx';
@@ -29,6 +31,8 @@ export default function Percorsi() {
         <Route path="storico" element={<RottaProtetta ruolo="PAZIENTE"><PaginaStorico /></RottaProtetta>} />
         <Route path="guida" element={<PaginaGuida />} />
         <Route path="guida/:modulo" element={<PaginaModulo />} />
+        <Route path="fogli" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFogli /></RottaProtetta>} />
+        <Route path="fogli/:id" element={<RottaProtetta ruolo="PAZIENTE"><PaginaFoglio /></RottaProtetta>} />
         <Route path="pazienti" element={<RottaProtetta ruolo="TERAPEUTA"><PaginaPazienti /></RottaProtetta>} />
         <Route path="pazienti/:id" element={<RottaProtetta ruolo="TERAPEUTA"><PaginaPaziente /></RottaProtetta>} />
       </Route>

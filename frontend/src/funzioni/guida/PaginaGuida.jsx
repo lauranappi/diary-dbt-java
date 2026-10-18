@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Hero from '../../componenti/Hero.jsx';
 import { MODULI_GUIDA, trovaScheda } from '../../contenuti/guida/moduli.js';
+import { leggiSessione } from '../../api/sessione.js';
 import { Freccia, Lente } from './Icone.jsx';
 import { cerca } from './ricerca.js';
 import { useGuidaPreferiti } from './useGuidaPreferiti.js';
@@ -12,6 +13,7 @@ const vai = (moduloId, schedaId) => `/guida/${moduloId}?scheda=${schedaId}`;
 export default function PaginaGuida() {
   const [domanda, setDomanda] = useState('');
   const navigate = useNavigate();
+  const ruolo = leggiSessione()?.utente?.ruolo;
   const { elenco: preferiti } = useGuidaPreferiti();
   const risultati = useMemo(() => cerca(domanda), [domanda]);
   const cercando = domanda.trim().length >= 2;
@@ -74,6 +76,16 @@ export default function PaginaGuida() {
                 <Freccia />
               </Link>
             ))}
+            {ruolo === 'PAZIENTE' && (
+              <Link to="/fogli" className={stili.riga}>
+                <img className={stili.illustrazione} src={`${import.meta.env.BASE_URL}illustrazioni/miniature/strumenti-generali.svg`} alt="" />
+                <span className={stili.testoRiga}>
+                  <span className={stili.titoloRiga}>Fogli di lavoro</span>
+                  <span className={stili.sottoRiga}>Per esercitarti con le abilità, passo dopo passo</span>
+                </span>
+                <Freccia />
+              </Link>
+            )}
           </>
         )}
       </div>
