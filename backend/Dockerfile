@@ -9,5 +9,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 ENV SPRING_PROFILES_ACTIVE=prod
+# Il piano gratuito di Render ha 512 MB: si limita la memoria della JVM
+ENV JAVA_TOOL_OPTIONS="-Xmx350m -XX:+UseSerialGC"
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]

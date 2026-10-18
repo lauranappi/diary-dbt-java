@@ -5,12 +5,14 @@ frontend (file statici su GitHub Pages).
 
 ## 1. Database
 
-Un PostgreSQL qualsiasi (Render, Railway, Neon, Supabase…). Annota indirizzo
+Un PostgreSQL qualsiasi. Consigliato: un nuovo progetto Supabase, vuoto e separato da quello della Marea attuale, usato solo come database (Project Settings → Database → Session pooler; indirizzo nel formato `jdbc:postgresql://HOST:5432/postgres`, utente e password dalle stesse impostazioni). Annota indirizzo
 JDBC, utente e password. Le tabelle le crea Flyway al primo avvio.
 
 ## 2. Backend
 
-Il più semplice è Docker: `backend/Dockerfile` è già pronto (su Render: New → Web
+**Render (piano gratuito, consigliato):** New → Blueprint, scegli il repository: legge `render.yaml`, genera da solo `JWT_SECRET` e ti chiede indirizzo, utente e password del database. A mano: New → Web Service, root directory `backend`, runtime Docker, piano Free. Dopo 15 minuti senza richieste va in pausa e la prima richiesta ci mette circa un minuto: è normale.
+
+Altrimenti Docker altrove: `backend/Dockerfile` è già pronto (su Render: New → Web
 Service, root directory `backend`, runtime Docker). Senza Docker: build
 `mvn -q package -DskipTests`, avvio `java -jar target/*.jar`.
 
