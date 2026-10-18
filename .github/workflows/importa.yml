@@ -1,0 +1,38 @@
+name: Importa dati da Marea vecchia
+
+# Si avvia a mano da GitHub (Actions -> "Importa dati da Marea vecchia" -> Run workflow).
+# Serve per portare nel database online i dati esportati da Supabase, senza installare nulla.
+# Segreti da creare in Settings -> Secrets and variables -> Actions:
+#   DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD  (gli stessi di Render)
+#   ESPORTAZIONE_JSON                                   (contenuto del file esportato)
+on:
+  workflow_dispatch:
+
+jobs:
+  importa:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Costruisci il backend
+        working-directory: backend
+        run: mvn -q -B -DskipTests package
+      - name: Importa
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          JWT_SECRET: solo-per-questa-importazione-non-usata-da-nessuno-0123456789
+          ESPORTAZIONE_JSON: ${{ secrets.ESPORTAZIONE_JSON }}
+        run: |
+          printf '%s' "$ESPORTAZIONE_JSON" > "$RUNNER_TEMP/esportazione.json"
+          java -jar target/marea-*.jar \
+            --spring.profiles.active=prod,importa-supabase \
+            --spring.main.web-application-type=none \
+            --importa.file="$RUNNER_TEMP/esportazione.json" 2>&1 | grep -E "Importazione terminata|saltato|non trovata|ERROR|Exception|Caused" || true
+          rm -f "$RUNNER_TEMP/esportazione.json"
