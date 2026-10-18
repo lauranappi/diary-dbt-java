@@ -7,8 +7,8 @@ stesse funzioni e stesso aspetto, codice che si legge e si modifica senza paura.
 
 ## Regole del progetto
 
-1. **Una cartella per funzionalità**, non per tipo di file. Chi cerca il codice
-   del diario guarda in `diario/`, non in tre cartelle diverse.
+1. **Frontend: una cartella per funzionalità**. Chi cerca il codice del diario
+   guarda in `diario/`, non in tre cartelle diverse. (Il backend invece è a livelli.)
 2. **Niente variabili globali.** Lo stato sta nei componenti, in contesti React
    (`auth`, `impostazioni`) o nel server.
 3. **I contenuti non sono codice.** Testi della Guida, schede, fogli ed elenchi
@@ -20,22 +20,23 @@ stesse funzioni e stesso aspetto, codice che si legge e si modifica senza paura.
 6. **Ogni cosa nuova ha un test** (backend: JUnit; frontend: Vitest).
 7. **Il database cambia solo con migrazioni** (Flyway), mai con `ddl-auto`.
 
-## Backend (`backend/`) — pacchetti per funzionalità
+## Backend (`backend/`) — a livelli, come un normale progetto Spring Boot
 
 ```
 com.marea
-├── auth/         registrazione, login, JWT, recupero password
-├── diario/       voci giornaliere (scale, sì/no, testi, abilità, planner)
-├── abilita/      catalogo delle abilità DBT
-├── terapeuta/    collegamento terapeuta ↔ paziente, lettura dati paziente
-├── documenti/    dati personali generici per chiave (impostazioni, post-it,
-│                 preferiti, fogli compilati, note) con unione per timestamp
-├── notifiche/    iscrizioni Web Push e invio programmato dei promemoria
-└── comune/       sicurezza, errori, configurazione condivisa
+├── controller/   endpoint REST (@RestController): ricevono la richiesta e chiamano il service
+├── service/      la logica (@Service): regole, controlli di accesso, unione dei documenti, promemoria push
+├── repository/   accesso al database (interfacce Spring Data JPA)
+├── model/        entità JPA (Utente, VoceDiario, DocumentoUtente, IscrizionePush)
+├── dto/          oggetti di richiesta e risposta dell'API (mai le entità direttamente)
+├── config/       sicurezza (SecurityConfig, filtro JWT) e avvio dell'importazione
+├── exception/    eccezioni dell'applicazione e gestore degli errori
+└── util/         costanti e piccole funzioni condivise
 ```
 
-Dentro ogni pacchetto: `…Controller`, `…Service`, `…Repository`, entità e DTO.
-Un pacchetto non importa le classi interne di un altro, solo il suo `Service`.
+Il flusso è sempre `controller → service → repository`: il controller non
+tocca mai un repository e il service non conosce HTTP. I test stanno nello
+stesso pacchetto della classe che provano.
 
 ## Frontend (`frontend/src/`)
 
