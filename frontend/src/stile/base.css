@@ -52,7 +52,17 @@ body::before {
   pointer-events: none;
 }
 
+/* Dietro la pagina il fondo e' petrolio (si vede sotto l'ora e nei rimbalzi); la pagina e' crema */
+html {
+  background: var(--testata);
+}
+html.accesso,
+html.accesso body {
+  background: var(--testata);
+}
+
 body {
+  min-height: 100svh;
   background: var(--sfondo);
   color: var(--inchiostro);
   font-family: var(--font);

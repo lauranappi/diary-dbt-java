@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
 import stili from './SchermataAccesso.module.css';
 
 // Cornice comune di accesso e registrazione: fondo petrolio, ramo decorativo,
 // titolo e scheda bianca con il modulo.
 export default function SchermataAccesso({ titolo, sottotitolo, children }) {
+  // Tutto lo schermo (anche sotto e dietro l'ora) deve essere petrolio, non solo la pagina
+  useEffect(() => {
+    document.documentElement.classList.add('accesso');
+    return () => document.documentElement.classList.remove('accesso');
+  }, []);
+
   return (
     <main className={stili.schermata}>
       <img
