@@ -40,7 +40,11 @@ export default function RigaScheda({ modulo, scheda, aperta, preferita, evidenzi
             <Stella piena={preferita} />
           </button>
         )}
-        {testo && <span className={stili.freccia}><Freccia verso="basso" aperta={aperta} /></span>}
+        {testo && (
+          <button type="button" className={stili.freccia} onClick={onApriChiudi} tabIndex={-1} aria-hidden="true">
+            <Freccia verso="basso" aperta={aperta} />
+          </button>
+        )}
       </div>
       {aperta && testo && (
         <div className={stili.corpo}>

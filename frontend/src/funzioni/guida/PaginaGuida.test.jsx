@@ -58,6 +58,15 @@ describe('Guida', () => {
     expect(screen.getByText(/Mente razionale\./)).toBeInTheDocument();
   });
 
+  it('anche la freccia accanto al nome apre e chiude la scheda', async () => {
+    apri('/guida/mind');
+    const freccia = document.body.querySelector('button[aria-hidden="true"]');
+    await userEvent.click(freccia);
+    expect(screen.getByText(/Manuale: Mindfulness/)).toBeInTheDocument();
+    await userEvent.click(freccia);
+    expect(screen.queryByText(/Manuale: Mindfulness/)).not.toBeInTheDocument();
+  });
+
   it('con ?scheda= la scheda arriva già aperta', () => {
     apri('/guida/mind?scheda=mind-3a');
     expect(screen.getByText(/Il sassolino nel lago/)).toBeInTheDocument();
