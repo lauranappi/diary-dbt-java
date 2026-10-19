@@ -6,7 +6,7 @@ import { vociLateraliPerRuolo, vociPerRuolo } from './navigazione.js';
 import stili from './Guscio.module.css';
 
 // Cornice delle pagine per chi ha fatto l'accesso: sul telefono contenuto + barra in basso,
-// da 701px in su barra laterale a sinistra e contenuto largo.
+// da 1024px in su con il mouse barra laterale a sinistra; su iPad barra in basso e contenuto centrato.
 export default function Guscio() {
   const { utente } = useAutenticazione();
   const voci = vociPerRuolo(utente.ruolo);
