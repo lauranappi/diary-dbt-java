@@ -39,23 +39,12 @@ body {
   }
 }
 
-/* Striscia petrolio dietro l'ora e la batteria (barra di stato trasparente su iPhone) */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: env(safe-area-inset-top, 0px);
-  background: var(--testata);
-  z-index: 200;
-  pointer-events: none;
-}
-
-/* Dietro la pagina il fondo e' petrolio (si vede sotto l'ora e nei rimbalzi); la pagina e' crema */
+/* Dietro l'ora e la batteria (barra di stato trasparente su iPhone) si vede lo sfondo della pagina:
+   crema di solito, petrolio nella Home e nell'accesso (come in Marea) */
 html {
-  background: var(--testata);
+  background: var(--sfondo);
 }
+html.sfondoPetrolio,
 html.accesso,
 html.accesso body {
   background: var(--testata);
