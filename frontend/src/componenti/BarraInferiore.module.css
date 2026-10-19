@@ -4,6 +4,8 @@
   right: 0;
   bottom: 0;
   z-index: 100;
+  transform: translateZ(0);
+  will-change: transform;
   background: var(--superficie);
   border-radius: var(--raggio-barra) var(--raggio-barra) 0 0;
   box-shadow: var(--ombra-barra);

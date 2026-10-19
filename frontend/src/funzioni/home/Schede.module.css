@@ -1,7 +1,7 @@
 .scheda {
   background: var(--superficie);
   border-radius: var(--raggio-scheda);
-  padding: clamp(14px, 2.4dvh, 18px);
+  padding: clamp(14px, 2.4svh, 18px);
   margin: 0;
 }
 
