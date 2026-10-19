@@ -24,6 +24,32 @@ body,
 html,
 body {
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+/* Sul telefono la pagina scorre solo in verticale e non si ingrandisce quando si scrive in un campo */
+body {
+  touch-action: pan-y;
+}
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Striscia petrolio dietro l'ora e la batteria (barra di stato trasparente su iPhone) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--testata);
+  z-index: 200;
+  pointer-events: none;
 }
 
 body {
