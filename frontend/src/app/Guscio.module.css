@@ -10,17 +10,24 @@
 
 .laterale { display: none; }
 
+/* Da 701px la pagina usa tutta la larghezza (la testata arriva ai bordi) */
 @media (min-width: 701px) {
   .guscio {
     --margine-laterale: 32px;
     max-width: none;
     margin: 0;
-    display: grid;
-    grid-template-columns: 248px minmax(0, 1fr);
   }
-  /* Fissa: resta ferma mentre la pagina scorre */
+}
+
+/* iPad e schermi piccoli o a dito: barra in basso e contenuto centrato, come in Marea */
+@media (min-width: 701px) and (not ((min-width: 1024px) and (pointer: fine))) {
+  .contenuto > :not(header) { max-width: 820px; margin-left: auto; margin-right: auto; }
+}
+
+/* Computer e schermi grandi con il mouse: barra laterale fissa a sinistra */
+@media (min-width: 1024px) and (pointer: fine) {
+  .guscio { display: grid; grid-template-columns: 248px minmax(0, 1fr); }
   .laterale { display: block; position: fixed; top: 0; left: 0; bottom: 0; width: 248px; z-index: 50; }
   .inferiore { display: none; }
   .contenuto { grid-column: 2; padding-bottom: 48px; min-width: 0; }
-  /* Il contenuto usa tutta la larghezza, come in Marea */
 }
