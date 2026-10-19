@@ -6,6 +6,7 @@ import { useAutenticazione } from '../autenticazione/useAutenticazione.js';
 import { chiave } from '../diario/date.js';
 import { compilata } from '../diario/voce.js';
 import { emozioniDiIeri, giorniDiFila, indiceSuggerimento, ruotaSuggerimento, saluto, suggerimentiPer, ultimiSetteGiorni } from './calcoli.js';
+import { useSfondoPetrolio } from '../../app/useSfondoPetrolio.js';
 import { useSchermoLargo } from '../../app/useSchermoLargo.js';
 import HomeDesktop from './HomeDesktop.jsx';
 import HomeTerapeuta from './HomeTerapeuta.jsx';
@@ -18,6 +19,7 @@ import stili from './PaginaHome.module.css';
 
 export default function PaginaHome() {
   const { utente } = useAutenticazione();
+  useSfondoPetrolio();
   if (utente.ruolo !== 'PAZIENTE') return <HomeTerapeuta />;
   return <HomePaziente utente={utente} />;
 }
