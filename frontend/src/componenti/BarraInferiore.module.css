@@ -51,3 +51,7 @@
   opacity: 0.55;
 }
 .attiva .etichetta { font-weight: var(--peso-semi); opacity: 1; }
+
+.gira { animation: gira 0.7s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .gira { animation: none; } }
