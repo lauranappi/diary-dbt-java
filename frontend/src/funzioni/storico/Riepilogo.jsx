@@ -1,19 +1,18 @@
 import stili from './Riepilogo.module.css';
 
-const VERDE = '#3D6B45';
-const ROSSO = '#B5473F';
+import { meglioSeAlto, peggioraSeAlto } from './colori.js';
 
 // Il numero grande dei giorni compilati e la griglia dei contatori
 export default function Riepilogo({ numeri, periodo }) {
   const celle = [
-    { n: 'Az. suicidarie', v: numeri.azioniSuicidarie, colore: numeri.azioniSuicidarie ? ROSSO : null },
-    { n: 'Az. autolesività', v: numeri.azioniAutolesive, colore: numeri.azioniAutolesive ? ROSSO : null },
-    { n: 'Giorni alcol', v: numeri.giorniAlcol, colore: numeri.giorniAlcol ? ROSSO : null },
-    { n: 'Giorni CBD', v: numeri.giorniCbd, colore: numeri.giorniCbd ? ROSSO : null },
-    { n: 'Emotional eating', v: numeri.emotionalEating, colore: numeri.emotionalEating ? ROSSO : null },
-    { n: 'Farmaci saltati', v: numeri.farmaciSaltati, colore: numeri.farmaciSaltati ? ROSSO : null },
+    { n: 'Az. suicidarie', v: numeri.azioniSuicidarie, colore: peggioraSeAlto(numeri.azioniSuicidarie) },
+    { n: 'Az. autolesività', v: numeri.azioniAutolesive, colore: peggioraSeAlto(numeri.azioniAutolesive) },
+    { n: 'Giorni alcol', v: numeri.giorniAlcol, colore: peggioraSeAlto(numeri.giorniAlcol) },
+    { n: 'Giorni CBD', v: numeri.giorniCbd, colore: peggioraSeAlto(numeri.giorniCbd) },
+    { n: 'Emotional eating', v: numeri.emotionalEating, colore: peggioraSeAlto(numeri.emotionalEating) },
+    { n: 'Farmaci saltati', v: numeri.farmaciSaltati, colore: peggioraSeAlto(numeri.farmaciSaltati) },
     { n: 'Rapporti occ.', v: numeri.rapporti, colore: numeri.rapporti ? 'var(--inchiostro)' : null },
-    { n: 'Abilità DBT', v: numeri.abilita, colore: numeri.abilita ? VERDE : null },
+    { n: 'Abilità DBT', v: numeri.abilita, colore: meglioSeAlto(numeri.abilita) },
   ];
   return (
     <div className={stili.griglia}>

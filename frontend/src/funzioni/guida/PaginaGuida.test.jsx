@@ -109,6 +109,15 @@ describe('Guida', () => {
     await vi.waitFor(() => expect(documentiApi.salva).toHaveBeenCalledWith('guida-preferiti', { elenco: ['mind-1'] }, expect.anything()));
   });
 
+  it('togliendo la stella il preferito sparisce anche se il server lo ha ancora', async () => {
+    documentiApi.leggi.mockResolvedValue({ contenuto: { elenco: ['mind-1'] }, versione: 3 });
+    apri('/guida/mind');
+    const stella = await screen.findByRole('button', { name: 'Togli dai preferiti' });
+    await userEvent.click(stella);
+    await vi.waitFor(() => expect(documentiApi.salva).toHaveBeenCalledWith('guida-preferiti', { elenco: [] }, 3));
+    documentiApi.leggi.mockResolvedValue(null);
+  });
+
   it('un modulo che non esiste riporta alla Guida', () => {
     apri('/guida/inesistente');
     expect(screen.getByRole('searchbox')).toBeInTheDocument();

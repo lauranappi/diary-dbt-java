@@ -13,7 +13,7 @@ export default function ElencoGiornate({ voci, onApri }) {
           <div className={stili.testo}>
             <div className={stili.data}>{formato(v.data)}</div>
             <div className={stili.etichette}>
-              {etichetteGiorno(v).map((e) => <span key={e} className={stili.etichetta}>{e}</span>)}
+              {etichetteGiorno(v).map((e) => <span key={e} className={`${stili.etichetta} ${e === 'Farmaci' ? stili.ok : ''}`}>{e}</span>)}
             </div>
           </div>
           <svg width="11" height="19" viewBox="0 0 11 19" fill="none" aria-hidden="true">

@@ -46,11 +46,11 @@ describe('PaginaStorico', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
-  it('la vista Trend mostra i sette grafici', async () => {
+  it('la vista Trend mostra i nove grafici', async () => {
     render(<PaginaStorico />);
     await screen.findByText(/giorni compilati/);
     await userEvent.click(screen.getByRole('button', { name: 'Trend' }));
-    expect(screen.getAllByRole('img')).toHaveLength(7);
+    expect(screen.getAllByRole('img')).toHaveLength(9);
     expect(screen.getByText('Emozioni positive')).toBeInTheDocument();
   });
 
