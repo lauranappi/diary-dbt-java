@@ -52,7 +52,7 @@ html.accesso body {
 /* Anche il corpo e' petrolio in alto (sotto la testata della Home): iOS sfuma l'ora con il colore
    del corpo, se fosse crema comparirebbe una fascia grigia */
 html.sfondoPetrolio body {
-  background: linear-gradient(var(--testata) 0 220px, var(--sfondo) 220px);
+  background: linear-gradient(var(--testata) 0 120px, var(--sfondo) 120px);
 }
 
 body {
