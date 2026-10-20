@@ -65,6 +65,12 @@ export function vociPerGrafici(voci, giorni, oggi = new Date()) {
 export const serieScala = (voci, id) => voci.map((v) => v.scale?.[id] ?? null);
 export const serieSino = (voci, id) => voci.map((v) => (v.toggle?.[id] === 'Sì' ? 1 : 0));
 
+// Valore piu' alto di una scala nei giorni dati (null se non c'e' nessun valore)
+export function massimoScala(voci, id) {
+  const valori = voci.map((v) => v.scale?.[id]).filter((x) => x != null);
+  return valori.length ? Math.max(...valori) : null;
+}
+
 // Media di una scala nei giorni dati (null se non c'e' nessun valore)
 export function mediaScala(voci, id) {
   const valori = voci.map((v) => v.scale?.[id]).filter((x) => x != null);

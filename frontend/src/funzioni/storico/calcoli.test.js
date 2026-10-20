@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { etichetteGiorno, riepilogo, serieSino, vociDelPeriodo, vociPerGrafici } from './calcoli.js';
+import { massimoScala, etichetteGiorno, riepilogo, serieSino, vociDelPeriodo, vociPerGrafici } from './calcoli.js';
 
 const oggi = new Date(2026, 9, 12); // 12 ottobre 2026
 const voce = (data, extra = {}) => ({ data, scale: {}, toggle: {}, testi: {}, ...extra });
@@ -57,5 +57,13 @@ describe('vociPerGrafici', () => {
 
   it('serieSino vale 1 per Sì e 0 altrimenti', () => {
     expect(serieSino([voce('a', { toggle: { sa: 'Sì' } }), voce('b', { toggle: { sa: 'No' } }), voce('c')], 'sa')).toEqual([1, 0, 0]);
+  });
+});
+
+describe('massimoScala', () => {
+  it('prende il valore piu\' alto, non la media', () => {
+    const voci = [voce('a', { scale: { sp: 1 } }), voce('b', { scale: { sp: 4 } }), voce('c', {})];
+    expect(massimoScala(voci, 'sp')).toBe(4);
+    expect(massimoScala(voci, 'ai')).toBeNull();
   });
 });

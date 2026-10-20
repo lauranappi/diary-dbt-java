@@ -25,4 +25,5 @@
   font-size: 11px;
   font-weight: var(--peso-semi);
 }
+.ok { background: var(--petrolio-chiaro); color: var(--petrolio); }
 .vuoto { padding: 1rem 0; font-size: 14px; color: var(--tenue); }
